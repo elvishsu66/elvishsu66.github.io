@@ -63,9 +63,9 @@
 		// init gallery
 		function initGallery(){  				
 			// get colorbox plugin and start to rock and roll
-	  		$.getScript('https://dl.dropboxusercontent.com/u/99319532/Blogger/host/colorbox.min.js',function(){
+	  		$.getScript('colorbox.min.js',function(){
 	  		 	// get the colorbox style sheet
-	  		 	$('head').append('<link href="https://dl.dropboxusercontent.com/u/99319532/Blogger/host/colorbox.min.css" rel="stylesheet"/>');
+	  		 	$('head').append('<link href="colorbox.min.css" rel="stylesheet"/>');
 	  		 	// make container position relative
 	  		 	me.css({'position':'relative'});
 				// append loading text
