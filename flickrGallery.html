@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+	<meta charset='utf-8' />
+		<title>Flickr Photo Gallery with Colorbox in jQuery</title>
+		<style type="text/css">
+		html, body{
+			font-family: Georgia, "Times New Roman", Times, serif;
+		}
+		#header{
+			height: 25px;
+			font-size: 15px;
+			text-align: center;
+			line-height: 17x;
+		}
+		</style>
+	</head>
+	<body>
+		<div id='header'><a title="Elvis is till in the building" href="http://www.elvishsu66.com/2014/01/flickr-photo-gallery-with-colorbox-in.html">Flickr Photo Gallery with Colorbox in jQuery</a> by <a href='http://www.elvishsu66.com'>Elvis Hsu</a></div>
+		<div id='container'><!-- Nothing here --></div>
+
+		<!-- Place your script above the end of </body> -->  
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+		<script type='text/javascript' src='flickrGallery.js'></script>
+		<script>
+			$(document).ready(function() {
+				var config={
+					rows: 5,
+					rowHeight: 150,
+					borderWidth: 3,
+					shuffle: true,
+					maxPages: 3,
+					loadOnScroll:true,
+					cb_url: 'url_o',
+					params:{
+						method:  'flickr.photos.search',
+						api_key: 'ad2e1cc1d51162a8ee4ee4b022a711f4',
+						tags: 	 'canon',
+						extras:  'url_o'
+				    }
+				};
+				$('#container').flickrGallery(config);
+			});
+		</script>
+	</body>
+</html>
