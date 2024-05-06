@@ -1,0 +1,23 @@
+<footer class="site-footer h-card">
+    <data class="u-url"
+          href="{{ '/' | relative_url }}"></data>
+
+    <div class="wrapper">
+
+        <div class="footer-col-wrapper">
+            <div class="footer-col">
+                <h2 class="footer-heading">{{ site.title | escape }}</h2>
+                <p>{{ site.description | escape }}</p>
+            </div>
+            <div class="footer-col">
+                <p>&copy; Copyright Elvis Hsu. All rights reserved.</p>
+                <p>
+                    <a href="{% link privacy.md %}">Privacy</a>
+                    |
+                    <a href="{% link license.md %}">License</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</footer>

@@ -1,0 +1,234 @@
+/**
+ * Reset some basic elements
+ */
+ body, h1, h2, h3, h4, h5, h6,
+ p, blockquote, pre, hr,
+ dl, dd, ol, ul, figure {
+   margin: 0;
+   padding: 0;
+ }
+ 
+ /**
+  * Basic styling
+  */
+ body {
+   font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
+   color: $text-color;
+   background-color: $gutter-color;
+   -webkit-text-size-adjust: 100%;
+   -webkit-font-feature-settings: "kern" 1;
+      -moz-font-feature-settings: "kern" 1;
+        -o-font-feature-settings: "kern" 1;
+           font-feature-settings: "kern" 1;
+   font-kerning: normal;
+   display: flex;
+   min-height: 100vh;
+   flex-direction: column;
+   overflow-wrap: break-word;
+ }
+ 
+ h1, h2, h3, h4, h5, h6,
+ p, blockquote, pre,
+ ul, ol, dl, figure,
+ %vertical-rhythm {
+   margin-bottom: $spacing-unit / 2;
+ }
+ 
+ main {
+   display: block; /* Default value of `display` of `main` element is 'inline' in IE 11. */
+ }
+ 
+ img {
+   max-width: 100%;
+   vertical-align: middle;
+ }
+ 
+ img.center {
+   margin: 0 auto;
+   display: block;
+ }
+ 
+ img.right {
+   float:right;
+   padding: 10px;
+ }
+ 
+ figure > img {
+   display: block;
+ }
+ 
+ figcaption {
+   font-size: $small-font-size;
+ }
+ 
+ ul, ol {
+   margin-left: $spacing-unit;
+ }
+ 
+ li {
+   > ul,
+   > ol {
+     margin-bottom: 0;
+   }
+ }
+ 
+ h1, h2, h3, h4, h5, h6 {
+   font-weight: $base-font-weight;
+   clear: both;
+ }
+ 
+ a {
+   color: $link-base-color;
+   text-decoration: none;
+ 
+   &:visited {
+     color: $link-visited-color;
+   }
+ 
+   &:hover {
+     color: $text-color;
+     text-decoration: underline;
+   }
+ }
+ 
+ /**
+  * Blockquotes
+  */
+ blockquote {
+   color: $brand-color;
+   border-left: 4px solid $brand-color;
+   padding-left: $spacing-unit / 2;
+   @include relative-font-size(1.125);
+   letter-spacing: -1px;
+   font-style: italic;
+ 
+   > :last-child {
+     margin-bottom: 0;
+   }
+ }
+ 
+ /**
+  * Wrapper
+  */
+ .wrapper {
+   background-color: $background-color;
+   max-width: calc(#{$content-width} - (#{$spacing-unit}));
+   margin-right: auto;
+   margin-left: auto;
+   padding-right: $spacing-unit / 2;
+   padding-left: $spacing-unit / 2;
+   padding-bottom: $spacing-unit / 2;
+   @extend %clearfix;
+ 
+   @media screen and (min-width: $on-large) {
+     max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
+     padding-right: $spacing-unit;
+     padding-left: $spacing-unit;
+     padding-bottom: $spacing-unit;
+   }
+ }
+ 
+ /**
+  * Clearfix
+  */
+ %clearfix:after {
+   content: "";
+   display: table;
+   clear: both;
+ }
+ 
+ 
+ /**
+  * Tables
+  */
+ table {
+   margin-bottom: $spacing-unit;
+   width: 100%;
+   text-align: $table-text-align;
+   color: $table-text-color;
+   border-collapse: collapse;
+   tr {
+     &:nth-child(even) {
+       background-color: $table-zebra-color;
+     }
+   }
+   th, td {
+     padding: ($spacing-unit / 3) ($spacing-unit / 2);
+   }
+   th {
+     background-color: $table-header-bg-color;
+     border: 1px solid $table-header-border;
+   }
+   td {
+     border: 1px solid $table-border-color;
+   }
+ 
+   @include media-query($on-laptop) {
+     display: block;
+     overflow-x: auto;
+     -webkit-overflow-scrolling: touch;
+             -ms-overflow-style: -ms-autohiding-scrollbar;
+   }
+ }
+
+.social {
+    li {
+        width:89px;
+        float:left;
+        border-right:1px solid #e0e0e0;
+        height:40px;
+        &:first-child a {
+            border-radius:5px 0 0 5px;
+          }
+        &:last-child a {
+            border-radius:0 5px 5px 0;
+          }
+      }
+    
+      a {
+        line-height:1;
+        font-size:11px;
+        color:#676767;
+        display:block;
+        text-align:center;
+        padding-top:6px;
+        height:34px;
+
+        &:hover, &:focus {
+            color:#675C5C;
+            font-weight:bold;
+        }
+
+        strong {
+            margin-top: 5px;
+            font-size:14px;
+            display:block;
+          }
+      }
+
+      ul {
+        a:active {
+            background-color:#f0f0f0;
+        }
+      }
+
+      strong {
+        font-weight:700;
+      }
+
+      li + li + li {
+        border-right:none;
+        width:89px;
+      }
+}
+
+ul.social {
+list-style:none;
+height:40px;
+padding:0;
+background: #f4f4f4;
+border-radius:5px;
+border:1px solid #e0e0e0;
+width:270px;
+margin: 0 auto;
+}
