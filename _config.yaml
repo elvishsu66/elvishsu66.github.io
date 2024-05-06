@@ -5,12 +5,15 @@ email: me@elvishsu.com
 description: A simple yet creative software designer
 baseurl: ""
 url: "https://elvishsu.com"
+author:
+  name: Elvis Hsu
+atom_path: /blog/atom.xml
 
 # Site settings
-permalink: /:title/
+permalink: /blog/:title.html
 markdown: kramdown
 paginate: 5
-paginate_path: "/:num/"
+paginate_path: "/blog/page:num/"
 date_format: "%b %-d, %Y"
 
 plugins:

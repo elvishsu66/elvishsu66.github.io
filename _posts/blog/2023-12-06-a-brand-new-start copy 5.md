@@ -1,8 +1,13 @@
 ---
 layout: post
-title: My first post!
-categories: [blogging]
+title: A brand new start 1!
+categories: [geneal]
 ---
+
+It has been a while since I post a blog page on [Blogger](https://elvishsu66.blogspot.com)
+
+![blog]({{ '/assets/images/blog.jpg' | relative_url }}){: .center }
+
 🌟 With over 20 years in the tech industry, I’ve mastered the art of transforming complex cloud technology into streamlined business solutions. As a seasoned Chief Architect and Director of Engineering, I lead the strategic deployment of cutting-edge software products that drive substantial business value.
 
 🚀 I excel in orchestrating the development of scalable, agile software architectures, meticulously tailored to meet the precise needs of our clients. My technical proficiency spans across a broad range of programming languages and state-of-the-art technologies, enabling me to deliver solutions that not only meet but exceed organisational objectives.

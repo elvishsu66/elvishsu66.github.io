@@ -1,11 +1,11 @@
 @charset "utf-8";
 
 $brand-color:           #030000;
-$text-color:            #070606;
+$text-color:            #111111;
 $gutter-color:          #131313;
-$background-color:      #faf7f7;
+$background-color:      #ffffff;
 
-$link-base-color:       #010427;
+$link-base-color:       #0663cd;
 $link-visited-color:    darken($link-base-color, 15%);
 
 $table-text-color:      lighten($text-color, 20%);
@@ -15,7 +15,7 @@ $table-header-border:   #ccc;
 $table-border-color:    #666;
 
 $base-font-family: -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$base-font-size:   14px;
+$base-font-size:   1.1em;
 $base-font-weight: 400;
 $small-font-size:  $base-font-size * 0.875;
 $base-line-height: 1.5;
@@ -25,10 +25,10 @@ $spacing-unit: 30px;
 $table-text-align: left;
 
 // Width of the content area
-$content-width:    1024px;
+$content-width:    1600px;
 
 $on-palm:          600px;
-$on-laptop:        1024px;
+$on-laptop:        1600px;
 
 $on-medium:        $on-palm;
 $on-large:         $on-laptop;

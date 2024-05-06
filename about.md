@@ -1,10 +1,10 @@
 ---
 layout: page
 title: About
-order: 2
+order: 3
 ---
 
-![elvis]({{ '/assets/images/elvis.jpg' | relative_url }})
+![elvis]({{ '/assets/images/elvis.jpg' | relative_url }}){: .center }
 
 🌟 With over 20 years in the tech industry, I’ve mastered the art of transforming complex cloud technology into streamlined business solutions. As a seasoned Chief Architect and Director of Engineering, I lead the strategic deployment of cutting-edge software products that drive substantial business value.
 
