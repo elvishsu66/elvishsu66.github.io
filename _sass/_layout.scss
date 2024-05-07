@@ -160,6 +160,7 @@
   background-color: $brand-colour;
   color: $background-colour;
   display: flex;
+  @include relative-font-size(.9);
   a {
     color: $background-colour;
     &:hover {
@@ -172,13 +173,16 @@
   .item {
     flex: 1;
     padding: 10px 25px;
+    &:nth-child(odd) {
+      text-align: right;
+    }
   }
 
   img.hello {
     position: absolute;
     width: 150px;
     right: 0;
-    top: -40px;
+    top: -50px;
     @include media-query(932px) {
       // display: none;
       width: 80px;
@@ -189,12 +193,15 @@
 
   @include media-query($on-mobile) {
     flex-direction: column;
-    text-align: center;
     h2, p {
       margin-bottom: 5px;
     }
     .item {
       padding: 3px 5px;
+      text-align: center;
+      &:nth-child(odd) {
+        text-align: center;
+      }
     }
   }
 }

@@ -1,16 +1,19 @@
 <footer class="site-footer">
     <div class="item">
-      <h2>{{ site.title | escape }}</h2>
+      <p><strong>{{ site.title | escape }}</strong></p>
       <p>{{ site.description | escape }}</p>
     </div>
     <div class="item">
       <p>
-        &copy; Copyright Elvis Hsu 
+        <a href="https://www.linkedin.com/in/elvishsu/" target="_blank" title="Connect with me on LinkedIn">LinkedIn</a> 
+        | <a href="https://github.com/elvishsu66" target="_blank" title="My GitHub Profile">GitHub</a> 
+        | <a href="https://x.com/elvishsu" target="_blank" title="Follow me on X">X</a> 
+        | <a href="{% link privacy.md %}">Privacy</a> 
+        | <a href="{% link license.md %}">License</a>
       </p>
       <p>
-        Power by <a href="https://github.com/elvishsu66/elvishsu66.github.io" target="_blank">GitHub Pages</a>
-        | <a href="{% link privacy.md %}">Privacy</a> 
-        | <a href="{% link license.md %}">License</a></p>
+        &copy; {{ site.time | date: '%Y' }} Copyright Elvis Hsu 
+      </p>
     </div>
     <img class="hello" src="{{ '/assets/images/icon-logo-waving.png' | relative_url }}" alt="Logo"/>
 </footer>
