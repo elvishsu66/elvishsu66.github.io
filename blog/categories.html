@@ -9,7 +9,9 @@ order: 2
 
 {%- assign categoryName = category[0] -%}
 {%- assign categoryNumPosts = category[1] | size -%}
-<h2 id="{{categoryName | uri_escape | downcase }}">{{ categoryName }} ({{ categoryNumPosts }})</h2>
+<h2 id="{{categoryName | uri_escape | downcase }}">
+    {{ categoryName | capitalize }} ({{ categoryNumPosts }})
+</h2>
 
 <ul>
     {% assign sorted_posts = category[1] | reversed %}

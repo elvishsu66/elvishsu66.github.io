@@ -143,24 +143,17 @@
   }
 }
 
-  
-.site-banner {
-  width: 100%;
-  margin: 0 auto;
-  padding: 2.5em 5em 1.6em .6em;
-  box-sizing: border-box;
-  background: $link-visited-colour url(/assets/images/rocket.png) 97% 70% no-repeat;
-}
-  
+
 /**
-  * Site footer
-  */
+* Site footer
+*/
 .site-footer {
   position: relative;
   background-color: $brand-colour;
   color: $background-colour;
   display: flex;
   @include relative-font-size(.9);
+
   a {
     color: $background-colour;
     &:hover {
@@ -182,12 +175,11 @@
     position: absolute;
     width: 150px;
     right: 0;
-    top: -50px;
+    top: -60px;
     @include media-query(932px) {
-      // display: none;
-      width: 80px;
+      width: 70px;
       right: 0;
-      top: -30px;
+      top: -35px;
     }
   }
 
@@ -206,13 +198,11 @@
   }
 }
   
-  
-  
 /**
-  * Page content
-  */
+* Page content
+*/
 .page-content {
-  flex: 1 0 auto;
+  padding: $spacing-unit 0;
 }
 
 .page-heading {
@@ -227,8 +217,18 @@
   margin-left: 0;
   list-style: none;
 
-  >li {
-    margin-bottom: $spacing-unit;
+  article {
+    margin-bottom: 4rem;
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: -2rem;
+      left: 0;
+      background: $link-base-colour;
+      height: 2px;
+      width: 60px;
+    }
   }
 }
 
@@ -243,10 +243,9 @@
 }
 
 
-
 /**
-  * Posts
-  */
+* Posts
+*/
 .post-nav {
   margin-bottom: $spacing-unit;
   @extend %clearfix;
@@ -305,7 +304,6 @@
   h6 {
     @include relative-font-size(1.0625);
   }
-
 }
 
 
@@ -329,10 +327,6 @@
 
       &:hover {
         border-color: lighten($brand-colour, 25%);
-
-        .svg-icon {
-          color: lighten($brand-colour, 25%);
-        }
       }
     }
   }
@@ -340,13 +334,12 @@
 
   
 /**
-  * Pagination navbar
-  */
+* Pagination navbar
+*/
 .pagination {
   @extend .media-list;
 
   li {
-
     a,
     div {
       min-width: 41px;
@@ -363,6 +356,41 @@
         color: $brand-colour;
         border: 1px dashed;
         border-radius: 20%;
+      }
+    }
+  }
+}
+
+
+.skill-list {
+  display: flex;
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  .skill-item {
+    padding:1em;
+    box-sizing: border-box;
+    width: 50%;
+    display:flex;
+    color: $background-colour;
+    @include media-query($on-mobile) {
+      width: 100%;
+    }
+    .skill-content {
+      flex: 1 1 auto;
+      border-radius: 5px;
+      padding: $spacing-unit;
+      .skill-title {
+        @include relative-font-size(1.5);
+        text-align: center;
+        padding-bottom: $spacing-unit;
+      }
+
+      transition: border-top 300ms ease-in-out, padding-top 300ms ease-in-out;
+
+      &:hover {
+        padding-top: 0.5rem;
+        border-top: 0.5rem solid lighten($color: $brand-colour, $amount: 50);
       }
     }
   }

@@ -14,7 +14,7 @@ permalink: /blog/:title.html
 markdown: kramdown
 paginate: 5
 paginate_path: "/blog/page:num/"
-date_format: "%b %-d, %Y"
+date_format: "%-d %b, %Y"
 
 plugins:
   - jekyll-feed
@@ -22,12 +22,15 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
-# html minify
+sass:
+  sass_dir: _sass
+  style: compressed
 compress_html:
   clippings: all
   comments: all
-  endings: []
+  endings: all
   profile: false
+  startings: [head, body]
 
 google_analytics: G-M47EN9ZR37
 

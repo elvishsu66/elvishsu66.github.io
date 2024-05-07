@@ -2,11 +2,19 @@
 layout: default
 title: Blog
 ---
-<img src="{{ '/assets/images/banner-blog.webp' | relative_url }}" alt="blog"/>
-
-<ul class="post-list">
+<div style="text-align: center;">
+    <h1>
+        Coding, thoughts, technology and ideas.
+    </h1>
+    <h3>
+        Don’t limit yourself. Many people limit themselves to what they think they can do. 
+        You can go as far as your mind lets you. What you believe, remember, you can achieve.
+    </h3>
+</div>
+<hr>
+<div class="post-list">
     {%- for post in paginator.posts -%}
-    <li>
+    <article>
         <span class="post-meta">{{ post.date | date: site.date_format }}</span>
         <h3>
             <a class="post-link"
@@ -15,9 +23,9 @@ title: Blog
             </a>
         </h3>
         {{ post.excerpt }}
-    </li>
+    </article>
     {%- endfor -%}
-</ul>
+</div>
 
 {% if paginator.total_pages > 1 %}
 <div class="pager">

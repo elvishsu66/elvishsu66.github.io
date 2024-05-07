@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A brand new start!
-categories: [geneal]
+categories: [thoughts]
 ---
 
 It has been a while since I post a blog page on [Blogger](https://elvishsu66.blogspot.com)
