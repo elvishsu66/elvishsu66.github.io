@@ -1,23 +1,16 @@
-<footer class="site-footer h-card">
-    <data class="u-url"
-          href="{{ '/' | relative_url }}"></data>
-
-    <div class="wrapper">
-
-        <div class="footer-col-wrapper">
-            <div class="footer-col">
-                <h2 class="footer-heading">{{ site.title | escape }}</h2>
-                <p>{{ site.description | escape }}</p>
-            </div>
-            <div class="footer-col">
-                <p>&copy; Copyright Elvis Hsu | Power by <a href="https://github.com/elvishsu66/elvishsu66.github.io" target="_blank">GitHub Pages</a></p>
-                <p>
-                    <a href="{% link privacy.md %}">Privacy</a>
-                    |
-                    <a href="{% link license.md %}">License</a>
-                </p>
-            </div>
-        </div>
+<footer class="site-footer">
+    <div class="item">
+      <h2>{{ site.title | escape }}</h2>
+      <p>{{ site.description | escape }}</p>
     </div>
-
+    <div class="item">
+      <p>
+        &copy; Copyright Elvis Hsu 
+      </p>
+      <p>
+        Power by <a href="https://github.com/elvishsu66/elvishsu66.github.io" target="_blank">GitHub Pages</a>
+        | <a href="{% link privacy.md %}">Privacy</a> 
+        | <a href="{% link license.md %}">License</a></p>
+    </div>
+    <img class="hello" src="{{ '/assets/images/icon-logo-waving.png' | relative_url }}" alt="Logo"/>
 </footer>

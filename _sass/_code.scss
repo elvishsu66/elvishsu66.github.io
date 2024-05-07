@@ -1,12 +1,12 @@
 // These colors are based on VSCode's Dark Plug theme: https://github.com/microsoft/vscode/blob/master/extensions/theme-defaults/themes/dark_plus.json
-$code-background-color: #1E1E1E;
-$code-foreground-color: #D4D4D4;
+$code-background-colour: #1E1E1E;
+$code-foreground-colour: #D4D4D4;
 
 pre,
 code {
   font-size: 0.9375em;
-  color: $code-foreground-color;
-  background-color: $code-background-color;
+  color: $code-foreground-colour;
+  background-color: $code-background-colour;
 }
 
 code {
@@ -26,13 +26,13 @@ pre {
 
 .highlight {
   border-radius: 3px;
-  color: $code-foreground-color;
-  background: $code-background-color;
+  color: $code-foreground-colour;
+  background: $code-background-colour;
   @extend %vertical-rhythm;
 
   .highlighter-rouge & {
-    color: $code-foreground-color;
-    background: $code-background-color;
+    color: $code-foreground-colour;
+    background: $code-background-colour;
   }
 
   // Syntax highlighting styles

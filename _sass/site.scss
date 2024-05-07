@@ -1,18 +1,18 @@
 @charset "utf-8";
 
-$brand-color:           #030000;
-$text-color:            #111111;
-$gutter-color:          #131313;
-$background-color:      #ffffff;
+$brand-colour:           #000000;
+$text-colour:            #111111;
+$gutter-colour:          #303030;
+$background-colour:      #ffffff;
 
-$link-base-color:       #0663cd;
-$link-visited-color:    darken($link-base-color, 15%);
+$link-base-colour:       #5aadbb;
+$link-visited-colour:    darken($link-base-colour, 15%);
 
-$table-text-color:      lighten($text-color, 20%);
-$table-zebra-color:     lighten($background-color, 7%);
-$table-header-bg-color: lighten($background-color, 12%);
-$table-header-border:   #ccc;
-$table-border-color:    #666;
+$table-text-colour:      lighten($text-colour, 20%);
+$table-zebra-colour:     lighten($background-colour, 7%);
+$table-header-bg-colour: lighten($background-colour, 12%);
+$table-header-border:    #ccc;
+$table-border-colour:    #666;
 
 $base-font-family: -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $base-font-size:   1.1em;
@@ -25,12 +25,12 @@ $spacing-unit: 30px;
 $table-text-align: left;
 
 // Width of the content area
-$content-width:    1600px;
+$content-width: 1024px;
 
-$on-palm:          600px;
-$on-laptop:        1600px;
+$on-mobile: 768px;
+$on-laptop: 1600px;
 
-$on-medium:        $on-palm;
+$on-medium:        $on-mobile;
 $on-large:         $on-laptop;
 
 @mixin media-query($device) {
@@ -43,4 +43,4 @@ $on-large:         $on-laptop;
   font-size: #{$ratio}rem;
 }
 
-@import "fonts", "code", "layout", "base";
+@import "fonts", "code", "layout", "base", "timeline";

@@ -1,393 +1,362 @@
 /**
  * Site header
  */
- .site-header {
-    min-height: $spacing-unit * 1.865;
-    line-height: $base-line-height * $base-font-size * 2.25;
-  
-    // Positioning context for the mobile navigation icon
-    position: relative;
+.site-header {
+  background-color: $brand-colour;
+  color: $background-colour;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+
+  a, nav {
+    vertical-align: middle;
   }
 
-  // .site-top {
-  //   height: 45px;
-  // }
-  
-  .site-title {
-    a.title {
-      @include relative-font-size(1.625);
-      font-weight: 400;
-      letter-spacing: -1px;
-      margin-bottom: 0;
-      vertical-align: middle;
-    
-      @include media-query($on-palm) {
-        padding-right: 45px;
-      }
-    
-      &,
-      &:visited {
-        color: $brand-color;
-      }
-    }
-    img {
-      width: 45px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
-  }
-  
-  .site-nav {
-    position: absolute;
-    top: 15px;
-    right: $spacing-unit / 3;
-    background-color: $background-color;
-    text-align: left;
-    z-index: 1000;
-  
-    .nav-trigger {
-      display: none;
-    }
-  
-    .menu-icon {
-      float: right;
-      width: 36px;
-      height: 26px;
-      line-height: 0;
-      padding-top: 10px;
-      text-align: center;
-  
-      >svg path {
-        fill: $brand-color;
-      }
-    }
-  
-    label[for="nav-trigger"] {
-      display: block;
-      float: right;
-      width: 36px;
-      height: 36px;
-      z-index: 2;
-      cursor: pointer;
-    }
-  
-    input~.trigger {
-      clear: both;
-      display: none;
-    }
-  
-    input:checked~.trigger {
-      display: block;
-      padding-bottom: 5px;
-    }
-  
-    .page-link {
-      color: $text-color;
-      line-height: $base-line-height;
-      display: block;
-      padding: 5px 10px;
-  
-      // Gaps between nav items, but not on the last one
-      &:not(:last-child) {
-        margin-right: 0;
-      }
-  
-      margin-left: 10px;
-    }
-  
-    @media screen and (min-width: $on-medium) {
-      position: static;
-      float: right;
-      border: none;
-      background-color: inherit;
-  
-      label[for="nav-trigger"] {
-        display: none;
-      }
-  
-      .menu-icon {
-        display: none;
-      }
-  
-      input~.trigger {
-        display: block;
-      }
-  
-      .page-link {
-        display: inline;
-        padding: 0;
-  
-        &:not(:last-child) {
-          margin-right: 20px;
-        }
-  
-        margin-left: auto;
-      }
-    }
-  }
-  
-  .site-banner {
-    img.bg {
-      // The banner undoes the padding from the wrapper to span the full width
-      max-width: calc(100% + #{$spacing-unit});
-      margin-left: -$spacing-unit / 2;
-      margin-right: -$spacing-unit / 2;
-  
-      @media screen and (min-width: $on-large) {
-        max-width: calc(100% + #{$spacing-unit * 2});
-        margin-left: -$spacing-unit;
-        margin-right: -$spacing-unit;
-      }
-    }
-  }
-  
-  /**
-   * Site footer
-   */
-  .site-footer {
-    padding-top: 1px;
-  }
-  
-  .footer-heading {
-    @include relative-font-size(1.125);
-    margin-bottom: $spacing-unit / 2;
-  }
-  
-  .media-list {
-    list-style: none;
-    margin-left: 0;
-  }
-  
-  .footer-col-wrapper {
-    @include relative-font-size(0.9375);
-    color: $brand-color;
-    //padding-top: $spacing-unit;
-    line-height: normal;
-  }
-  
-  // from above
-  .footer-col-wrapper {
-    padding-top: $spacing-unit;
-  }
-  
-  .footer-col {
-    margin-bottom: $spacing-unit / 2;
-  }
-  
-  .footer-col-1,
-  .footer-col-2 {
-    width: calc(50% - (#{$spacing-unit} / 2));
-  }
-  
-  .footer-col-3 {
-    width: calc(100% - (#{$spacing-unit} / 2));
-  }
-  
-  @media screen and (min-width: $on-large) {
-    .footer-col-1 {
-      width: calc(35% - (#{$spacing-unit} / 2));
-    }
-  
-    .footer-col-2 {
-      width: calc(20% - (#{$spacing-unit} / 2));
-    }
-  
-    .footer-col-3 {
-      width: calc(45% - (#{$spacing-unit} / 2));
-    }
-  }
-  
-  @media screen and (min-width: $on-medium) {
-    .footer-col-wrapper {
-      display: flex
-    }
-  
-    .footer-col {
-      width: calc(100% - (#{$spacing-unit} / 2));
-      padding: 0 ($spacing-unit / 2);
-  
-      &:first-child {
-        padding-right: $spacing-unit / 2;
-        padding-left: 0;
-      }
-  
-      &:last-child {
-        padding-right: 0;
-        padding-left: $spacing-unit / 2;
-      }
-    }
-  }
-  
-  
-  
-  /**
-   * Page content
-   */
-  .page-content {
-    flex: 1 0 auto;
-  }
-  
-  .page-heading {
-    @include relative-font-size(2);
-  }
-  
-  .post-list-heading {
-    @include relative-font-size(1.75);
-  }
-  
-  .post-list {
-    margin-left: 0;
-    list-style: none;
-  
-    >li {
-      margin-bottom: $spacing-unit;
-    }
-  }
-  
-  .post-meta {
-    font-size: $small-font-size;
-    color: $brand-color;
-  }
-  
-  .post-link {
-    display: block;
-    @include relative-font-size(1.5);
-  }
-  
-  
-  
-  /**
-   * Posts
-   */
-  .post-nav {
-    margin-bottom: $spacing-unit;
-    @extend %clearfix;
-  }
-  
-  .post-previous {
-    float: left;
-  }
-  
-  .post-next {
-    float: right;
-  }
-  
-  .post-header {
-    margin-bottom: $spacing-unit;
-  }
-  
-  .post-title,
-  .post-content h1 {
-    @include relative-font-size(2.625);
+  a.title {
+    @include relative-font-size(1.3);
+    font-weight: 400;
     letter-spacing: -1px;
-    line-height: 1.15;
+    margin-bottom: 0;
+    @include media-query($on-mobile) {
+      @include relative-font-size(1.1);
+    }
   
-    @media screen and (min-width: $on-large) {
-      @include relative-font-size(2.625);
+    &,
+    &:visited {
+      color: $background-colour;
     }
   }
-  
-  .post-content {
-    margin-bottom: $spacing-unit;
-  
-    h2 {
-      @include relative-font-size(1.75);
-  
-      @media screen and (min-width: $on-large) {
-        @include relative-font-size(2);
-      }
+
+  img.logo {
+    width: 70px;
+    border-radius: 50%;
+    margin: 5px;
+    padding: 3px;
+    @include media-query($on-mobile) {
+      width: 50px;
     }
-  
-    h3 {
-      @include relative-font-size(1.375);
-  
-      @media screen and (min-width: $on-large) {
-        @include relative-font-size(1.625);
-      }
-    }
-  
-    h4 {
-      @include relative-font-size(1.25);
-    }
-  
-    h5 {
-      @include relative-font-size(1.125);
-    }
-  
-    h6 {
-      @include relative-font-size(1.0625);
-    }
-  
   }
+}
   
-  
-  .media-list {
-    display: table;
-    margin: 0 auto;
-  
+.site-nav {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: $brand-colour;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .5s ease-out;
+
+  .site-menu { 
+    a {
+      padding: 25px 25px;
+      color: $background-colour;
+      display: inline-block;
+      width: 100%;
+      &:hover{
+        background-color: lighten($brand-colour, 20);
+        text-decoration: none;
+      }
+    }
+  }
+}
+
+/* Menu Icon */
+.hamburger {
+  cursor: pointer;
+  float: right;
+  padding: 25px 25px;
+}
+
+.hamburger-line {
+  background: $background-colour;
+  display: block;
+  height: 2px;
+  position: relative;
+  width: 24px;
+
+  &::before{
+    top: 5px;
+  }
+  &::after{
+    top: -5px;
+  }
+  &::before, &::after {
+    background: $background-colour;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+  }
+}
+
+.side-menu {
+  /* Hide checkbox */
+  display: none;
+  &:checked {
+    ~ nav {
+      max-height: 100vh;
+      background-color: $brand-colour;
+    }
+    /* Toggle menu icon */
+    ~ .hamburger {
+      .hamburger-line {
+        background: transparent;
+        &::before {
+          transform: rotate(-45deg);
+          top:0;
+        }
+        &::after {
+          transform: rotate(45deg);
+          top:0;
+        }
+      }
+    }
+  }
+} 
+
+/* Responsiveness */
+@media (min-width: $on-mobile) {
+  .site-nav{
+      max-height: none;
+      top: 0;
+      position: relative;
+      float: right;
+      width: fit-content;
+      background-color: transparent;
+  }
+  .site-menu {
     li {
       float: left;
-      margin: 5px 10px 5px 0;
+    }
+    a:hover{
+      background-color: transparent;
+      color: $background-colour;
+    }
+  } 
+
+  .hamburger{
+    display: none;
+  }
+}
+
   
-      &:last-of-type {
-        margin-right: 0
-      }
+.site-banner {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5em 5em 1.6em .6em;
+  box-sizing: border-box;
+  background: $link-visited-colour url(/assets/images/rocket.png) 97% 70% no-repeat;
+}
   
-      a {
-        display: block;
-        padding: $spacing-unit / 4;
-        border: 1px solid $brand-color;
-        border-radius: 20%;
-  
-        &:hover {
-          border-color: lighten($brand-color, 25%);
-  
-          .svg-icon {
-            color: lighten($brand-color, 25%);
-          }
-        }
-      }
+/**
+  * Site footer
+  */
+.site-footer {
+  position: relative;
+  background-color: $brand-colour;
+  color: $background-colour;
+  display: flex;
+  a {
+    color: $background-colour;
+    &:hover {
+      color: darken($background-colour, 5);
+    }
+    &:visited {
+      color: darken($background-colour, 2);
     }
   }
-  
-  
-  
-  /**
-   * Pagination navbar
-   */
-  .pagination {
-    @extend .media-list;
-  
-    li {
-  
-      a,
-      div {
-        min-width: 41px;
-        text-align: center;
-        box-sizing: border-box;
-      }
-  
-      div {
-        display: block;
-        padding: $spacing-unit / 4;
-        border: 1px solid transparent;
-  
-        &.pager-edge {
-          color: $brand-color;
-          border: 1px dashed;
-          border-radius: 20%;
-        }
-      }
+  .item {
+    flex: 1;
+    padding: 10px 25px;
+  }
+
+  img.hello {
+    position: absolute;
+    width: 150px;
+    right: 0;
+    top: -40px;
+    @include media-query(932px) {
+      // display: none;
+      width: 80px;
+      right: 0;
+      top: -30px;
     }
   }
+
+  @include media-query($on-mobile) {
+    flex-direction: column;
+    text-align: center;
+    h2, p {
+      margin-bottom: 5px;
+    }
+    .item {
+      padding: 3px 5px;
+    }
+  }
+}
   
   
   
-  /**
-   * Grid helpers
-   */
+/**
+  * Page content
+  */
+.page-content {
+  flex: 1 0 auto;
+}
+
+.page-heading {
+  @include relative-font-size(2);
+}
+
+.post-list-heading {
+  @include relative-font-size(1.75);
+}
+
+.post-list {
+  margin-left: 0;
+  list-style: none;
+
+  >li {
+    margin-bottom: $spacing-unit;
+  }
+}
+
+.post-meta {
+  font-size: $small-font-size;
+  color: $brand-colour;
+}
+
+.post-link {
+  display: block;
+  @include relative-font-size(1.5);
+}
+
+
+
+/**
+  * Posts
+  */
+.post-nav {
+  margin-bottom: $spacing-unit;
+  @extend %clearfix;
+}
+
+.post-previous {
+  float: left;
+}
+
+.post-next {
+  float: right;
+}
+
+.post-header {
+  margin-bottom: $spacing-unit;
+}
+
+.post-title,
+.post-content h1 {
+  @include relative-font-size(2.625);
+  letter-spacing: -1px;
+  line-height: 1.15;
+
   @media screen and (min-width: $on-large) {
-    .one-half {
-      width: calc(50% - (#{$spacing-unit} / 2));
+    @include relative-font-size(2.625);
+  }
+}
+
+.post-content {
+  margin-bottom: $spacing-unit;
+
+  h2 {
+    @include relative-font-size(1.75);
+
+    @media screen and (min-width: $on-large) {
+      @include relative-font-size(2);
     }
   }
+
+  h3 {
+    @include relative-font-size(1.375);
+
+    @media screen and (min-width: $on-large) {
+      @include relative-font-size(1.625);
+    }
+  }
+
+  h4 {
+    @include relative-font-size(1.25);
+  }
+
+  h5 {
+    @include relative-font-size(1.125);
+  }
+
+  h6 {
+    @include relative-font-size(1.0625);
+  }
+
+}
+
+
+.media-list {
+  display: table;
+  margin: 0 auto;
+
+  li {
+    float: left;
+    margin: 5px 10px 5px 0;
+
+    &:last-of-type {
+      margin-right: 0
+    }
+
+    a {
+      display: block;
+      padding: $spacing-unit / 4;
+      border: 1px solid $brand-colour;
+      border-radius: 20%;
+
+      &:hover {
+        border-color: lighten($brand-colour, 25%);
+
+        .svg-icon {
+          color: lighten($brand-colour, 25%);
+        }
+      }
+    }
+  }
+}
+
+  
+/**
+  * Pagination navbar
+  */
+.pagination {
+  @extend .media-list;
+
+  li {
+
+    a,
+    div {
+      min-width: 41px;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    div {
+      display: block;
+      padding: $spacing-unit / 4;
+      border: 1px solid transparent;
+
+      &.pager-edge {
+        color: $brand-colour;
+        border: 1px dashed;
+        border-radius: 20%;
+      }
+    }
+  }
+}
