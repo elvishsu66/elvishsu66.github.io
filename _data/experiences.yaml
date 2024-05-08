@@ -1,4 +1,4 @@
-- title: Chief Architect
+- role: Chief Architect
   company: Numeus Group
   location: Zug, Switzerland
   tenure: 09/2021 - 05/2024
@@ -12,7 +12,7 @@
     - Managed and fostered collaboration among dynamic Engineering and Research teams
     - Technologies - Rust, C++, Python, ReactJs, NodeJs, Redis, Airflow, Ray, Dask, Prefect, Karpenter, 
               TimescaleDB, PostgreSQL, Terraform, FluxCD, Prometheus, Grafana, Loki, Kubernetes, AWS, GCP
-- title: Chief Architect
+- role: Chief Architect
   company: Covario AG
   location: Zug, Switzerland
   tenure: 05/2020 - 08/2021
@@ -25,7 +25,7 @@
     - Led, mentored, supported and coordinated with engineering teams around the world
     - Laugh, enjoy and complain about things we don't like and transform them into what we love
     - Technologies - ASP.NET, Akka.NET, GRPC, SignalR, Entity Framework Core, RepoDb, ReactJS, Kafka, Protobuf-net, Kubernetes, Docker, Azure, AWS, GitLab
-- title: Solution Architect
+- role: Solution Architect
   company: EF Education First
   location: Zurich, Switzerland
   tenure: 07/2019 - 05/2010
@@ -36,7 +36,7 @@
     - Led, coached and mentored the Software and DevOps engineering teams in-house and offshore
     - Languages - C#, PostgreSQL, MySQL, T-SQL, Powershell, Python, TypeScript, JavaScript, Sass, Shell, Groovy
     - Technologies - ASP.NET Core, ReactJs, Redux, PostgreSQL, MySQL, MSSQL, Redis, Kafka, Jenkins, GitHub, Docker, Kubernetes, Envoy, Prometheus, Grafana, ELK, AWS, Azure, Salesforce
-- title: Principal Software Architect
+- role: Principal Software Architect
   company: Argentière Capital AG
   location: Zug, Switzerland
   tenure: 03/2017 - 06/2019
@@ -53,7 +53,7 @@
     - Ensured compliance with architecture principles and IT strategies from front to back office
     - Languages - C#, PHP, T-SQL, P/L SQL, MySQL, Powershell, Perl, Python, TypeScript, JavaScript, Sass, VBA, Shell, Groovy
     - Technologies - ASP.NET Core, NancyFx, OpenFin, Angular, RxJs, NgRx, React, Redux, Vue, Icinga2, Phabricator, GitLab, MS SQL, PostgreSQL, MySQL, Oracle, Redis, InfluxDB, RabbitMQ, Kafka, VSTO, Excel-DNA, Bloomberg, TeamCity, Jenkins, SpecFlow, Docker (Swarm), Kubernetes, Azure, AWS
-- title: Head of Desktop Development
+- role: Head of Desktop Development
   company: Leonteq Securities AG
   location: Zurich, Switzerland
   tenure: 07/2014 - 02/2017
@@ -63,7 +63,7 @@
     - Managing implementation of tools and processes for Change Management activities, including Continuous Integration for enterprise systems
     - Business clients - Trading, Structuring, Treasury, Sales & Quantitative Analytics 
     - Specialised in derivatives and structured products (Single Stocks, Indices & FICC)
-- title: Senior Software Engineer
+- role: Senior Software Engineer
   company: Barcode Dynamics
   location: Brisbane, Australia
   tenure: 11/2006 - 04/2013
@@ -77,7 +77,7 @@
     - Code review, bugs fixing and development of client application modules (WinForm/ASP.NET)
     - Project management, requirement management and follow-up activities
     - Carried pre and post sales design engineering. Worked closely with customers to compile requirements and designed specific customisations to meet client needs
-- title: Application Engineer
+- role: Application Engineer
   company: Taiwan Semiconductor
   location: Taipei, Taiwan
   tenure: 09/2003 - 04/2005

@@ -12,7 +12,7 @@ atom_path: /blog/atom.xml
 # Site settings
 permalink: /blog/:title.html
 markdown: kramdown
-paginate: 5
+paginate: 6
 paginate_path: "/blog/page:num/"
 date_format: "%-d %b, %Y"
 

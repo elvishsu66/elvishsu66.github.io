@@ -1,9 +1,9 @@
 ---
 layout: page
 title: License
+banner:
+  image: /assets/images/bg-license.webp
 ---
-
-![license]({{ '/assets/images/bg-license.png' | relative_url }}){: .center }
 
 In addition to fostering the dissemination of knowledge for the greater benefit of the public, the aim of public posting is to create a collaborative environment where ideas can thrive and evolve. It is encouraged that content from this platform be utilized in ways that contribute positively to the collective discourse and advancement of understanding.
 

@@ -1,0 +1,13 @@
+<div class="page-banner">
+    <div class="image" style="background-image: url('{{ page.banner.image }}');">
+        <div class="overlay"></div>
+    </div>
+    <div class="wrap">
+        {%- if page.banner.title -%}
+        <h1>{{ page.banner.title }}</h1>
+        {%- else -%}
+        <h1>{{ page.title }}</h1>
+        {%- endif -%}
+        <p>{{ page.banner.subtitle }}</p>
+    </div>
+</div>

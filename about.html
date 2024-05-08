@@ -1,30 +1,28 @@
 ---
 layout: page
 title: About
+banner:
+    title: About me
+    subtitle: Professional Experiences
+    image: /assets/images/elvis.jpg
 ---
-<div style="text-align: center;">
-  <img src="{{ '/assets/images/elvis.jpg' | relative_url }}" alt="about" style="width: 90%;"/>
-  <h2>My Professional Experiences</h2>
-</div>
-
 <div class="timeline">
     <div class="outer">
       {% for experience in site.data.experiences %}
-      <div class="card">
+      <section class="card">
         <div class="info">
           <div class="title">
-            <h3>{{ experience.title }} @ {{ experience.company }}</h3>
-            <span style="font-style: italic;">{{ experience.tenure }}, </span>
-            <span>{{ experience.location }}</span>
+            <h3 class="role">{{ experience.role }} @ {{ experience.company }}</h3>
+            <span class="tenure">{{ experience.tenure }}, </span>
+            <span class="location">{{ experience.location }}</span>
           </div>
-          
           <ul>
             {% for item in experience.content %}
             <li>{{ item }}</li>
             {% endfor %}
           </ul>
         </div>
-      </div>
+      </section>
       {% endfor %}
     </div>
 </div>

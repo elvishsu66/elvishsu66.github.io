@@ -1,0 +1,39 @@
+{% if paginator.total_pages > 1 %}
+<div class="pager">
+    <ul class="pagination">
+        {%- if paginator.previous_page %}
+        <li>
+            <span>
+                <a href="{{ paginator.previous_page_path | relative_url }}">&laquo;</a>
+            </span>
+        </li>
+        {%- else %}
+        <!-- <li><span class="previous">Previous</span></li> -->
+        {%- endif %}
+
+        {% for page in (1..paginator.total_pages) %}
+        <li class="{% if page == paginator.page %}active{% endif %}">
+            <span>
+                {% if page == paginator.page %}
+                <em>{{ page }}</em>
+                {% elsif page == 1 %}
+                <a href="{{ '/blog/' | relative_url }}">{{ page }}</a>
+                {% else %}
+                <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
+                {% endif %}
+            </span>
+        </li>
+        {% endfor %}
+        
+        {%- if paginator.next_page %}
+        <li>
+            <span>
+                <a href="{{ paginator.next_page_path | relative_url }}">&raquo;</a>
+            </span>
+        </li>
+        {%- else %}
+        <!-- <li><span class="next">Next</span></li> -->
+        {%- endif %}
+    </ul>
+</div>
+{% endif %}

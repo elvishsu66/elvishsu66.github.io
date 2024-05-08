@@ -22,10 +22,11 @@ $spacing-unit: 2em;
 $table-text-align: left;
 
 // Width of the content area
-$content-width: 1024px;
+$content-width: 1280px;
 
-$on-mobile: 768px;
-$on-laptop: 1600px;
+$on-mobile: 720px;
+$on-tablet: 1024px;
+$on-laptop: 1900px;
 
 $on-medium: $on-mobile;
 $on-large: $on-laptop;

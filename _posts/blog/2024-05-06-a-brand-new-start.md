@@ -2,11 +2,12 @@
 layout: post
 title: A brand new start!
 categories: [thoughts]
+banner:
+    title: A brand new start!
+    image: /assets/posts/bg-a-brand-new-start.jpg
 ---
 
 It has been a while since I post a blog page on [Blogger](https://elvishsu66.blogspot.com)
-
-![blog]({{ '/assets/images/blog.jpg' | relative_url }}){: .center }
 
 🌟 With over 20 years in the tech industry, I’ve mastered the art of transforming complex cloud technology into streamlined business solutions. As a seasoned Chief Architect and Director of Engineering, I lead the strategic deployment of cutting-edge software products that drive substantial business value.
 

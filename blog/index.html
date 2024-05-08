@@ -1,54 +1,45 @@
 ---
 layout: default
 title: Blog
+banner:
+    title: Coding, thoughts, technology and ideas.
+    subtitle: Don’t limit yourself. Many people limit themselves to what they think they can do. You can go as far as your mind lets you. What you believe, remember, you can achieve.
+    image: /assets/posts/bg-technology-network.png
 ---
-<div style="text-align: center; vertical-align: middle; padding: 2em; min-height: 20em; background: url('/assets/images/bg-blogging.png');">
-    <h1>
-        Coding, thoughts, technology and ideas.
-    </h1>
-    <h3>
-        Don’t limit yourself. Many people limit themselves to what they think they can do. 
-        You can go as far as your mind lets you. What you believe, remember, you can achieve.
-    </h3>
-</div>
-<hr>
 <div class="post-list">
     {%- for post in paginator.posts -%}
-    <article>
-        <span class="post-meta">{{ post.date | date: site.date_format }}</span>
-        <h3>
-            <a class="post-link"
-               href="{{ post.url | relative_url }}">
-                {{ post.title | escape }}
-            </a>
-        </h3>
-        {{ post.excerpt }}
-    </article>
+    <div class="item">
+        <div class="wrapper">
+            <div class="thumbnail">
+                <a class="post-link" href="{{ post.url | relative_url }}" title="{{ post.title }}">
+                    {%- if post.banner.image -%}
+                    <img src="{{ post.banner.image }}" alt="{{ post.title }}"/>
+                    {%- else -%}
+                    <img src="/assets/images/bg-blogging.png" alt="{{ post.title }}"/>
+                    {%- endif -%}
+                </a>
+            </div>
+            
+            <span class="post-meta">{{ post.date | date: site.date_format }}</span>
+            
+            <h3>
+                <a class="post-link" href="{{ post.url | relative_url }}">
+                    {{ post.title | escape }}
+                </a>
+            </h3>
+            
+            <div class="content">
+                {{ post.content | markdownify | strip_html | truncatewords: 20 }}
+            </div>
+
+            <div class="categories">
+                {%- for cateogry in post.categories -%}
+                <div class="category">{{ cateogry | capitalize }}</div>
+                {%- endfor -%}
+            </div>
+        </div>
+    </div>
     {%- endfor -%}
 </div>
 
-{% if paginator.total_pages > 1 %}
-<div class="pager">
-    <ul class="pagination">
-        {%- if paginator.previous_page %}
-        <li><a href="{{ paginator.previous_page_path | relative_url }}"
-               class="previous-page">{{ paginator.previous_page }}</a></li>
-        {%- else %}
-        <li>
-            <div class="pager-edge">•</div>
-        </li>
-        {%- endif %}
-        <li>
-            <div class="current-page">{{ paginator.page }}</div>
-        </li>
-        {%- if paginator.next_page %}
-        <li><a href="{{ paginator.next_page_path | relative_url }}"
-               class="next-page">{{ paginator.next_page }}</a></li>
-        {%- else %}
-        <li>
-            <div class="pager-edge">•</div>
-        </li>
-        {%- endif %}
-    </ul>
-</div>
-{% endif %}
+{%- include pager.html -%}

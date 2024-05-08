@@ -1,6 +1,10 @@
 ---
 layout: page
 title: Categories
+banner:
+    title: Discover what you are interested in
+    subtitle: “Limitations live only in our minds. But if we use our imaginations, our possibilities become limitless.” – Jamie Paolinetti
+    image: /assets/posts/bg-evening-at-my-balcony.jpg
 ---
 
 {%- assign categories = site.categories | sort -%}
@@ -17,8 +21,9 @@ title: Categories
     {% for post in sorted_posts %}
     <li>
         <a href="{{ post.url }}">{{ post.title }}</a> -
-        <time datetime="{{ post.date | date_to_xmlschema }}"
-              itemprop="datePublished">{{ post.date | date: "%b %-d, %Y" }}</time>
+        <time datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+            {{ post.date | date: "%-d %b, %Y" }}
+        </time>
     </li>
     {% endfor %}
 </ul>

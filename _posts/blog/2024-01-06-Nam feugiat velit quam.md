@@ -2,6 +2,9 @@
 layout: post
 title: Nam feugiat velit quam
 categories: [designs]
+banner:
+    title: An example with text
+    image: /assets/posts/bg-technology-network.png
 ---
 
 Nam feugiat velit quam, nec posuere arcu aliquet id. Pellentesque blandit lectus eu nisl vulputate aliquam. Etiam eget urna a ante tempus tristique id vitae ligula. Aliquam mollis auctor ante ut ornare. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et porttitor elit. Suspendisse sed metus at nisi porttitor bibendum vitae at odio.
