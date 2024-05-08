@@ -259,6 +259,7 @@
   flex: 1;
 }
 
+
 .post-list {
   margin-left: 0;
   list-style: none;
@@ -324,10 +325,12 @@
   }
 }
 
+
 .post-meta {
   font-size: $small-font-size;
   color: lighten($theme-colour, 40%)
 }
+
 
 .post-link {
   display: block;
@@ -399,11 +402,24 @@
     h6 {
       @include relative-font-size(1.0625);
     }
+
+    img {
+      overflow: hidden;
+      display: inline-flex;
+      transition: transform .5s;
+      object-fit: cover;
+      opacity: 0.8;
+      &:hover {
+        opacity: 1;
+        transform: scale(1.02);
+      }
+    }
   }
 }
 
 
 .pager {
+  margin-top: $spacing-unit;
   justify-content: center !important;
   .pagination {
     display: flex;

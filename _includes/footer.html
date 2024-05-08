@@ -1,6 +1,6 @@
 <footer class="site-footer">
     <div class="item">
-      <p><strong>{{ site.title | escape }}</strong></p>
+      <p><a href="/" title="home"><strong>{{ site.title | escape }}</strong></a></p>
       <p>{{ site.description | escape }}</p>
     </div>
     <div class="item">
@@ -8,6 +8,7 @@
         <a href="https://www.linkedin.com/in/elvishsu/" target="_blank" title="Connect with me on LinkedIn">LinkedIn</a> 
         | <a href="https://github.com/elvishsu66" target="_blank" title="My GitHub Profile">GitHub</a> 
         | <a href="https://x.com/elvishsu" target="_blank" title="Follow me on X">X</a> 
+        | <a href="{% link blog/atom.xml %}" target="_blank" title="RSS">RSS</a> 
         | <a href="{% link privacy.md %}">Privacy</a> 
         | <a href="{% link license.md %}">License</a>
       </p>
