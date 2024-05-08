@@ -1,7 +1,6 @@
 ---
 layout: page
 title: About
-order: 3
 ---
 <div style="text-align: center;">
   <img src="{{ '/assets/images/elvis.jpg' | relative_url }}" alt="about" style="width: 90%;"/>
@@ -10,110 +9,22 @@ order: 3
 
 <div class="timeline">
     <div class="outer">
+      {% for experience in site.data.experiences %}
       <div class="card">
         <div class="info">
-          <h3 class="title">Chief Architect @ Numeus Group</h3>
-          <p>
-            <ul>
-                <li>Designed and managed technical strategy and blueprint of cloud-native operations</li>
-                <li>Designed and developed the global distributed high-frequency crypto trading systems</li>
-                <li>Designed and implemented the automated cloud infrastructure platforms</li>
-                <li>Implemented preventative measures and manage cyber risks</li>
-                <li>Focused on continuous detection and response to ensure DevSecOps principles are intact</li>
-                <li>Ensured the organisation follows engineering and architecture best practices </li>
-                <li>Managed and fostered collaboration among dynamic Engineering and Research teams</li>
-                <li>Technologies: Rust, C++, Python, ReactJs, NodeJs, Redis, Airflow, Ray, Dask, Prefect, Karpenter, 
-                    TimescaleDB, PostgreSQL, Terraform, FluxCD, Prometheus, Grafana, Loki, Kubernetes, AWS, GCP</li>
-            </ul>
-          </p>
+          <div class="title">
+            <h3>{{ experience.title }} @ {{ experience.company }}</h3>
+            <span style="font-style: italic;">{{ experience.tenure }}, </span>
+            <span>{{ experience.location }}</span>
+          </div>
+          
+          <ul>
+            {% for item in experience.content %}
+            <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
         </div>
       </div>
-      <div class="card">
-        <div class="info">
-          <h3 class="title">Chief Architect @ Covario AG</h3>
-          <p>
-            <ul>
-                <li>Designed and managed technical strategy and blueprint of cloud-native operations</li>
-                <li>Designed and developed the global distributed high-frequency crypto trading systems</li>
-                <li>Designed and implemented the automated cloud infrastructure platforms</li>
-                <li>Implemented preventative measures and manage cyber risks</li>
-                <li>Focused on continuous detection and response to ensure DevSecOps principles are intact</li>
-                <li>Ensured the organisation follows engineering and architecture best practices </li>
-                <li>Managed and fostered collaboration among dynamic Engineering and Research teams</li>
-                <li>Technologies: Rust, C++, Python, ReactJs, NodeJs, Redis, Airflow, Ray, Dask, Prefect, Karpenter, TimescaleDB, PostgreSQL, Terraform, FluxCD, Prometheus, Grafana, Loki, Kubernetes, AWS, GCP</li>
-            </ul>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="info">
-          <h3 class="title">Solution Architect @ EF Education First</h3>
-          <p>
-            <ul>
-                <li>Designed, developed EF’s core commerce system, a cloud-based solution utilising AWS with high availability architecture</li>
-                <li>Migrated multiple legacy software services into Kubernetes within 6 month</li>
-                <li>Established architecture strategies and a technical roadmap</li>
-                <li>Led, coached, and mentored cross-functional engineering teams, comprising a total of 20 members</li>
-                <li>Technologies: C#, ReactJs, NodeJs, Kafka, PostgreSQL, ElasticSearch, Kubernetes, AWS</li>
-            </ul>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="info">
-          <h3 class="title">Principal Software Architect @ Argentiere Capital AG</h3>
-          <p>
-            <ul>
-                <li>Led a team of 5 in architecting and engineering a proprietary enterprise solution across multiple domains</li>
-                <li>Managed the design and operation of the trading system, overseeing operations totalling AUM $2.9bn</li>
-                <li>Improved productivity by 50% through designing and implementing an automated trade reconciliation system</li>
-                <li>Provided strategic leadership in technical development and collaborated with management teams to establish functional workflows and business rules</li>
-                <li>Technologies: C#, AngularJs, ReactJs, MSSQL, InfluxDB, Icinga, Azure, AWS</li>
-            </ul>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="info">
-          <h3 class="title">Head of Desktop Development @ Leonteq Security AG</h3>
-          <p>
-            <ul>
-                <li>Directed projects with a team of 4, employing Agile methodologies and adhering to software engineering best practices</li>
-                <li>Orchestrated the successful modernisation of financial tools into distributed microservices within a 6-month timeframe</li>
-                <li>Reduced development effort by 50% through designing, enhancing, and refining proprietary APIs and libraries</li>
-                <li>Pioneered and led rapid developments of trading software aimed at enhancing transparency, accuracy, and efficiency</li>
-                <li>Technologies: C#, ASP.NET, ExtJs, AngularJs, Oracle, RabbitMQ, Azure</li>
-            </ul>
-          </p>
-        </div>
-      </div>
-      <div class="card">
-        <div class="info">
-          <h3 class="title">Senior Softweare Engineer @ Barcode Dynamics</h3>
-          <p>
-            <ul>
-                <li>Assisted in acquiring and completing large government and enterprise projects</li>
-                <li>Designed and implemented enterprise software and hardware solutions</li>
-                <li>Conducted software lifecycle management, testing, documentation, and quality assurance</li>
-                <li>Pioneered and led rapid developments of trading software aimed at enhancing transparency, accuracy, and efficiency</li>
-                <li>Technologies: PHP, C#, VB.NET, ExtJs, MSSQL, MySQL, Azure</li>
-            </ul>
-          </p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="info">
-          <h3 class="title">Application Engineer @ Taiwan Semiconductor</h3>
-          <p>
-            <ul>
-                <li>Developed production software applications using .NET C# and Borland C++</li>
-                <li>Designed, deployed, and supported custom software for partners and end-users, including pre- and post-sales design engineering 
-                  with technical analysis, specifications, and client support</li>
-                <li>Technologies: PHP, C#, VB.NET, C++, jQuery, MySQL</li>
-            </ul>
-          </p>
-        </div>
-      </div>
+      {% endfor %}
     </div>
 </div>

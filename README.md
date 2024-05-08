@@ -16,5 +16,5 @@ jekyll build
 Run the following and go to http://localhost:4000 in your browser
 
 ```bash
-bundle exec jekyll serve --drafts --livereload
+bundle exec jekyll serve --open-url --livereload
 ```

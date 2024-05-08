@@ -20,10 +20,7 @@ body {
       -o-font-feature-settings: "kern" 1;
           font-feature-settings: "kern" 1;
   font-kerning: normal;
-  display: flex;
   min-height: 100vh;
-  flex-direction: column;
-  overflow-wrap: break-word;
 }
 
 h1, h2, h3, h4, h5, h6,
@@ -89,13 +86,10 @@ hr {
   margin: $spacing-unit;
 }
 
-/**
-* Blockquotes
-*/
 blockquote {
-  color: $brand-colour;
-  border-left: 4px solid $brand-colour;
-  padding-left: $spacing-unit / 2;
+  color: $theme-colour;
+  border-left: 4px solid $theme-colour;
+  padding: $spacing-unit / 2;
   @include relative-font-size(1.125);
   letter-spacing: -1px;
   font-style: italic;
@@ -105,43 +99,36 @@ blockquote {
   }
 }
 
-
-/**
-* Table
-*/
 table {
   margin-bottom: $spacing-unit;
   width: 100%;
   text-align: $table-text-align;
-  color: $table-text-colour;
+  color: $text-colour;
   border-collapse: collapse;
   tr {
     &:nth-child(even) {
-      background-color: $table-zebra-colour;
+      background-color: darken($background-colour, 3%);
     }
   }
   th, td {
     padding: ($spacing-unit / 3) ($spacing-unit / 2);
   }
   th {
-    background-color: $table-header-bg-colour;
-    border: 1px solid $table-header-border;
+    background-color: $header-background-colour;
+    color: $header-colour;
+    border: 1px solid $header-background-colour;
   }
   td {
-    border: 1px solid $table-border-colour;
+    border: 1px solid darken($background-colour, 10%);
   }
 
   @include media-query($on-laptop) {
-    display: block;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
             -ms-overflow-style: -ms-autohiding-scrollbar;
   }
 }
  
- /**
-  * Wrapper
-  */
 .wrapper {
   background-color: $background-colour;
   max-width: calc(#{$content-width} - (#{$spacing-unit}));
@@ -160,9 +147,6 @@ table {
   }
 }
  
- /**
-* Clearfix
-*/
 %clearfix:after {
   content: "";
   display: table;

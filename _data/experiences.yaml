@@ -1,0 +1,91 @@
+- title: Chief Architect
+  company: Numeus Group
+  location: Zug, Switzerland
+  tenure: 09/2021 - 05/2024
+  content:
+    - Designed and managed technical strategy and blueprint of cloud-native operations
+    - Designed and developed the global distributed high-frequency crypto trading systems
+    - Designed and implemented the automated cloud infrastructure platforms
+    - Implemented preventative measures and manage cyber risks
+    - Focused on continuous detection and response to ensure DevSecOps principles are intact
+    - Ensured the organisation follows engineering and architecture best practices 
+    - Managed and fostered collaboration among dynamic Engineering and Research teams
+    - Technologies - Rust, C++, Python, ReactJs, NodeJs, Redis, Airflow, Ray, Dask, Prefect, Karpenter, 
+              TimescaleDB, PostgreSQL, Terraform, FluxCD, Prometheus, Grafana, Loki, Kubernetes, AWS, GCP
+- title: Chief Architect
+  company: Covario AG
+  location: Zug, Switzerland
+  tenure: 05/2020 - 08/2021
+  content:
+    - Defined and managed the technical strategy and blueprint of Covario's state-of-the-art platform
+    - Architected an enterprise solution for high availability, data protection and disaster recovery mission-critical computing services, on-premises and with multiple cloud vendors
+    - Designed and developed the global distributed high-frequency and ultra-low latency digital assets trading systems
+    - Designed and developed automated digital asset trades clearing and settlement engine
+    - Ensured the consistent of engineering practice, quality assurance and software development process
+    - Led, mentored, supported and coordinated with engineering teams around the world
+    - Laugh, enjoy and complain about things we don't like and transform them into what we love
+    - Technologies - ASP.NET, Akka.NET, GRPC, SignalR, Entity Framework Core, RepoDb, ReactJS, Kafka, Protobuf-net, Kubernetes, Docker, Azure, AWS, GitLab
+- title: Solution Architect
+  company: EF Education First
+  location: Zurich, Switzerland
+  tenure: 07/2019 - 05/2010
+  content:
+    - Designed, developed, and tested the complete architecture of EF's core commerce system, an in-house built leading-edge SaaS solution leveraging Amazon web services with high availability architecture and utilised the leading-edge technologies
+    - Containerised multiple legacy software services into the enterprise-grade cloud-native environment
+    - Defined IT architecture strategies and technical roadmap with industrial-proven best practices
+    - Led, coached and mentored the Software and DevOps engineering teams in-house and offshore
+    - Languages - C#, PostgreSQL, MySQL, T-SQL, Powershell, Python, TypeScript, JavaScript, Sass, Shell, Groovy
+    - Technologies - ASP.NET Core, ReactJs, Redux, PostgreSQL, MySQL, MSSQL, Redis, Kafka, Jenkins, GitHub, Docker, Kubernetes, Envoy, Prometheus, Grafana, ELK, AWS, Azure, Salesforce
+- title: Principal Software Architect
+  company: Argentière Capital AG
+  location: Zug, Switzerland
+  tenure: 03/2017 - 06/2019
+  content:
+    - Lead architect and engineer creating solutions architecture, algorithms and designs of a proprietary enterprise solution including Trading, Risk Analysis, Operation, Finance, and Investor Relations systems
+    - Researched, evaluated and developed software applications to create and monitor the complex IT infrastructure and software applications
+    - Invented and designed state-of-the-art Microsoft Excel solution to integrate with proprietary financial systems using the microservice architecture
+    - Led and performed agile product development activities with a complete full-stack design process including a Web portal, RESTful API, database designs and security implementations across multiple teams
+    - Applied software engineering practices to analyse system test results, document risks and recommend countermeasures with the implementation of automation across all elements of solution delivery
+    - Provided guidance and guidelines of the technical development environments, developer tools, and operating systems
+    - Leveraged information servers, including data profiling, data quality, ETL and metadata by designing and architecting enterprise data integration solutions
+    - Collaborated with Portfolio and Operation Management teams to develop functional workflows and business rules
+    - Maintained and analysed financial statistical data and suggested enhancements with rich graphical UI to the trading models and strategies
+    - Ensured compliance with architecture principles and IT strategies from front to back office
+    - Languages - C#, PHP, T-SQL, P/L SQL, MySQL, Powershell, Perl, Python, TypeScript, JavaScript, Sass, VBA, Shell, Groovy
+    - Technologies - ASP.NET Core, NancyFx, OpenFin, Angular, RxJs, NgRx, React, Redux, Vue, Icinga2, Phabricator, GitLab, MS SQL, PostgreSQL, MySQL, Oracle, Redis, InfluxDB, RabbitMQ, Kafka, VSTO, Excel-DNA, Bloomberg, TeamCity, Jenkins, SpecFlow, Docker (Swarm), Kubernetes, Azure, AWS
+- title: Head of Desktop Development
+  company: Leonteq Securities AG
+  location: Zurich, Switzerland
+  tenure: 07/2014 - 02/2017
+  content:
+    - Leading agile project management of Desktop Development team leveraging Scrum/Kanban methodologies and incorporating FDD, TDD, BDD, CI/CD, and other XP Programming practices
+    - Leading and coaching product engineering of enterprise platform and APIs across .NET teams
+    - Managing implementation of tools and processes for Change Management activities, including Continuous Integration for enterprise systems
+    - Business clients - Trading, Structuring, Treasury, Sales & Quantitative Analytics 
+    - Specialised in derivatives and structured products (Single Stocks, Indices & FICC)
+- title: Senior Software Engineer
+  company: Barcode Dynamics
+  location: Brisbane, Australia
+  tenure: 11/2006 - 04/2013
+  content:
+    - Ongoing ASP.NET based solution developments utilising C# and SQL server reporting
+    - Lead engineer on designing and implementing enterprise software and hardware solutions
+    - Focused on web-based and standalone developments for desktop and mobile platforms
+    - Developed and maintained web APIs (SOAP/RESTful) and DLLs in .NET environment
+    - Conducted software lifecycle management, testing, documentation and quality assurance
+    - Coached and mentored junior engineers to enhance team force
+    - Code review, bugs fixing and development of client application modules (WinForm/ASP.NET)
+    - Project management, requirement management and follow-up activities
+    - Carried pre and post sales design engineering. Worked closely with customers to compile requirements and designed specific customisations to meet client needs
+- title: Application Engineer
+  company: Taiwan Semiconductor
+  location: Taipei, Taiwan
+  tenure: 09/2003 - 04/2005
+  content:
+    - Developed production testing software applications (.NET C# / Borland C++)
+    - Designed and deployed various custom software for partners and end users (PHP + MySQL) 
+    - Carried pre and post sales design engineering
+    - Participated the mechanical design and firmware developments
+    - Modified and applied newly developed mechanisms into OEM thermal printer products
+    - Focused on testing and evaluating products through performance, operational conditions and safety
+    - Coordinated team members with customer services and inbound info with R&D department

@@ -25,6 +25,7 @@ plugins:
 sass:
   sass_dir: _sass
   style: compressed
+
 compress_html:
   clippings: all
   comments: all
@@ -36,3 +37,13 @@ google_analytics: G-M47EN9ZR37
 
 disqus:
   shortname: elvishsu66
+
+navigation:
+  - title: home
+    url: /
+  - title: blog
+    url: /blog/
+  - title: categories
+    url: /blog/categories
+  - title: about
+    url: /about
