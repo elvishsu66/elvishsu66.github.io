@@ -4,7 +4,6 @@ logo: /assets/images/elvis.jpg
 email: me@elvishsu.com
 description: A simple yet creative software designer
 baseurl: ""
-url: "https://elvishsu.com"
 author:
   name: Elvis Hsu
 atom_path: /blog/atom.xml
