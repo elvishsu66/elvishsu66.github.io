@@ -81,9 +81,9 @@
     /* Title of the card */
     .title {
         padding: 0 $spacing-unit;
-        h3 {
+        h2, h3 {
             color: $link-base-colour;
-            margin-bottom: .3em;
+            margin-bottom: .2em;
         }
         span {
             @include relative-font-size(.85);

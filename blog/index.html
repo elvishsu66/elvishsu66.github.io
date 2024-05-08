@@ -20,7 +20,9 @@ banner:
                 </a>
             </div>
             
-            <span class="post-meta">{{ post.date | date: site.date_format }}</span>
+            <span class="post-meta">
+                {{ post.date | date: site.date_format }}
+            </span>
             
             <h3>
                 <a class="post-link" href="{{ post.url | relative_url }}">

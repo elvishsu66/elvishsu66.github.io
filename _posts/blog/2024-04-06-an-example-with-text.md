@@ -3,7 +3,8 @@ layout: post
 title: An example with text
 categories: [thoughts]
 banner:
-    title: An example with text
+    title: We all get challenges in life
+    subtitle: Sometimes, you can give it a little push
     image: /assets/posts/bg-redcliff.jpg
 ---
 

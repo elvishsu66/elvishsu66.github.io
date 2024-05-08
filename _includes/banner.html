@@ -10,6 +10,10 @@
         {%- else -%}
         <h1>{{ page.title }}</h1>
         {%- endif -%}
-        <p>{{ page.banner.subtitle }}</p>
+        {%- if page.banner.subtitle -%}
+        <h3>{{ page.banner.subtitle }}</h3>
+        {%- else -%}
+        <h3>{{ page.subtitle }}</h3>
+        {%- endif -%}
     </div>
 </div>
