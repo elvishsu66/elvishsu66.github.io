@@ -52,8 +52,10 @@ layout: page
         {%- endif -%}
 
         <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
-        <data itemprop="author.name">{{ site.author.name }}</data>
-        <data itemprop="author.url">{{ site.author.url }}</data>
-        <data itemprop="image">{{ page.image }}</data>
+        <div itemprop="author publisher" itemscope itemtype="http://schema.org/Person" hidden>
+            <data itemprop="name">{{ site.author.name }}</data>
+            <data itemprop="url">{{ site.author.url }}</data>
+        </div>
+        <img src="{{ page.image }}" itemprop="image" alt="{{ page.title | escape }}" hidden/>
     </article>
 </div>
