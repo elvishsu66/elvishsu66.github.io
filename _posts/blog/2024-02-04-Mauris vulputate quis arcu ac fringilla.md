@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Mauris vulputate quis arcu ac fringilla
-categories: [coding]
+tags: [coding]
 image: /assets/posts/bg-lisbon-skyline.jpg
 ---
 

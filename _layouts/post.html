@@ -31,11 +31,11 @@ layout: page
                       itemprop="datePublished">
                     {{ page.date | date: site.date_format }}
                 </time>
-                {%- if page.categories -%}
+                {%- if page.tags -%}
                 • Posted in
-                {% for category in page.categories %}
-                <a href="{% link blog/categories.html %}#{{category | uri_escape | downcase }}">
-                    {{ category | capitalize }}
+                {% for tag in page.tags %}
+                <a href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">
+                    {{ tag | capitalize }}
                 </a>
                 {%- if forloop.last == false %}, {% endif -%}
                 {% endfor %}

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Lorem ipsum dolor sit amet!
-categories: [architecture]
+tags: [architecture]
 image: /assets/posts/bg-evening-at-my-balcony.jpg
 ---
 

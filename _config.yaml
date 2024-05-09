@@ -52,7 +52,7 @@ navigation:
     url: /
   - title: blog
     url: /blog/
-  - title: categories
-    url: /blog/categories
+  - title: topics
+    url: /blog/topics
   - title: about
     url: /about

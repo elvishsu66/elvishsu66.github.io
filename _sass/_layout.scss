@@ -2,12 +2,12 @@
  * Site header
  */
 .site-header {
-  background-color: $theme-colour;
-  color: $background-colour;
+  background-color: $theme-color;
+  color: $background-color;
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 1;
 
   a, nav {
     vertical-align: middle;
@@ -24,7 +24,7 @@
   
     &,
     &:visited {
-      color: $background-colour;
+      color: $background-color;
     }
   }
 
@@ -42,7 +42,7 @@
     width: 100%;
     height: 100%;
     position: fixed;
-    background-color: $theme-colour;
+    background-color: $theme-color;
     overflow: hidden;
     max-height: 0;
     transition: max-height .5s ease-out;
@@ -50,11 +50,11 @@
     .site-menu { 
       a {
         padding: 25px 25px;
-        color: $background-colour;
+        color: $background-color;
         display: inline-block;
         width: 100%;
         &:hover{
-          background-color: lighten($theme-colour, 20);
+          background-color: lighten($theme-color, 20);
           text-decoration: none;
         }
         &.active {
@@ -73,7 +73,7 @@
   }
   
   .hamburger-line {
-    background: $background-colour;
+    background: $background-color;
     display: block;
     height: 2px;
     position: relative;
@@ -86,7 +86,7 @@
       top: -8px;
     }
     &::before, &::after {
-      background: $background-colour;
+      background: $background-color;
       content: '';
       display: block;
       height: 100%;
@@ -102,7 +102,7 @@
     &:checked {
       ~ nav {
         max-height: 100vh;
-        background-color: $theme-colour;
+        background-color: $theme-color;
       }
       /* Toggle menu icon */
       ~ .hamburger {
@@ -137,7 +137,7 @@
       }
       a:hover{
         background-color: transparent;
-        color: $background-colour;
+        color: $background-color;
       }
     } 
   
@@ -152,24 +152,32 @@
 */
 .site-footer {
   position: relative;
-  background-color: $theme-colour;
-  color: $background-colour;
+  background-color: $theme-color;
+  color: $background-color;
   display: flex;
-  @include relative-font-size(.9);
+  @include relative-font-size(.95);
 
   a {
-    color: $background-colour;
+    color: $background-color;
     &:hover {
-      color: darken($background-colour, 5);
+      color: darken($background-color, 5);
     }
     &:visited {
-      color: darken($background-colour, 2);
+      color: darken($background-color, 2);
     }
   }
 
   .item {
     flex: 1;
     padding: 1em 25px;
+    a, span {
+      margin: 0 .5em;
+    }
+
+    a.fa, a.fab {
+      text-decoration: none;
+    }
+
     &:nth-child(odd) {
       text-align: right;
     }
@@ -210,7 +218,7 @@
   padding: ($spacing-unit * 3) 0 ($spacing-unit * 3);
   margin-bottom: $spacing-unit / 2;
   text-align: center;
-  color: $background-colour;
+  color: $background-color;
 
   @include media-query($on-mobile) {
     padding: ($spacing-unit * 1.5) 0 ($spacing-unit * 1.5);
@@ -275,15 +283,15 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      padding: 1em;
+      padding: .5em;
 
       .thumbnail {
-        border-radius: $spacing-unit / 4;
-        border: 1px solid darken($background-colour, 5%);
+        border-radius: 5px;
+        border: 1px solid darken($background-color, 5%);
         overflow: hidden;
         display: inline-flex;
         img {
-          aspect-ratio: 16/9;
+          aspect-ratio: 3/2;
           width: 100%;
           height: 100%; 
           object-fit: cover;
@@ -301,20 +309,20 @@
 
       .content {
         flex: 1;
-        color: lighten($theme-colour, 40%)
+        color: lighten($theme-color, 40%)
       }
 
-      .categories {
+      .categories, .tags {
         margin-top: $spacing-unit / 2;
         display: flex;
-        .category {
+        .category, .tag {
           flex: 0 0 auto;
           padding: 0 5px;
           margin: 0 5px;
           border-radius: 5px;
           text-transform: uppercase;
-          color: lighten($theme-colour, 40%);
-          background-color: darken($background-colour, 10%);
+          color: lighten($theme-color, 40%);
+          background-color: darken($background-color, 10%);
           @include relative-font-size(.8);
         }
       }
@@ -333,7 +341,7 @@
 
 .post-meta {
   font-size: $small-font-size;
-  color: lighten($theme-colour, 40%)
+  color: lighten($theme-color, 40%)
 }
 
 
@@ -439,7 +447,7 @@
 
     li {
       text-decoration: none;
-      border: 1px solid $link-base-colour;
+      border: 1px solid $link-base-color;
       border-right: none;
       text-align: center;
       vertical-align: middle;
@@ -447,25 +455,25 @@
       &.active {
         span {
           padding: 8px 12px;
-          background-color: $link-base-colour;
-          color: $background-colour;
+          background-color: $link-base-color;
+          color: $background-color;
         }
       }
 
       span {
         display: block;
-        color: $text-colour;
+        color: $text-color;
         text-decoration: none;
       }
 
       a {
         padding: 8px 12px;
         display: block;
-        color: $text-colour;;
+        color: $text-color;;
         text-decoration: none;
         &:hover {
-          background-color: lighten($link-base-colour, 10%);
-          color: $background-colour;
+          background-color: lighten($link-base-color, 10%);
+          color: $background-color;
         }
       }
 
@@ -477,52 +485,72 @@
       &:last-of-type {
         border-top-right-radius: 3px;
         border-bottom-right-radius: 3px;
-        border-right: 1px solid $link-base-colour;
+        border-right: 1px solid $link-base-color;
       }
     }
   }
 }
 
-
-.skill-list {
+.search {
+  &[hidden="true"] { 
+    display: none 
+  }
+  z-index: 1000;
+  position: fixed;
+  padding:0;
+  margin:0;
+  top:0;
+  left:0;
+  width: 100vw;
+  height: 100vh;
+  background:rgba(255,255,255,0.95);
+  
   display: flex;
-  box-sizing: border-box;
-  display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: normal;
 
-  .skill-item {
-    padding:1em;
-    box-sizing: border-box;
-    width: 50%;
-    display: flex;
-    color: $background-colour;
-    @include media-query($on-mobile) {
-      width: 100%;
+  .container {
+    margin: $spacing-unit;
+    padding: $spacing-unit;
+    // background-color: $background-color;
+    // border-radius: 5px;    
+
+    .fa-close {
+      float: right;
+      cursor: pointer;
     }
 
-    .skill-wrapper {
-      border-radius: 10px;
-      padding: $spacing-unit;
-      transition: border-top 300ms ease-in-out, padding-top 300ms ease-in-out;
+    input[type='text'] {
+      padding: .8em 1em .5em .1em;
+      border: 0;
+      border-bottom: 3px solid $theme-color;
+      background-color: transparent;
+      width: 100%;
+      @include relative-font-size(1.5);
+    }
 
-      &:hover {
-        padding-top: 0.5rem;
-        border-top: 0.5rem solid lighten($color: $theme-colour, $amount: 50);
+    .results-container {
+      .result {
+        padding: .5em;
+        display: flex;
+        .title {
+          flex: 1 1 auto;
+          font-weight: bold;
+        }
+        img {
+          max-width: 80px;
+          margin-right: 1em;
+          border-radius: 5px;
+        }
       }
+    }
 
-      .skill-icon {
-        @include relative-font-size(3);
-        text-align: center;
-      }
-
-      .skill-title {
-        @include relative-font-size(1.65);
-        text-align: center;
-        padding-bottom: $spacing-unit / 2;
-      }
-      
-      .skill-content {
-        flex: 1 1 auto;
+    @include media-query($on-mobile) {
+      margin: $spacing-unit / 2;
+      padding: $spacing-unit / 2;
+      input[type='text'] {
+        @include relative-font-size(1);
       }
     }
   }

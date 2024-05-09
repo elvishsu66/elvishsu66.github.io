@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A brand new start!
-categories: [thoughts]
+tags: [thoughts]
 image: /assets/posts/bg-a-brand-new-start.jpg
 ---
 

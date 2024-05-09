@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Nam feugiat velit quam
-categories: [designs]
+tags: [designs]
 image: /assets/posts/bg-technology-network.png    
 ---
 

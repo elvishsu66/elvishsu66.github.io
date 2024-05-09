@@ -2,7 +2,7 @@
 layout: post
 title: An example with text
 description: Sometimes, you can give it a little push
-categories: [thoughts]
+tags: [thoughts]
 image: /assets/posts/bg-redcliff.jpg
 ---
 

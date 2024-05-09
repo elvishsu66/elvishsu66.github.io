@@ -1,6 +1,6 @@
 - title: Solution Architecture
   icon: 🚀
-  background: "#d698b5"
+  background: pink
   content: | 
     I specialise in designing and implementing scalable software and infrastructure architectures that are carefully tailored to align with 
     our clients' specific needs. My expertise spans a wide range of programming languages and cutting-edge technologies, 
@@ -8,7 +8,7 @@
 
 - title: Tech Leadership
   icon: 🔍 
-  background: "#848abd"
+  background: purple
   content: |
     As a tech leader, I'm dedicated to cultivating a culture of innovation and collaboration. I believe in empowering teams by promoting 
     open communication and creating an environment where respect and excellence are at the forefront. 
@@ -16,7 +16,7 @@
 
 - title: Project Management
   icon: ✨
-  background: "#5ca7db"
+  background: blue
   content: |
     Recognised for my effective project management approach, I champion transparency, accountability, and continuous improvement. 
     I'm committed to building strong, lasting relationships with stakeholders while driving projects with a shared vision that fosters 
@@ -25,7 +25,7 @@
         
 - title: Innovation
   icon: 💡
-  background: "#a4bf9e"
+  background: green
   content: |
     Committed to driving innovation, I bring extensive expertise in cloud architecture and distributed software solutions.
     With a strong background in software engineering and Kubernetes, I excel at guiding teams to build resilient, 

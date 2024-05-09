@@ -28,7 +28,7 @@
         content: "";
         position: absolute;
         width: 50%;
-        border: solid $link-base-colour;
+        border: solid $link-base-color;
     }
 
     /* Setting the border of top, bottom, left */
@@ -72,8 +72,8 @@
     .info {
         display: flex;
         flex-direction: column;
-        background: lighten($theme-colour, 5%);
-        color: $background-colour;
+        background: lighten($theme-color, 5%);
+        color: $background-color;
         border-radius: $spacing-unit;
         padding: 10px;
     }
@@ -82,7 +82,7 @@
     .title {
         padding: 0 $spacing-unit;
         h2, h3 {
-            color: $link-base-colour;
+            color: $link-base-color;
             margin-bottom: .2em;
         }
         span {
@@ -98,7 +98,7 @@
         height: $spacing-unit;
         background: white;
         border-radius: 999px;
-        border: 5px solid $link-base-colour;
+        border: 5px solid $link-base-color;
     }
 
     /* text right if the card is even  */
