@@ -2,9 +2,7 @@
 layout: post
 title: A brand new start!
 categories: [thoughts]
-banner:
-    title: A brand new start!
-    image: /assets/posts/bg-a-brand-new-start.jpg
+image: /assets/posts/bg-a-brand-new-start.jpg
 ---
 
 It has been a while since I post a blog page on [Blogger](https://elvishsu66.blogspot.com)

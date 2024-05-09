@@ -2,8 +2,7 @@
 layout: post
 title: Sed porttitor dapibus odio quis congue
 categories: [architecture, coding]
-banner:
-    image: /assets/posts/bg-shell-from-beach.jpg
+image: /assets/posts/bg-shell-from-beach.jpg
 ---
 
 Sed porttitor dapibus odio quis congue. In vehicula, ex sed tincidunt maximus, augue ex malesuada ipsum, non suscipit massa nisl mattis metus. Integer ullamcorper eleifend massa consectetur aliquet. Etiam in sagittis diam. Ut malesuada viverra molestie. Vivamus consectetur magna nec massa molestie gravida. Fusce aliquet elit ut fermentum faucibus. Interdum et malesuada fames ac ante ipsum primis in faucibus.

@@ -2,15 +2,14 @@
 $code-background-colour: #1e1e1e;
 $code-foreground-colour: #d4d4d4;
 
-pre,
-code {
+pre, code {
   font-size: 0.9375em;
   color: $code-foreground-colour;
   background-color: $code-background-colour;
 }
 
 code {
-  padding: 1px 5px;
+  padding: 3px 5px;
 }
 
 pre {

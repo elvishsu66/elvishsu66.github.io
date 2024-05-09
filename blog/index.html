@@ -1,19 +1,17 @@
 ---
 layout: default
-title: Blog
-banner:
-    title: Coding, thoughts, technology and ideas.
-    subtitle: Don’t limit yourself. Many people limit themselves to what they think they can do. You can go as far as your mind lets you. What you believe, remember, you can achieve.
-    image: /assets/posts/bg-technology-network.png
+title: Coding, thoughts, technology and ideas.
+image: /assets/posts/bg-technology-network.png
+description: Don’t limit yourself. Many people limit themselves to what they think they can do. You can go as far as your mind lets you. What you believe, remember, you can achieve.
 ---
 <div class="post-list">
     {%- for post in paginator.posts -%}
     <div class="item">
         <div class="wrapper">
             <div class="thumbnail">
-                <a class="post-link" href="{{ post.url | relative_url }}" title="{{ post.title }}">
-                    {%- if post.banner.image -%}
-                    <img src="{{ post.banner.image }}" alt="{{ post.title }}"/>
+                <a href="{{ post.url | relative_url }}" title="{{ post.title }}">
+                    {%- if post.image -%}
+                    <img src="{{ post.image }}" alt="{{ post.title }}"/>
                     {%- else -%}
                     <img src="/assets/images/bg-blogging.png" alt="{{ post.title }}"/>
                     {%- endif -%}
@@ -31,7 +29,7 @@ banner:
             </h3>
             
             <div class="content">
-                {{ post.content | markdownify | strip_html | truncatewords: 20 }}
+                {{ post.content | markdownify | strip_html | truncatewords: 25 }}
             </div>
 
             <div class="categories">

@@ -1,19 +1,11 @@
 <div class="page-banner">
-    {%- if page.banner.image -%}
-    <div class="image" style="background-image: url('{{ page.banner.image }}');">
+    {%- if page.image -%}
+    <div class="image" style="background-image: url('{{ page.image }}');">
         <div class="overlay"></div>
     </div>
     {%- endif -%}
     <div class="wrap">
-        {%- if page.banner.title -%}
-        <h1>{{ page.banner.title }}</h1>
-        {%- else -%}
         <h1>{{ page.title }}</h1>
-        {%- endif -%}
-        {%- if page.banner.subtitle -%}
-        <h3>{{ page.banner.subtitle }}</h3>
-        {%- else -%}
-        <h3>{{ page.subtitle }}</h3>
-        {%- endif -%}
+        <h3>{{ page.description }}</h3>
     </div>
 </div>

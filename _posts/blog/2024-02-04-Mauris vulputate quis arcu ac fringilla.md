@@ -2,9 +2,7 @@
 layout: post
 title: Mauris vulputate quis arcu ac fringilla
 categories: [coding]
-banner:
-    title: This is very nice
-    image: /assets/posts/bg-lisbon-skyline.jpg
+image: /assets/posts/bg-lisbon-skyline.jpg
 ---
 
 Mauris vulputate quis arcu ac fringilla. Praesent eu augue massa. In ac neque non enim vehicula faucibus. Cras nec lorem eros. In ullamcorper, tortor in venenatis pharetra, ligula magna fringilla dui, ac venenatis lectus ante rhoncus enim. In venenatis viverra nisi, id consequat nibh ornare sit amet. Phasellus iaculis ac metus a placerat. Phasellus posuere nibh mi. Sed fermentum tellus sit amet ante vehicula mollis. Quisque id lectus arcu. Pellentesque interdum non ex id maximus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.

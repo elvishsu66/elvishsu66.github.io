@@ -166,9 +166,10 @@
       color: darken($background-colour, 2);
     }
   }
+
   .item {
     flex: 1;
-    padding: 10px 25px;
+    padding: 1em 25px;
     &:nth-child(odd) {
       text-align: right;
     }
@@ -277,7 +278,7 @@
       padding: 1em;
 
       .thumbnail {
-        border-radius: 10px;
+        border-radius: $spacing-unit / 4;
         border: 1px solid darken($background-colour, 5%);
         overflow: hidden;
         display: inline-flex;
@@ -292,6 +293,10 @@
             transform: scale(1.1);
           }
         }
+      }
+
+      .post-meta {
+        margin-top: 1em;
       }
 
       .content {
@@ -334,6 +339,7 @@
 
 .post-link {
   display: block;
+  font-weight: bold;
   @include relative-font-size(1.3);
 }
 

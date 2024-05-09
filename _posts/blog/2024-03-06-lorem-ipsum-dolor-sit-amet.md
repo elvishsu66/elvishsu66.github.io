@@ -2,9 +2,7 @@
 layout: post
 title: Lorem ipsum dolor sit amet!
 categories: [architecture]
-banner:
-    title: An example with text
-    image: /assets/posts/bg-evening-at-my-balcony.jpg
+image: /assets/posts/bg-evening-at-my-balcony.jpg
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ut odio ligula. Vestibulum risus purus, gravida suscipit elementum ac, hendrerit nec ipsum. Donec convallis, ipsum ac mollis viverra, erat lacus bibendum sem, a sollicitudin purus velit quis felis. Donec laoreet neque a ligula faucibus hendrerit. Donec vel diam massa. Nulla magna est, faucibus a luctus vel, consectetur a elit. Morbi dignissim elit sit amet sem vehicula tempus a at neque. Nam congue vulputate enim, sed malesuada tellus bibendum vitae. Cras molestie elementum nibh, eget eleifend tellus bibendum nec.

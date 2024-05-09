@@ -1,11 +1,9 @@
 ---
 layout: post
 title: An example with text
+description: Sometimes, you can give it a little push
 categories: [thoughts]
-banner:
-    title: We all get challenges in life
-    subtitle: Sometimes, you can give it a little push
-    image: /assets/posts/bg-redcliff.jpg
+image: /assets/posts/bg-redcliff.jpg
 ---
 
 ### The standard Lorem Ipsum passage, used since the 1500s

@@ -1,10 +1,9 @@
 ---
 layout: post
-title: Praesent commodo
-subtitle: There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...
+title: Ut sit amet nunc quis orci consectetur mollis
+description: There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain...
 categories: [coding]
-banner:
-  image: /assets/posts/bg-tram-sf.jpg
+image: /assets/posts/bg-tram-sf.jpg
 ---
 
 Praesent commodo, justo non porttitor dapibus, nisl arcu facilisis ante, sed accumsan orci erat tempus tellus. Morbi mattis ultricies nisl, in vestibulum ipsum. Fusce nulla ligula, accumsan eget venenatis eget, posuere sit amet tortor. Maecenas rutrum dignissim posuere. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Etiam vitae convallis nulla. Praesent scelerisque tempor risus eu lacinia. Suspendisse a blandit tellus. Vestibulum cursus eget est vel dapibus. Vestibulum ultrices vitae ex vitae fermentum. Pellentesque molestie, purus sed venenatis aliquam, libero ligula sodales nisl, vel vehicula nibh arcu nec erat. Proin imperdiet molestie magna, id pulvinar turpis auctor nec. Proin non pulvinar tellus. Etiam sed ex ac ipsum ultrices egestas nec in lorem. Mauris gravida sem quis odio vehicula, nec aliquet risus elementum. Vestibulum pretium enim sapien, non sodales leo malesuada sed.

@@ -1,12 +1,24 @@
 # Site information
 title: Elvis is still in the building
-logo: /assets/images/elvis.jpg
 email: me@elvishsu.com
 description: A simple yet creative software designer
 baseurl: ""
 author:
   name: Elvis Hsu
+  twitter: elvishsu
+twitter:
+  username: elvishsu66
+  card: summary
+disqus:
+  shortname: elvishsu66
+logo: /assets/icon/favicon.webp
 atom_path: /blog/atom.xml
+social:
+  name: Elvis Hsu
+  links:
+    - https://twitter.com/elvishsu
+    - https://www.linkedin.com/in/elvishsu
+    - https://github.com/elvishsu66
 
 # Site settings
 permalink: /blog/:title.html
@@ -34,8 +46,9 @@ compress_html:
 
 google_analytics: G-M47EN9ZR37
 
-disqus:
-  shortname: elvishsu66
+
+
+
 
 navigation:
   - title: home
