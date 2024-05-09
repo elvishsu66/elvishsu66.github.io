@@ -7,7 +7,7 @@ author:
   name: Elvis Hsu
   twitter: elvishsu
 twitter:
-  username: elvishsu66
+  username: elvishsu
   card: summary
 disqus:
   shortname: elvishsu66
@@ -45,10 +45,6 @@ compress_html:
   startings: [head, body]
 
 google_analytics: G-M47EN9ZR37
-
-
-
-
 
 navigation:
   - title: home
