@@ -52,7 +52,8 @@ layout: page
         {%- endif -%}
 
         <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
-        <data itemprop="author">{{ site.author.name }}</data>
+        <data itemprop="author.name">{{ site.author.name }}</data>
+        <data itemprop="author.url">{{ site.author.url }}</data>
         <data itemprop="image">{{ page.image }}</data>
     </article>
 </div>
