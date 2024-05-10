@@ -382,13 +382,16 @@
 
 
 .post {
-  padding: $spacing-unit / 4 $spacing-unit $spacing-unit $spacing-unit;
+  padding: $spacing-unit / 4 $spacing-unit;
+
+  @include media-query($on-mobile) {
+    padding: $spacing-unit / 6;
+  }
 
   /**
   * Posts
   */
   .post-nav {
-
     @extend %clearfix;
   }
 
