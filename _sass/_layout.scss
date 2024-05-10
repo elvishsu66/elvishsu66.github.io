@@ -565,15 +565,24 @@
       flex: 1 1 auto;
       overflow: auto;
       .result {
-        padding: .5em;
-        display: flex;
-        .title {
-          flex: 1 1 auto;
-        }
-        img {
-          max-width: 80px;
-          margin-right: 1em;
-          border-radius: 5px;
+        a {
+          color: $theme-color;
+          padding: .5em;
+          display: flex;
+          .date {
+            @include relative-font-size(.9);
+            text-decoration: none !important;
+          }
+          .title {
+            flex: 1 1 auto;
+            color: $link-base-color;
+          }
+          img {
+            display: inline-block;
+            max-width: 80px;
+            margin-right: 1em;
+            border-radius: 5px;
+          }
         }
       }
     }
