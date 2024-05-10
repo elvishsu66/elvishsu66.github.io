@@ -348,9 +348,15 @@
 
   .avatar {
     flex: 0 0 auto;
-    img {
-      max-width: 48px;
+    i.author {
+      width: 48px;
+      height: 48px;
+      display: inline-block;
       border-radius: 50%;
+      background-image: url(/assets/images/elvis-head.jpg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
     }
   }
 
