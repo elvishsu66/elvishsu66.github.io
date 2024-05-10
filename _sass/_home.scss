@@ -14,12 +14,13 @@ $colors: (
     flex-wrap: wrap;
   
     .skill-item {
-      padding:1em;
+      padding: 1em;
       box-sizing: border-box;
       width: 50%;
       display: flex;
       color: $background-color;
       @include media-query($on-mobile) {
+        padding: .5em;
         width: 100%;
       }
   

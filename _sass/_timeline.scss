@@ -8,7 +8,16 @@
     }
     li {
         list-style-type: '► '
-      }
+    }
+
+    @include media-query($on-mobile) {
+        margin: ($spacing-unit / 4) auto;
+        padding: ($spacing-unit / 4);
+        ol, ul {
+            margin: 0 $spacing-unit / 2;
+            padding: ($spacing-unit / 4);
+        }
+    }
 }
 
 /* Card container */

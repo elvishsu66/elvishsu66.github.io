@@ -274,6 +274,7 @@
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  row-gap: $spacing-unit;
 
   .item {
     flex: 0 0 33.3333%;
@@ -341,7 +342,29 @@
 
 .post-meta {
   font-size: $small-font-size;
-  color: lighten($theme-color, 40%)
+  color: lighten($theme-color, 40%);
+  display: flex;
+  margin: 1em 0;
+
+  .avatar {
+    flex: 0 0 auto;
+    img {
+      max-width: 48px;
+      border-radius: 50%;
+    }
+  }
+
+  .meta {
+    flex: 1;
+    flex-direction: column;
+    padding-left: 1em;
+    time {
+      font-size: 90%;
+    }
+    .item {
+      flex: 1;
+    }
+  }
 }
 
 
@@ -353,13 +376,13 @@
 
 
 .post {
-  padding: $spacing-unit 0;
+  padding: $spacing-unit / 4 0 $spacing-unit 0;
 
   /**
   * Posts
   */
   .post-nav {
-    margin-bottom: $spacing-unit;
+
     @extend %clearfix;
   }
 
@@ -369,10 +392,6 @@
 
   .post-next {
     float: right;
-  }
-
-  .post-header {
-    margin-bottom: $spacing-unit;
   }
 
   .post-title,
@@ -507,14 +526,11 @@
   
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  align-content: normal;
 
   .container {
-    margin: $spacing-unit;
+    position: relative;
     padding: $spacing-unit;
-    // background-color: $background-color;
-    // border-radius: 5px;    
+    max-height: 100%;
 
     .fa-close {
       float: right;
@@ -530,13 +546,20 @@
       @include relative-font-size(1.5);
     }
 
+    .search-container {
+      max-height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
     .results-container {
+      flex: 1 1 auto;
+      overflow: auto;
       .result {
         padding: .5em;
         display: flex;
         .title {
           flex: 1 1 auto;
-          font-weight: bold;
         }
         img {
           max-width: 80px;

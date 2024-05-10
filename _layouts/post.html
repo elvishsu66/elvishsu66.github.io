@@ -2,7 +2,7 @@
 layout: page
 ---
 <div class="post">
-    <div class="post-nav">
+    <!-- <div class="post-nav">
         {%- if page.previous -%}
         <span class="post-previous">
             <a href="{{ page.previous.url }}"
@@ -15,32 +15,43 @@ layout: page
             rel="next">Next Post ⇨</a>
         </span>
         {%- endif -%}
-    </div>
+    </div> -->
 
     <article class="post h-entry"
             itemscope
             itemtype="http://schema.org/BlogPosting"
             >
         <header class="post-header">
-            <h1 class="post-title p-name" itemprop="name headline">
+            <h1 class="post-title p-name" itemprop="name headline" hidden>
                 {{ page.title | escape }}
             </h1>
-            <p class="post-meta">
-                <time class="dt-published"
-                      datetime="{{ page.date | date_to_xmlschema }}"
-                      itemprop="datePublished">
-                    {{ page.date | date: site.date_format }}
-                </time>
-                {%- if page.tags -%}
-                • Posted in
-                {% for tag in page.tags %}
-                <a href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">
-                    {{ tag | capitalize }}
-                </a>
-                {%- if forloop.last == false %}, {% endif -%}
-                {% endfor %}
-                {%- endif -%}
-            </p>
+            <div class="post-meta">
+                <div class="avatar">
+                    <a href="{% link about.html %}">
+                        <img src="/assets//images/elvis-head.jpg" alt="author">
+                    </a>
+                </div>
+                <div class="meta">
+                    <div class="item">
+                        <a href="{% link about.html %}" itemprop="author publisher" itemscope itemtype="http://schema.org/Person">
+                            <span itemprop="name">{{ site.author.name }}</span>
+                            <span itemprop="url" hidden>{{ site.author.url }}</span>
+                        </a>
+                        {%- if page.tags -%}
+                        posted in
+                        {% for tag in page.tags %}
+                        <a href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">
+                            {{ tag | capitalize }}
+                        </a>
+                        {%- if forloop.last == false %}, {% endif -%}
+                        {% endfor %}
+                        {%- endif -%}
+                    </div>
+                    <time class="item dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+                        {{ page.date | date: site.date_format }}
+                    </time>
+                </div>
+            </div>
         </header>
 
         <div class="post-content e-content" itemprop="articleBody">
@@ -48,14 +59,10 @@ layout: page
         </div>
 
         {%- if site.disqus.shortname -%}
-        {%- include disqus_comments.html -%}
+        {%- include disqus.html -%}
         {%- endif -%}
 
         <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
-        <div itemprop="author publisher" itemscope itemtype="http://schema.org/Person" hidden>
-            <data itemprop="name">{{ site.author.name }}</data>
-            <data itemprop="url">{{ site.author.url }}</data>
-        </div>
         <img src="{{ page.image }}" itemprop="image" alt="{{ page.title | escape }}" hidden/>
     </article>
 </div>

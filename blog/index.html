@@ -17,11 +17,26 @@ description: Don’t limit yourself. Many people limit themselves to what they t
                     {%- endif -%}
                 </a>
             </div>
-            
-            <span class="post-meta" itemprop="datePublished">
-                {{ post.date | date: site.date_format }}
-            </span>
-            
+                       
+            <div class="post-meta">
+                <div class="avatar">
+                    <a href="{% link about.html %}">
+                        <img src="/assets//images/elvis-head.jpg" alt="author">
+                    </a>
+                </div>
+                <div class="meta">
+                    <div class="item">
+                        <a href="{% link about.html %}" itemprop="author publisher" itemscope itemtype="http://schema.org/Person">
+                            <span itemprop="name">{{ site.author.name }}</span>
+                            <span itemprop="url" hidden>{{ site.author.url }}</span>
+                        </a>
+                    </div>
+                    <time class="item dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+                        {{ post.date | date: site.date_format }}
+                    </time>
+                </div>
+            </div>
+
             <h3>
                 <a class="post-link" href="{{ post.url | relative_url }}" itemprop="name headline">
                     {{ post.title | escape }}
