@@ -30,7 +30,6 @@ $colors: (
         transition: border-top 300ms ease-in-out, padding-top 300ms ease-in-out;
   
         &:hover {
-          padding-top: 0.5rem;
           border-top: 0.5rem solid lighten($color: $theme-color, $amount: 50);
         }
   
@@ -40,13 +39,11 @@ $colors: (
         }
   
         .skill-title {
-          @include relative-font-size(1.65);
           text-align: center;
-          padding-bottom: $spacing-unit / 2;
         }
         
         .skill-content {
-          flex: 1 1 auto;
+          @include relative-font-size(1);
         }
       }
     }
