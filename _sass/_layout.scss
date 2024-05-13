@@ -562,22 +562,29 @@
       max-height: 100%;
       padding: .5em;
       display: flex;
+      border: none;
+      border-bottom: 3px solid $theme-color;
 
       input, button {
         border: none;
-        border-bottom: 3px solid $theme-color;
         background: transparent;
-        @include relative-font-size(1.5);
       }
 
       button {
         cursor: pointer;
+        transition: all .25s ease-in-out;
+        @include relative-font-size(2.2);
+        &:hover {
+          transform: rotate(90deg);
+          color: $link-base-color;
+        }
       }
   
       input[type='text'] {
         flex: 1;
         width: 100%;
-        padding: .8em .5em .5em .5em;
+        padding: .5em .2em;
+        @include relative-font-size(1.5);
       }
     }
     
