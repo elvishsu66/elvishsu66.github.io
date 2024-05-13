@@ -1,0 +1,72 @@
+---
+layout: post
+title: Vibration on Windows Mobile
+date: '2011-09-19T02:23:00.001+02:00'
+author: Elvis Hsu
+tags:
+- Coding
+- C#
+- NETCF
+- Windows Mobile
+modified_time: '2014-01-26T13:24:09.134+01:00'
+thumbnail: /assets/posts/blogger/2011-09-19-image-0000.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-4656685514956003524
+blogger_orig_url: https://www.elvishsu.com/2011/09/vibration-on-windows-mobile-6.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh8T2roAUgnsgrrci-Bqy8CzW48twXjo4J7fuXYeepenQGDER5bEjSNDmACMyT33kyIlQ8fi0pFps9OJXD20kwWk_EJCgP7w9LTXgfbMquogd_59yyw5R5sSgYJnwzzcziGcH5-7dDstm0/s1600/WM6_Logo.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="200" src="/assets/posts/blogger/2011-09-19-image-0000.png" width="200" /></a></div>
+<br />
+<br />
+I remember a while ago that I needed to enable the vibration for a client's application. 
+So I googled a bit and found the similar codes like below...
+And today, I found some people are looking for this solution on MSDN... 
+So I decided to post it in C# and hope it will give some people a heads up...<br />
+<br />
+<br />
+<br />
+<pre class="brush:csharp" name="code">       /// <summary>
+        /// This function plays the specified vibration.
+        /// </summary>
+        /// <param name="cvn" />Must be 0
+        /// <param name="rgvn" />Must be NULL
+        /// <param name="fRepeat" />A Boolean value that indicates whether the song 
+        /// should be repeated. If this parameter is equal to TRUE, it will refer to dwTimeout 
+        /// to determine how long the vibration song should play.
+        /// <param name="dwTimeout" />Must be INFINITE
+        /// <returns></returns>
+        /// <remarks>This API is not supported by Windows Mobile 6 Professional.</remarks>
+        [DllImport("aygshell.dll", EntryPoint = "Vibrate")]
+        private static extern int VibrateStart(int cvn, IntPtr rgvn, bool fRepeat, uint dwTimeout);
+
+        /// <summary>
+        /// Stops all current vibration songs.
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>
+        /// This API not supported by Windows Mobile 6 Professional.
+        /// </remarks>
+        [DllImport("aygshell.dll")]
+        private static extern int VibrateStop();
+
+        private const uint INFINITE = 0xffffffff;
+
+        /// <summary>
+        /// Start the mobile vibration.
+        /// <para>This is not supported by Windows Mobile 6 Professional.</para>
+        /// </summary>
+        /// <returns></returns>
+        public static int StartVibrate()
+        {
+            return VibrateStart(0, IntPtr.Zero, true, INFINITE);
+        }
+
+        /// <summary>
+        /// Stops all current vibration.
+        /// <para>This is not supported by Windows Mobile 6 Professional.</para>
+        /// </summary>
+        public static void StopVibrate()
+        {
+            VibrateStop();
+        }
+</pre>

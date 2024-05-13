@@ -5,9 +5,9 @@
   {
     "title"       : "{{ post.title | escape }}",
     "description" : "{{ post.description | strip_html | strip_newlines | escape }}",
-    "content"     : "{{ post.content | markdownify | strip_html | truncatewords: 25 }}",
+    "content"     : "{{ post.content | markdownify | strip_html | truncatewords: 25 | escape }}",
     "url"         : "{{ site.baseurl }}{{ post.url }}",
-    "image"       : "{{ post.image }}",
+    "image"       : "{% if post.image %}{{ post.image }}{% elsif post.thumbnail %}{{ post.thumbnail }}{% else %}/assets/image/bg-blogging.png{% endif %}",
     "tags"        : "{{ post.tags | join: ', ' }}",
     "date"        : "{{ post.date | date: site.date_format }}"
   } {%- unless forloop.last -%},{%- endunless -%}

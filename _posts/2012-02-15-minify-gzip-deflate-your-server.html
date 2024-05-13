@@ -1,0 +1,37 @@
+---
+layout: post
+title: Minify + GZip (Deflate) your server response
+date: '2012-02-15T08:56:00.000+01:00'
+author: Elvis Hsu
+tags:
+- Apache
+- Html
+- Minify
+- Javascript
+modified_time: '2014-01-26T13:23:12.798+01:00'
+thumbnail: /assets/posts/blogger/2012-02-15-image-0000.jpg
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-3430947159515629003
+blogger_orig_url: https://www.elvishsu.com/2012/02/minify-gzip-deflate-your-server.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi4ewYUSGUrG078iJJPPM5_NIMDL-kFwg3PnPraXXeEgkuug9wqJ_dJJtmR1c8o0kRGBDEHprtRlGOyWDfbmq-pur68IsrZVGnVbVmYTrDREoYUEVnrY5pcYuajE_6O0ubN1xvMSDrvapM/s1600/minify.jpg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="192" src="/assets/posts/blogger/2012-02-15-image-0000.jpg" width="320" /></a></div>
+Today, I was browsing around the web and found some interesting articles which are related to <a href="http://elvishsu66.blogspot.com.au/2012/02/minify-extjs-on-fly.html" target="_blank">minify extjs on the fly</a>.&nbsp;Well, if I can minify the server response and deflate it, that would be even faster to deliver to client's browser? So I decided to give it a go.<br />
+<br />
+Bang~ It is faster than just minify the content. But so far I just tested with Apache server as it is most used http server in my projects.&nbsp;I just added the following code in my .htaccess file<br />
+<br />
+<pre class="brush:js" name="code"># compress text, html, javascript, css, xml:
+AddOutputFilterByType DEFLATE text/plain
+AddOutputFilterByType DEFLATE text/html
+AddOutputFilterByType DEFLATE text/xml
+AddOutputFilterByType DEFLATE text/css
+AddOutputFilterByType DEFLATE application/xml
+AddOutputFilterByType DEFLATE application/xhtml+xml
+AddOutputFilterByType DEFLATE application/rss+xml
+AddOutputFilterByType DEFLATE application/javascript
+AddOutputFilterByType DEFLATE application/x-javascript
+</pre>
+<br />
+By the way, you may want to enable the <b>mod_deflate.so</b> in your <b>httpd.conf</b> to make it work.<br />
+<br />
+Anyway, have a look at&nbsp;<a href="http://betterexplained.com/articles/how-to-optimize-your-site-with-gzip-compression/" target="_blank">How To Optimize Your Site With GZIP Compression</a>. It&nbsp;really gives a heads up. So you may want to have a try on your projects.

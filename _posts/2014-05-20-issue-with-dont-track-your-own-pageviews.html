@@ -1,0 +1,76 @@
+---
+layout: post
+title: Issue with "Don't track your own pageviews"
+date: '2014-05-20T13:41:00.000+02:00'
+author: Elvis Hsu
+tags:
+- Blogger
+- Tips
+modified_time: '2014-06-05T17:52:24.551+02:00'
+thumbnail: /assets/posts/blogger/2014-05-20-image-0003.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-202160770264391760
+blogger_orig_url: https://www.elvishsu.com/2014/05/issue-with-dont-track-your-own-pageviews.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2014-05-20-image-0003.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/assets/posts/blogger/2014-05-20-image-0003.png" /></a></div>
+Do you use your own domain name with Blogger? Do you place "<b>Blogger's Stats Widget</b>" on your page? Or do you regularly check up the stats from your Blogger's dashboard? And most importantly have you found that "<b>Don't track your own pagesviews</b>" link no longer works?<br />
+<br />
+Well, it used to be working when I used the regular subdomain under&nbsp;blogspot.com. Many bloggers have reported this issue to <a href="https://productforums.google.com/forum/#!topic/blogger/PSwkuiIQrbw" target="_blank">Google</a> but yet no acceptable answers from them. However there is a way to <b>patch</b> this issue.<br />
+<br />
+<a name='more'></a>Let's have a look how to re-produce this error.<br />
+<br />
+1. Login to your <b>Blogger Dashboard</b>&nbsp;(<a href="http://www.blogger.com/" target="_blank">www.blogger.com</a>)<br />
+2. Go to <b>Stats</b> --&gt; <b>Overview</b> of your blog<br />
+3. Click the "<b>Don't track your own pageviews</b>" link<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2014-05-20-image-0003.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/assets/posts/blogger/2014-05-20-image-0003.png" height="336" width="640" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+4. A blue window should appear like image below and the loading icon keeps spinning</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2014-05-20-image-0003.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/assets/posts/blogger/2014-05-20-image-0003.png" height="138" width="320" /></a></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+5. A while later, an error message "<i><span style="color: #990000;">There was an error while fetching stats. Please reload page.</span></i>" prompted.</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2014-05-20-image-0003.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/assets/posts/blogger/2014-05-20-image-0003.png" height="122" width="320" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+6. If you reload the page, try again, and the above message will appear again.</div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+<b><span style="font-size: large;">So, if this is the issue, how can I make my own blogger site stop tracking my computer?&nbsp;</span></b></div>
+<div class="separator" style="clear: both; text-align: left;">
+<br /></div>
+<div class="separator" style="clear: both; text-align: left;">
+1. Open a new tab on your browser while you're still logged in&nbsp;</div>
+<div class="separator" style="clear: both; text-align: left;">
+2. Copy the text below and paste it on the address bar of the new tab</div>
+<blockquote class="tr_bq" style="clear: both; text-align: left;">
+<span style="font-family: Courier New, Courier, monospace;">www.<b>yourdomain.com</b>/b/statsBlockingCookie?action=SET&amp;callback=__gwt_jsonp__.P2.onSuccess</span></blockquote>
+<div class="separator" style="clear: both; text-align: left;">
+3. Replace "<b>yourdomain.com</b>" to your domain name</div>
+<div class="separator" style="clear: both; text-align: left;">
+4. Press "<b>Enter</b>" and a response should be shown like below</div>
+<blockquote class="tr_bq" style="clear: both; text-align: left;">
+<span style="font-family: Courier New, Courier, monospace;">// API callback<br />__gwt_jsonp__.P2.onSuccess({"status":"yes"});</span></blockquote>
+5. Go to your home page and keep reloading the page. You will find that the pageviews counter stop incrementing (the counter is either on your home page or the dashboard).<br />
+<br />
+<span style="font-size: large;"><b>Important Note</b></span><br />
+<br />
+1. This method does not fix the fundamental problem of the link<br />
+2. You need to do it on every browser of your computer<br />
+3. If you have other authors to access the blog, they have to do the same process<br />
+<br />

@@ -1,7 +1,7 @@
 ---
 layout: page
 ---
-<div class="post">
+<div class="post-body">
     <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
         <header class="post-header">
             <span class="post-title p-name" itemprop="name headline" hidden>
@@ -38,11 +38,15 @@ layout: page
             {{ content }}
         </div>
 
-        {%- if site.disqus.shortname -%}
-        {%- include disqus.html -%}
-        {%- endif -%}
-
         <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
         <img src="{{ page.image }}" itemprop="image" alt="{{ page.title | escape }}" hidden/>
     </article>
+    
+    <hr>
+
+    {%- include related.html -%}
+
+    {%- if site.disqus.shortname -%}
+    {%- include disqus.html -%}
+    {%- endif -%}
 </div>

@@ -1,0 +1,47 @@
+---
+layout: post
+title: Minify ExtJs on the fly
+date: '2012-02-10T04:20:00.000+01:00'
+author: Elvis Hsu
+tags:
+- ExtJs
+- Apache
+- Minify
+- Coding
+- PHP
+modified_time: '2014-01-26T13:23:29.309+01:00'
+thumbnail: /assets/posts/blogger/2012-02-10-image-0000.jpg
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-2295601757441445472
+blogger_orig_url: https://www.elvishsu.com/2012/02/minify-extjs-on-fly.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhO550DnbTwFPNbe1CdrxliBXCx6QtWJfukVj4ETwczmRSw_N6PgT9o6-_BWFfMNJmBtTTeaBKG0gVVFiQrNy2-GSyDIZrmOTd7_Fs8-mGAYQcqGmszA2vKuLovsO_wFP64iIMuwFVslE0/s1600/minify2.jpg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="160" src="/assets/posts/blogger/2012-02-10-image-0000.jpg" width="320" /></a></div>
+I have been developing some projects with ExtJs for a while and also created some plubg-ins and extensions for these projects. Recently, I found out that I have so many *.js and *.css codes and they are somehow too fat for some slow band width users. Well, I decided to google some solutions to minify my js and css codes. Luckily, I found <a href="http://code.google.com/p/minify/" target="_blank">minify</a> and I am loving it. However, most of my ExtJs plug-ins and&nbsp;extensions&nbsp;are called by <a href="http://docs.sencha.com/ext-js/4-0/#!/api/Ext-method-require" target="_blank">Ext.require</a>&nbsp;and it is somehow complicated to override the <a href="http://docs.sencha.com/ext-js/4-0/#!/api/Ext.Loader-method-require" target="_blank">Ext.Loader.require</a>&nbsp;so I googled again... Ha... the answer came up from <a href="http://code.google.com/p/minify/wiki/UserGuide" target="_blank">here</a>&nbsp;(Using .htaccess and RewriteRule? for Minify).<br />
+<br />
+<br />
+<pre class="brush:js" name="code">   Options +FollowSymlinks
+   RewriteEngine On
+   RewriteBase /
+   RewriteRule ^(.*\.(css|js).*)$ min/f=%{REQUEST_URI} [L,NC]
+
+</pre>
+<br />
+The <a href="http://code.google.com/p/minify/wiki/UserGuide" target="_blank">original post</a> is just rewrite the file name but I need full path.<br />
+Well, just replace <b>$1</b> to <b>%{REQUEST_URI}</b>&nbsp;and put the .htaccess file under the <b><u>Ext.ux</u></b> path.<br />
+Then job done.
+<br />
+<br />
+So when you call:
+<br />
+<pre class="brush:js" name="code">Ext.require([
+    'Ext.ux.SimpleIFrame',
+    'Ext.ux.PreviewPlugin',
+    'Ext.ux.GMapPanel'
+]);
+
+</pre>
+<br />
+The Apache server redirects the JS script URL and the <a href="http://code.google.com/p/minify/" target="_blank">minify</a>&nbsp;class process it.
+<br />
+Have a try and your will love it...

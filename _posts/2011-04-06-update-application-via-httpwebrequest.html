@@ -1,0 +1,36 @@
+---
+layout: post
+title: Validate input URL string
+date: '2011-04-06T09:32:00.009+02:00'
+author: Elvis Hsu
+tags:
+- Coding
+- C#
+modified_time: '2014-01-26T13:17:13.816+01:00'
+thumbnail: /assets/posts/blogger/2011-04-06-image-0000.jpg
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-7912342599875695841
+blogger_orig_url: https://www.elvishsu.com/2011/04/update-application-via-httpwebrequest.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzUC6HEWJhlqM3ZcddfZhEvVU13Au97Kf_JlGe6y2Q3O10A0wAIAEr9qLgWv0DjmESQ40drCLKzmFljmWVyH8u-PYkKGzdnZJBYcH7Ved8dahZHwY2984yQrOJ-LMoF147qfcXOo0y-DM/s1600/URL-Encode-Decode.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="193" src="/assets/posts/blogger/2011-04-06-image-0000.jpg" width="320" /></a></div>
+<div class="separator" style="clear: both; text-align: center;">
+<br /></div>
+I just tried to write a function to validate URL address. Well, as usual, I've done some researches on Google and not many efficient and satisfy solutions. However, I've got a solution which is using Regex in C# to validate a URL and it seems a acceptable method to test the URL input.<br />
+<br />
+<pre class="brush:csharp" name="code">public static bool IsValidUrl(this string url)
+{
+    string strRegex = "^(https?://)"
+        + "?(([0-9a-z_!~*'().&amp;=+$%-]+: )?[0-9a-z_!~*'().&amp;=+$%-]+@)?" // user@
+        + @"(([0-9]{1,3}\.){3}[0-9]{1,3}" // IP- 10.0.0.1
+        + "|" // allows either IP or domain
+        + @"([0-9a-z_!~*'()-]+\.)*" // tertiary domain(s)- www.
+        + @"([0-9a-z][0-9a-z-]{0,61})?[0-9a-z]" // second level domain
+        + @"(\.[a-z]{2,6})?)" // first level domain- .com or .museum is optional
+        + "(:[0-9]{1,5})?" // port number- :80
+        + "((/?)|" // a slash isn't required if there is no file name
+        + "(/[0-9a-z_!~*'().;?:@&amp;=+$,%#-]+)+/?)$";
+
+    return new Regex(strRegex).IsMatch(url);
+}
+</pre>

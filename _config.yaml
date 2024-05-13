@@ -12,8 +12,7 @@ twitter:
   card: summary
 disqus:
   shortname: elvishsu66
-logo: /assets/icon/favicon.webp
-atom_path: /blog/atom.xml
+logo: /assets/icon/favicon-64x64.png
 social:
   name: Elvis Hsu
   links:
@@ -22,28 +21,33 @@ social:
     - https://github.com/elvishsu66
 
 # Site settings
-permalink: /blog/:title.html
-markdown: kramdown
+permalink: /:year/:month/:title.html
 paginate: 6
-paginate_path: "/blog/page:num/"
+paginate_path: /blog/p/:num/
+
 date_format: "%-d %b, %Y"
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+  input: GFM
 
 plugins:
   - jekyll-feed
   - jekyll-paginate
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-tagging-related_posts
 
-sass:
-  sass_dir: _sass
-  style: compressed
+# sass:
+#   sass_dir: _sass
+#   style: compressed
 
-compress_html:
-  clippings: all
-  comments: all
-  endings: all
-  profile: false
-  startings: [head, body]
+# compress_html:
+#   clippings: all
+#   comments: all
+#   endings: all
+#   profile: false
+#   startings: [head, body]
 
 google_analytics: G-M47EN9ZR37
 
@@ -56,3 +60,9 @@ navigation:
     url: /blog/topics
   - title: about
     url: /about
+
+exclude:
+- Gemfile
+- Gemfile.lock
+- utils
+- README.md

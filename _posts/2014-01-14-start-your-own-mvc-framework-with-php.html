@@ -1,0 +1,925 @@
+---
+layout: post
+title: Start your own MVC Framework with PHP
+date: '2014-01-14T20:51:00.000+01:00'
+author: Elvis Hsu
+tags:
+- MySQL
+- Coding
+- PHP
+modified_time: '2014-06-18T16:17:26.172+02:00'
+thumbnail: /assets/posts/blogger/2014-01-14-image-0000.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-183004351027862120
+blogger_orig_url: https://www.elvishsu.com/2014/01/start-your-own-mvc-framework-with-php.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2014-01-14-image-0000.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/assets/posts/blogger/2014-01-14-image-0000.png" title="Start your own MVC Framework with PHP" alt="Start your own MVC Framework with PHP"/></a></div>
+I have been using ASP .NET MVC for many years. It is a complex framework but
+    not difficult to learn (at least for .NET developers). Anyway, I like the
+    way it handles templates and routing. Few years ago, one of my clients asked
+    me to developed a simple ERP system with PHP and MySQL. My first thought
+    was: "Why not developing a simple MVC framework with PHP?". It would allow
+    me to utilise the backend code and avoid mixing code in classes.<br />
+<br />
+I started to study many PHP MVC Frameworks such as <a href="http://framework.zend.com/" target="_blank">Zend
+      Framework</a>, <a href="http://symfony.com/" target="_blank">Symfony</a>
+    and <a href="http://cakephp.org/" target="_blank">CakePHP</a> but I
+    realised those "<span style="font-style: italic; font-weight: bold;">ready-to-use</span>"
+    frameworks are overkilled for this simple project and I would like to have
+    codes that I could manipulate easily and apply them to next simple projects
+    without making my brand hurts. <br />
+<a name='more'></a><br />
+Luckily, I found this article: <a href="http://anantgarg.com/2009/03/13/write-your-own-php-mvc-framework-part-1/" target="_blank">Write
+      your own PHP MVC Framework</a>. It is a very good article and it explained
+    the concept of MVC comprehensively. If you just start learning MVC, this is
+    a great place start. Well, the truth is the article inspired me to create my
+    own little MVC framework with PHP.<br />
+<br />
+Anyway, before you continue reading, I recommend you to read through the
+    article I mentioned <a href="http://anantgarg.com/2009/03/13/write-your-own-php-mvc-framework-part-1/" target="_blank">above</a>.
+    My version of MVC is a little bit different from Anant Garg's but I believe you will find it useful.<br />
+<br />
+In this article, I would like to focus on the routing and template operations. Since Anant Garg has covered most important parts of MVC, I will just point out some features of my own framework in this article.<br />
+<br />
+Before we start talking about the details, let's have a look at the
+    directory structure. You can expand the folder below and link to sample
+    codes of this article. The structure is pretty much the same as
+    Anant Garg's. The only difference is that I put all public assessable files (images, style
+    sheets and js scripts) into public folder.
+<br />
+<style>
+        .filepath{
+          color:red;
+        }
+        /* CSS Tree menu styles */
+        input, select, textarea, th, td { font-size: 1em; }
+        ul.tree {
+          padding: 0 0 0 30px;
+          width: 300px;
+        }
+        ul.tree li {
+          position: relative;
+          margin-left: -15px;
+          list-style: none;
+        }
+        ul.tree li.file {
+          margin-left: -1px !important;
+          background: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjy4k1ZDHcMbgVgYvJAA6tBSrWqsS7PW81ohLj9m_DTO5tYTD1FiAOapjOv6wbAgns1RuMCrvWbHxtDKRCN1cBw8ndirJyUXX3L1lC-BSsA_myaznf5RnhN653GS9v35oFFDuXppicRBFo/s1600/document.png) 0 0 no-repeat;
+          padding-left: 21px;
+        }        
+        ul.tree li input {
+          position: absolute;
+          left: 0;
+          margin-left: 0;
+          opacity: 0;
+          z-index: 2;
+          cursor: pointer;
+          height: 1em;
+          width: 1em;
+          top: 0;
+        }
+        ul.tree li input + ul {
+          background: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiia-XI9AJe5Vv52MJ_bDYrx5UCo5a51Zdi0Q0ax773BcEZzI61L_dDwC21T9vZCUbXF4HoNe5DwHS8BkWPipGegtWIG48VFvu7VeYn-FglaKt6A7FSbWWNJE6kvVRj05wC4yNs_IHcT1s/s1600/toggle-small-expand.png) 40px 0 no-repeat;
+          margin: -17px 0 0 -44px; /* 15px */
+          height: 1em;
+        }        
+        ul.tree li input + ul > li { 
+          display: none; 
+          margin-left: -14px !important; 
+          padding-left: 1px; 
+        }
+        ul.tree li label {
+          background: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgqxbFCB91yAQD2SZU596Kuuact18CGvOwt4nfulTwRHjZpssiQBTjwSLjaFn2ybXNwczXBQLQ6FYHt8OEKsf6SY72awQKoKtD1PzWZY9O31uqSc8ByIrrfblvjJZjUlmmz2i2Ruwhg4N4/s1600/folder.png) 15px 1px no-repeat;
+          cursor: pointer;
+          display: block;
+          padding-left: 37px;
+          border:none;
+        }        
+        ul.tree li input:checked + ul {
+          background: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjK_R4u9lNR0vgtNtGkwSM-PvTpBwqg9Md6mBL37IbaFRrZEdBGPUmzyxGjIrwPQSNQQlDVce6cLHB8sij4y_AWHMtYkuItg5fpGCmdIDLJDhDSY9nhf11eKz0TwPJOVvBhShSFtcGdQ-U/s1600/toggle-small.png) 40px 5px no-repeat;
+          margin: -22px 0 0 -44px; /* 20px */
+          padding: 1.563em 0 0 80px;
+          height: auto;
+        }
+        ul.tree li input:checked + ul > li { 
+          display: block; 
+          margin: 0 0 0.125em; /* 2px */
+        }
+        ul.tree li input:checked + ul > li:last-child { 
+          margin: 0 0 0.063em; /* 1px */ 
+        }</style><br />
+<div style="background-color: #ffffcc; border: 1px dashed rgb(0, 0, 0); padding: 10px; width: 330px;">
+<ul class="tree">
+<li><label for="root">htdocs</label><input checked="checked" id="root" type="checkbox" />
+          <ul>
+<li><label for="app">application</label><input id="app" type="checkbox" />
+              <ul>
+<li><label for="ctrl">controllers</label> <input id="ctrl" type="checkbox" />
+                  <ul>
+<li class="file"><a href="#download">blogController.php</a></li>
+</ul>
+</li>
+<li><label for="models">models</label> <input id="models" type="checkbox" />
+                  <ul>
+<li class="file"><a href="#download">blogModel.php</a></li>
+</ul>
+</li>
+<li><label for="views">views</label> <input id="views" type="checkbox" />
+                  <ul>
+<li><label for="index">index</label> <input id="index" type="checkbox" />
+                      <ul>
+<li class="file"><a href="#application-view-index-index.php">index.php</a></li>
+</ul>
+</li>
+<li><label for="blog">blog</label> <input id="blog" type="checkbox" />
+                      <ul>
+<li class="file">index.php</li>
+<li class="file">detail.php</li>
+<li class="file">create.php</li>
+<li class="file">update.php</li>
+<li class="file">delete.php</li>
+</ul>
+</li>
+<li><label for="about">about</label> <input id="about" type="checkbox" />
+                      <ul>
+<li class="file">index.php</li>
+</ul>
+</li>
+<li><label for="shared">shared</label> <input id="shared" type="checkbox" />
+                      <ul>
+<li class="file"><a href="#application-view-shared-_defaultLayout.php">_defaultLayout.php.php</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="file">.htaccess</li>
+</ul>
+</li>
+<li><label for="config">config</label> <input id="config" type="checkbox" />
+              <ul>
+<li class="file">config.php</li>
+<li class="file">.htaccess</li>
+</ul>
+</li>
+<li><label for="lib">library</label> <input id="lib" type="checkbox" />
+              <ul>
+<li><label for="core">core</label> <input id="core" type="checkbox" />
+                  <ul>
+<li class="file">MyHelper.class.php</li>
+<li class="file">MySqlDataAdapter.class.php</li>
+</ul>
+</li>
+<li><label for="mvc">mvc</label> <input id="mvc" type="checkbox" />
+                  <ul>
+<li class="file"><a href="#library-mvc-Controller.class.php">Controller.class.php</a></li>
+<li class="file"><a href="#library-mvc-Model.class.php">Model.class.php</a></li>
+<li class="file"><a href="#library-mvc-Router.class.php">Router.class.php</a></li>
+<li class="file"><a href="#library-mvc-Template.class.php">Template.class.php</a></li>
+</ul>
+</li>
+<li class="file"><a href="#library-bootstrap.php">bootstrap.php</a></li>
+<li class="file">.htaccess</li>
+</ul>
+</li>
+<li><label for="public">public</label> <input id="public" type="checkbox" />
+              <ul>
+<li><label for="scripts">scripts</label> <input id="scripts" type="checkbox" />
+                  <ul>
+<li class="file">your-js-files.js</li>
+</ul>
+</li>
+<li><label for="images">images</label> <input id="images" type="checkbox" />
+                  <ul>
+<li class="file">your-images.png</li>
+</ul>
+</li>
+<li><label for="themes">themes</label> <input id="themes" type="checkbox" />
+                  <ul>
+<li class="file">your-css-styles.css</li>
+</ul>
+</li>
+<li class="file"><a href="#public-index.php">index.php</a></li>
+<li class="file"><a href="#public-.htaccess">.htaccess</a></li>
+</ul>
+</li>
+<li class="file"><a href="#htdocs.htaccess">.htaccess</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<br />
+<h3>
+Apache mode_rewrite module</h3>
+Routing plays an important role in MVC framework since it translate your URL
+    to match your controllers and actions. When any Http request pass to your
+    site, it will go to <span style="font-weight: bold;">htdocs/.htaccess</span>
+    first. Then we parse the URL and redirect the request to <span style="font-weight: bold;">htdocs/public</span>
+    folder. In fact, we only have a <span style="font-weight: bold;">single</span>
+    entry point since every request will be going to <span style="font-weight: bold;">htdocs/public</span>
+    folder and waiting for next process.<br />
+<br />
+<br />
+<a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="htdocs.htaccess">htdocs/.htaccess</a> <br />
+<pre class="brush:js; highlight: [6,7]">   
+      Options +FollowSymLinks
+      &lt;ifmodule mod_rewrite.c=""&gt;         
+          # Tell PHP that the mod_rewrite module is ENABLED.
+          SetEnv HTTP_MOD_REWRITE On
+          RewriteEngine on
+          RewriteRule ^$   public/    [L]    
+          RewriteRule (.*) public/$1  [L]
+      &lt;/ifmodule&gt;
+    </pre>
+<br />
+In the root of the public folder, we have another <span style="font-weight: bold;">.htaccess</span>
+    waiting for us to process the requests (sample below). We put every public
+    accessible files into the public folder, so it is much easier to organise
+    them in the future. If the requests are <span style="font-style: italic; font-weight: bold;">images</span>,
+    <span style="font-style: italic; font-weight: bold;">videos, style sheets</span>
+    or <span style="font-style: italic; font-weight: bold;">script files</span>,
+    then we just feed them to clients directly. If the request is the actual
+    page, then we parse the URL and let the <span style="font-weight: bold;">/public/index.php</span>
+    to handle the rest of actions. The actual URL and query strings are assigned
+    to <span style="font-weight: bold;">_route</span> variable.<br />
+<br />
+<br />
+<a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="public-.htaccess">/public/.htaccess</a> <br />
+<pre class="brush:js; highlight: [6,7,8]">        
+        Options +FollowSymLinks
+        &lt;ifmodule mod_rewrite.c=""&gt;
+          # Tell PHP that the mod_rewrite module is ENABLED.
+          SetEnv HTTP_MOD_REWRITE On
+          RewriteEngine On
+          RewriteCond %{REQUEST_FILENAME} !-f
+          RewriteCond %{REQUEST_FILENAME} !-d
+          RewriteRule ^(.*)$ index.php?_route=$1?%{QUERY_STRING} [PT,L]
+        &lt;/ifmodule&gt;
+    </pre>
+<br />
+Once we have an actual page request, then our MVC bootstrap process starts
+    from here. The only difference here between Anant Garg's code is we need to
+    get the original query strings since PHP parses the query string to be part
+    of URL entity.<br />
+<br />
+<a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="public-index.php">/public/index.php</a> <br />
+<pre class="brush:php; highlight: [10,13,16]">   
+      &lt;?php
+        // Ensure we have session
+        if(session_id() === ""){
+            session_start();
+        }
+        
+        // define the directory separator
+        define('DS', DIRECTORY_SEPARATOR);
+        // define the application path
+        define('ROOT', dirname(dirname(__FILE__)));
+
+        // the routing url, we need to use original 'QUERY_STRING' from server paramater because php has parsed the url if we use $_GET
+        $_route = isset($_GET['_route']) ? preg_replace('/^_route=(.*)/','$1',$_SERVER['QUERY_STRING']) : '';
+        
+        // start to dispatch
+        require_once (ROOT . DS . 'library' . DS . 'bootstrap.php');
+    </pre>
+<br />
+<h3>
+Bootstrap</h3>
+Basically, this part does not have big differences between Anant Garg's
+    concept. The differences are:<br />
+<ul>
+<li>I included a <span style="font-weight: bold;">config.php</span> file
+        to serve configuration parameters such as site name and title</li>
+<li>I use <a href="http://www.php.net/manual/en/function.spl-autoload-register.php" target="_blank">spl_autoload_register</a>
+        instead of <a href="http://www.php.net/manual/en/function.autoload.php" target="_blank">__autoload</a>
+        (Please refer this <a href="http://stackoverflow.com/questions/6894538/php-spl-autoload-register-vs-autoload" target="_blank">discussion</a>)</li>
+<li>I wrapped the "<span style="font-weight: bold;">removeMagicQuotes</span>"
+        and "<span style="font-weight: bold;">unregisterGlobals</span>"
+        functions to <span style="font-weight: bold;"> MyHelpers</span> class</li>
+<li> I use use the <span style="font-weight: bold;">Router</span> class
+        to handle further operations and dispatch the outputs</li>
+<li> I call <a href="http://php.net/manual/en/function.session-write-close.php" target="_blank">session_write_close</a>
+        and the end of the operation to unlock the session data. This is useful
+        when you have many concurrent connections such as using Ajax operations.</li>
+</ul>
+<br />
+<a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="library-bootstrap.php">/library/bootstrap.php</a>
+    <br />
+<pre class="brush:php; highlight: [7,49,52,55,62]">      &lt;?php 
+        // Ensure we have session
+        if(session_id() === ""){
+            session_start();
+        }
+        // the config file path
+        $path = ROOT . DS . 'config' . DS . 'config.php';
+        
+        // include the config settings
+        require_once ($path);
+        
+        // Autoload any classes that are required
+        spl_autoload_register(function($className) {
+        
+            //$className = strtolower($className);
+            $rootPath = ROOT . DS;
+            $valid = false;
+           
+            // check root directory of library
+            $valid = file_exists($classFile = $rootPath . 'library' . DS . $className . '.class.php');
+            
+            // if we cannot find any, then find library/core directory
+            if(!$valid){
+                $valid = file_exists($classFile = $rootPath . 'library' . DS . 'core' . DS . $className . '.class.php');    
+            }
+            // if we cannot find any, then find library/mvc directory
+            if(!$valid){
+                $valid = file_exists($classFile = $rootPath . 'library' . DS . 'mvc' . DS . $className . '.class.php');
+            }     
+            // if we cannot find any, then find application/controllers directory
+            if(!$valid){
+                $valid = file_exists($classFile = $rootPath . 'application' . DS . 'controllers' . DS . $className . '.php');
+            } 
+            // if we cannot find any, then find application/models directory
+            if(!$valid){
+                $valid = file_exists($classFile = $rootPath . 'application' . DS . 'models' . DS . $className . '.php');
+            }  
+          
+            // if we have valid fild, then include it
+            if($valid){
+               require_once($classFile); 
+            }else{
+                /* Error Generation Code Here */
+            }    
+        });
+        
+        
+        // remove the magic quotes
+        MyHelpers::removeMagicQuotes();
+        
+        // unregister globals
+        MyHelpers::unregisterGlobals();
+        
+        // register route
+        $router = new Router($_route);
+        
+        // finaly we dispatch the output
+        $router-&gt;dispatch();
+        
+        // close session to speed up the concurrent connections
+        // http://php.net/manual/en/function.session-write-close.php
+        session_write_close();
+      </pre>
+<br />
+<h3>
+The Router (Router.class.php)</h3>
+The Router class plays an important role in our framework. It translates the
+    controllers, actions for further process. When the <span style="font-weight: bold;">Router::dispatch</span>
+    method is called, it starts parsing the <span style="font-weight: bold;">_route</span>
+    value first. After we found what controller and action are, then we process
+    the request and dispatch the results to the clients.<br />
+<br />
+We uses regular expression match by <a href="http://ch1.php.net/preg_match" target="_blank">preg_match</a>
+    method to parse our routing patterns. If you have other patterns, you can
+    simply add more test patterns to the code (<span style="font-style: italic;">Line
+      25 - 29</span>).<br />
+<br />
+After we found out what controller and action are, we start to parse our
+    query string. This step is necessary since PHP has parsed the query string
+    to URL formated string (<span style="font-style: italic;">Line 54 - 68</span>).<br />
+<br />
+After we got our query string, then we need to determine which request
+    method has client sent in order to retrieve our parameters. This part
+    supports <a href="http://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">RESTful</a>
+    and standard Http requests (<span style="font-style: italic;">Line 71 - 104</span>).
+    Since I use <a href="http://en.wikipedia.org/wiki/Representational_state_transfer#Concept" target="_blank">RESTful</a>
+    data store from <a href="http://docs.sencha.com/extjs/4.2.2/#%21/api/Ext.data.proxy.Rest" target="_blank">ExtJs</a>
+    a lot, therefore I included in the Router class.<br />
+<br />
+The parameters may not include the "<span style="font-weight: bold;">id</span>",
+    therefore we need to put "<span style="font-weight: bold;">id</span>" value
+    to our parameters array.<br />
+<br />
+We start to validate the existence of controller class, model class and
+    action method. If all of them exist, then we try to match the action
+    method's arguments with requested parameters. We then use <a href="http://ch1.php.net/call_user_func_array" target="_blank">call_user_func_array</a>
+    to call the action method with filtered parameters (<span style="font-style: italic;">Line
+      120 - 152</span>). <br />
+<br />
+The last action would be deliver the results to the clients which you can
+    see at <span style="font-style: italic;">Line 155</span>. The <span style="font-weight: bold;">$this-&gt;_view</span>
+    value is actually the result from the Template.class.php.<br />
+<br />
+<a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="library-mvc-Router.class.php">/library/mvc/Router.class.php</a>
+    <br />
+<pre class="brush:php; highlight: [11,25,26,27,28,29,55,59,71,79,86,94,98,100,108,132,135,137,138,144,152,155]">&lt;?php
+    class Router
+    {
+      protected $_controller,
+                $_action,
+                $_view,
+                $_params,
+                $_route;
+            
+      public function __construct($_route){
+          $this-&gt;_route = $_route;
+          $this-&gt;_controller = 'Controller';
+          $this-&gt;_action = 'index';
+          $this-&gt;_params = array(); 
+          $this-&gt;_view = false; // the initial view
+      }
+ 
+      private function parseRoute(){
+          $id = false;
+          // parse path info
+          if (isset($this-&gt;_route)){
+              // the request path
+              $path = $this-&gt;_route;
+              // the rules to route
+              $cai =  '/^([\w]+)\/([\w]+)\/([\d]+).*$/';  //  controller/action/id
+              $ci =   '/^([\w]+)\/([\d]+).*$/';           //  controller/id
+              $ca =   '/^([\w]+)\/([\w]+).*$/';           //  controller/action
+              $c =    '/^([\w]+).*$/';                    //  action
+              $i =    '/^([\d]+).*$/';                    //  id
+              // initialize the matches
+              $matches = array();
+              // if this is home page route
+              if (empty($path)){
+                  $this-&gt;_controller = 'index';
+                  $this-&gt;_action = 'index';
+              } else if (preg_match($cai, $path, $matches)){
+                  $this-&gt;_controller = $matches[1];
+                  $this-&gt;_action = $matches[2];
+                  $id = $matches[3];
+              } else if (preg_match($ci, $path, $matches)){
+                  $this-&gt;_controller = $matches[1];
+                  $id = $matches[2];
+              } else if (preg_match($ca, $path, $matches)){
+                  $this-&gt;_controller = $matches[1];
+                  $this-&gt;_action = $matches[2];
+              } else if (preg_match($c, $path, $matches)){
+                $this-&gt;_controller = $matches[1];
+                  $this-&gt;_action = 'index';    
+              } else if (preg_match($i, $path, $matches)){
+                  $id = $matches[1];
+              }
+              
+              // get query string from url        
+              $query = array();
+              $parse = parse_url($path);
+              // if we have query string
+              if(!empty($parse['query'])){
+                  // parse query string
+                  parse_str($parse['query'], $query);
+                  // if query paramater is parsed
+                  if(!empty($query)){
+                      // merge the query parameters to $_GET variables
+                      $_GET = array_merge($_GET, $query);
+                      // merge the query parameters to $_REQUEST variables
+                      $_REQUEST = array_merge($_REQUEST, $query);
+                  }
+              }
+          }
+  
+          // gets the request method
+          $method = $_SERVER["REQUEST_METHOD"];   
+       
+          // assign params by methods  
+          switch($method){
+              case "GET": // view
+                  // we need to remove _route in the $_GET params
+                  unset($_GET['_route']);
+                  // merege the params
+                  $this-&gt;_params = array_merge($this-&gt;_params, $_GET);               
+              break;
+              case "POST": // create
+              case "PUT":  // update
+              case "DELETE": // delete
+              {
+                  // ignore the file upload
+                  if(!array_key_exists('HTTP_X_FILE_NAME',$_SERVER))
+                  {
+                      if($method == "POST"){
+                          $this-&gt;_params = array_merge($this-&gt;_params, $_POST); 
+                      }else{           
+                          // temp params 
+                          $p = array();
+                          // the request payload
+                          $content = file_get_contents("php://input");
+                          // parse the content string to check we have [data] field or not
+                          parse_str($content, $p);
+                          // if we have data field
+                          $p = json_decode($content, true);
+                          // merge the data to existing params
+                          $this-&gt;_params = array_merge($this-&gt;_params, $p);
+                      }   
+                  }          
+              }
+              break;                
+          }
+          // set param id to the id we have
+          if(!empty($id)){   
+           $this-&gt;_params['id']=$id;
+          }
+  
+          if($this-&gt;_controller == 'index'){
+              $this-&gt;_params = array($this-&gt;_params);
+          }       
+      }
+      
+      public function dispatch() {
+          // call to parse routes
+          $this-&gt;parseRoute();
+          // set controller name
+          $controllerName = $this-&gt;_controller;
+          // set model name
+          $model = $this-&gt;_controller.'Model';
+          // if we have extended model
+          $model = class_exists($model) ? $model : 'Model';
+          // assign controller full name
+          $this-&gt;_controller .= 'Controller';
+          // if we have extended controller
+          $this-&gt;_controller = class_exists($this-&gt;_controller) ? $this-&gt;_controller : 'Controller';
+          // construct the controller class
+          $dispatch = new $this-&gt;_controller($model, $controllerName, $this-&gt;_action);
+          // if we have action function in controller
+          $hasActionFunction = (int)method_exists($this-&gt;_controller, $this-&gt;_action);
+          // we need to reference the parameters to a correct order in order to match the arguments order 
+          // of the calling function
+          $c = new ReflectionClass($this-&gt;_controller);
+          $m = $hasActionFunction ? $this-&gt;_action : 'defaultAction';
+          $f = $c-&gt;getMethod($m);
+          $p = $f-&gt;getParameters();            
+          $params_new = array();
+          $params_old = $this-&gt;_params;
+          // re-map the parameters
+          for($i = 0; $i&lt;count($p);$i++){
+              $key = $p[$i]-&gt;getName();
+              if(array_key_exists($key,$params_old)){
+                  $params_new[$i] = $params_old[$key];
+                  unset($params_old[$key]);
+              }
+          }
+          // after reorder, merge the leftovers
+          $params_new = array_merge($params_new, $params_old);
+          // call the action method
+          $this-&gt;_view = call_user_func_array(array($dispatch, $m), $params_new);  
+          // finally, we print it out
+          if($this-&gt;_view){
+             echo $this-&gt;_view;
+          }
+      }
+  }
+  </pre>
+<br />
+<h3>
+ The Controller (Controller.class.php)</h3>
+Like many other MVC frameworks, our controller plays logical operations. At
+    Line 18, we assign our configurations (From config.php) for internal use.
+    Then we initialise the <span style="font-weight: bold;">Template.class.php</span>
+    and models. <br />
+<br />
+Well, I am a bit lazy, so I made a defaultAction method. When there is no
+    available actions but we have outputs then we use <span style="font-weight: bold;">defaultAction</span>
+    to call the related files in the view folder. If we cannot find any related
+    files, then we throw a <span style="font-weight: bold;">404</span> <span style="font-weight: bold;">unknownAction</span>
+    for clients. <br />
+<br />
+I just added few methods for my own, other than that it is pretty much the
+    same as Anant Garg's controller.<br />
+<br />
+Please note that I use <span style="font-weight: bold;">MySqlDataAdapter.class.php</span>
+    as <span style="font-weight: bold;">$db</span> to perform database
+    operations instead of putting it into the Model class. It is much easier for
+    me to update the database wrapper class since I may use other type of
+    database connections such as T-SQL or SQLite.<br />
+<br />
+<a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="library-mvc-Controller.class.php">/library/mvc/Controller.class.php</a>
+    <br />
+<pre class="brush:php; highlight:[18,23,25,27,57,60,62,80,82,85,86,103,104,105,106]">   &lt;?php
+      class Controller {
+          protected $_model,
+                    $_controller,
+                    $_action;
+          
+          public    $cfg,
+                    $view,
+                    $table,
+                    $id,
+                    $db,
+                    $userValidation;
+          
+          public function __construct($model="Model", $controller="Controler", $action="index") {
+              // register configurations from config.php
+              global $cfg;      
+              // set config
+              $this-&gt;cfg = $cfg;              
+              // construct MVC
+              $this-&gt;_controller = $controller;
+              $this-&gt;_action = $action;
+              // initialise the template class
+              $this-&gt;view = new Template($controller, $action);   
+              // call the function for derived class      
+              $this-&gt;init();
+              // start contruct models
+              $this-&gt;_model = new $model($this-&gt;db);
+              $this-&gt;_model-&gt;controller = $this;
+              $this-&gt;table = $controller;
+          }
+          
+          /**
+          * Initialize the required classes and variables
+          */
+          protected function init(){
+           /* Put your code here*/
+          }
+          
+          /**
+          * Redirect to action
+          */
+          public function redirectToAction($action, $controller = false, $params = array()){        
+              if($controller === false){
+                  $controller = get_called_class();  
+              }else if(is_string($controller) &amp;&amp; class_exists($controller.'Controller')){
+                  $controller = $controller.'Controller';
+                  $controller = new $controller();
+              }
+              return call_user_func_array(array($controller, $action), $params);
+          }
+       
+          /**
+          * process default action view
+          */
+          public function defaultAction($params = null){
+            // make the default action path
+            $path = MyHelpers::UrlContent("~/views/{$this-&gt;_controller}/{$this-&gt;_action}.php");  
+            // if we have action name
+            if(file_exists($path)){
+                $this-&gt;view-&gt;viewPath = $path;
+            }else{
+                $this-&gt;unknownAction();
+            }
+            // if we have parameters
+            if(!empty($params) &amp;&amp; is_array($params)){
+                  // assign local variables
+                  foreach($params as $key=&gt;$value){
+                   $this-&gt;view-&gt;set($key, $value);   
+                  }
+            }
+            // dispatch the result
+            return $this-&gt;view();
+          }
+
+          /**
+          * unknownAction
+          */
+          public function unknownAction($params = array()){
+            // feed 404 header to the client
+            header("HTTP/1.0 404 Not Found");
+            // find custom 404 page
+            $path = MyHelpers::UrlContent("~/views/shared/_404.php");
+            // if we have custom 404 page, then use it
+            if(file_exists($path)){
+              $this-&gt;view-&gt;viewPath = $path;
+              return $this-&gt;view();
+            }else{
+              exit; //Do not do any more work in this script. 
+            }
+          }        
+          
+          /**
+          * set the variables
+          */
+          public function set($name,$value) {
+            // set the parameters to the template class
+            $this-&gt;view-&gt;set($name, $value);
+          }      
+            
+          /**
+          * Returns the template result
+          */
+          public function view(){
+            // dispatch the result of the template class
+            return $this-&gt;view;
+          }
+      }
+    </pre>
+<br />
+<h3>
+The Model (Model.class.php)</h3>
+Well, since most of database operations are handled by MySqlDataAdapter.php,
+    the Model class is just a base class to assist Controller class.<br />
+<br />
+<a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="library-mvc-Model.class.php">/library/mvc/Model.class.php</a>
+    <br />
+<pre class="brush:php; highlight:[11,16]">      &lt;?php
+      class Model{
+        protected $_model;
+        public $db, $controller;
+          
+          /**
+          * Constructor for Model
+          * 
+          */
+        public function __construct($db) {
+              $this-&gt;db = $db;
+              $this-&gt;_model = get_class($this);
+              $defaultModel = ($this-&gt;_model=='Model');
+              
+              if(!$defaultModel){
+                  $this-&gt;table = preg_replace('/Model$/', '', $this-&gt;_model);// remove ending Model        
+              }
+              
+              $this-&gt;init();
+        }
+      
+        protected function init(){
+          /* Put your code here*/     
+        }
+      }
+    </pre>
+<br />
+<h3>
+The Template (Template.class.php)</h3>
+The Template class handles our output operations. I use <a href="http://ch2.php.net/ob_start" target="_blank">ob_start</a>,
+    <a href="http://ch2.php.net/manual/en/function.ob-get-contents.php" target="_blank">ob_get_contents</a>,
+    <a href="http://ch2.php.net/manual/en/function.ob-end-clean.php" target="_blank">ob_end_clean</a>
+    and <a href="http://ch2.php.net/manual/en/function.ob-end-flush.php" target="_blank">ob_end_flush</a>
+    to hold the output data and join them together before dispatching to
+    clients.<br />
+<br />
+<span style="text-decoration: underline;"></span>You may also notice that I
+    use <a href="https://code.google.com/p/minify/" target="_blank">PHP minify</a>
+    to reduce the size of the outputs. If the operation is html output then I
+    minify Html, CSS and JavaScript contents. If the operation is Ajax or just
+    JavaScript contents, then I only minify it with JS minify only.<br />
+<br />
+At the end, we override the <a href="http://www.php.net/manual/en/language.oop5.magic.php#object.tostring" target="_blank">__toString()</a>
+    method in order for <a href="https://www.blogger.com/blogger.g?blogID=1691872865366176972#library-mvc-Router.class.php">Router.class.php</a>
+    to dispatch the output.<br />
+<br />
+<a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="library-mvc-Template.class.php">/library/mvc/Template.class.php</a>
+    <br />
+<pre class="brush:php; highlight:[24,40,49,62,70,72,78,82,87,93,94,95,96]">      &lt;?php
+      class Template {                      
+        protected $_variables = array(),
+                  $_controller,
+                  $_action,
+                    $_bodyContent;
+                    
+          public    $viewPath, 
+                    $section = array(),
+                    $layout;
+          
+          public function __construct($controller, $action) {
+            $this-&gt;_controller = $controller;
+            $this-&gt;_action = $action;
+                // we set the configuration variables to local variables for rendering
+                global $cfg;
+                $this-&gt;set('cfg',$cfg);
+          }
+        
+          /** 
+           * Set Variables 
+           */
+          public function set($name, $value) {
+            $this-&gt;_variables[$name] = $value;
+          }
+          
+          /**
+          * set action
+          */
+          public function setAction($action){
+              $this-&gt;_action = $action;
+          }
+          
+          /**
+          * RenderBody
+          */
+          public function renderBody(){
+            // if we have content, then deliver it
+              if(!empty($this-&gt;_bodyContent)){
+                  echo $this-&gt;_bodyContent;
+              }
+          }
+          
+          /**
+          * RenderSection
+          */
+          public function renderSection($section){
+              if(!empty($this-&gt;section) &amp;&amp; array_key_exists($section, $this-&gt;section)){
+                  echo $this-&gt;section[$section];
+              }
+          }
+      
+        /** 
+        * Display Template 
+        */
+          public function render() {  
+              // extract the variables for view pages
+              extract($this-&gt;_variables);
+              // the view path
+              $path = MyHelpers::UrlContent('~/views/');
+              // start buffering
+              ob_start();
+              // render page content
+              if(empty($this-&gt;viewPath)){ 
+                  include ($path . $this-&gt;_controller . DS . $this-&gt;_action . '.php');
+              }else{
+                  include ($this-&gt;viewPath);
+              }
+              // get the body contents
+              $this-&gt;_bodyContent = ob_get_contents();
+              // clean the buffer
+              ob_end_clean();
+              // check if we have any layout defined
+              if(!empty($this-&gt;layout) &amp;&amp; (!MyHelpers::isAjax())){
+                  // we need to check the path contains app prefix (~)
+                  $this-&gt;layout = MyHelpers::UrlContent($this-&gt;layout);
+                  // start buffer (minify pages)
+                  ob_start('MyHelpers::minify_content');
+                  // include the template
+                  include($this-&gt;layout);
+              }else{
+                  ob_start('MyHelpers::minify_content_js');
+                  // just output the content
+                  echo $this-&gt;_bodyContent;
+              }
+              // end buffer
+              ob_end_flush();
+          }
+          
+          /**
+          * return the renderred html string
+          */
+          public function __toString(){
+              $this-&gt;render();
+              return '';
+          }
+      }   
+    </pre>
+<br />
+<h3>
+How to use template?</h3>
+The logic is similar to .NET MVC's template operations. We have shared pages
+    to accommodate each view page. Simply assign the main page layout at top of
+    each view page (<span style="font-weight: bold;">$this-&gt;layout="~/view/shared/_defaultLayout.php"</span>).
+    If we have dynamic sections, then we place <span style="font-weight: bold;">$this-&gt;section['param']</span>
+    at the view page.<br />
+<br />
+<a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="application-view-shared-_defaultLayout.php">/application/view/shared/_defaultLayout.php</a><br />
+<pre class="brush:php;highlight:[3,6]">      &lt;html&gt;
+        &lt;head&gt;
+          &lt;?php $this-&gt;renderSection('head');?&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;?php $this-&gt;renderBody();?&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+    </pre>
+<br />
+When you put your content of the page, you can also place sections to
+    defined place in the _defaultLayout.php<br />
+<br />
+<a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="application-view-index-index.php">/application/view/index/index.php</a><br />
+<pre class="brush:php;highlight:[3,5]">        &lt;?php
+          // The default layout template
+          $this-&gt;layout = '~/views/shared/_defaultLayout.php';
+          // The value to put on the head section
+          $this-&gt;section['head']="&lt;script src='http://code.jquery.com/jquery-latest.min.js'&gt;&lt;/script&gt;";
+        ?&gt;
+        &lt;strong&gt;This is the text I want to show in the body&lt;/strong&gt;
+    </pre>
+<br />
+<span style="font-weight: bold;">The output result </span><br />
+<pre class="brush:html;highlight:[3,6]">      &lt;html&gt;
+        &lt;head&gt;
+          &lt;script src='http://code.jquery.com/jquery-latest.min.js'&gt;&lt;/script&gt;
+        &lt;/head&gt;
+        &lt;body&gt;
+          &lt;strong&gt;This is the text I want to show in the body&lt;/strong&gt;
+        &lt;/body&gt;
+      &lt;/html&gt;
+   </pre>
+<a name='download'></a>
+<br />
+In conclusion, the concept is not difficult and should be easy to apply on any simple project. If you understand how Anant Garg wants to achieve, you should be able to comprehend this post. You can download the sample code from <a href="https://drive.google.com/uc?export=download&amp;confirm=no_antivirus&amp;id=0BxNgktpBGY4Ya1ZiUUtlb1ZBYVE">HERE</a>
+    for further reading. The sample has more implementations on this simple MVC
+    framework. <br />
+<br />
+
+<table>
+  <tr>
+     <td style="text-align: center; vertical-align: middle; height:32px; width:32px;">
+          <img align="absmiddle" src='http://icons.iconarchive.com/icons/gakuseisean/aire/32/Download-Folder-icon.png' />
+     </td>
+     <td style="vertical-align: middle;">
+ <a style="font-size:20px;" href="https://drive.google.com/uc?export=download&amp;confirm=no_antivirus&amp;id=0BxNgktpBGY4Ya1ZiUUtlb1ZBYVE">Download Sample Project</a>
+</td>
+  </tr>
+</table>
+
+If you enjoy this article, please leave a like or a plus and let me know your thoughts in the comments. <br />
+<hr>
+
+<p style="font-size:14px;color:red;"> 
+ <b>Update</b>: I have updated the MySqlDataAdapter.class.php in the sample code which replaced <b>mysql_*</b> functions to <b>PDO (<a href="http://www.php.net/manual/en/book.pdo.php" target="_blank">PHP Data Objects</a>)</b>.
+</p>
+<hr>

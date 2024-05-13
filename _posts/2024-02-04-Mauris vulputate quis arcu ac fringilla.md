@@ -2,7 +2,8 @@
 layout: post
 title: Mauris vulputate quis arcu ac fringilla
 description: Pellentesque interdum non ex id maximus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas
-tags: [coding]
+tags: 
+- Coding
 image: /assets/posts/bg-lisbon-skyline.jpg
 ---
 

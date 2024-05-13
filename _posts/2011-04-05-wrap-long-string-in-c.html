@@ -1,0 +1,97 @@
+---
+layout: post
+title: Wrap long string in C#
+date: '2011-04-05T03:09:00.005+02:00'
+author: Elvis Hsu
+tags:
+- Coding
+- C#
+- NETCF
+modified_time: '2014-01-28T10:54:01.977+01:00'
+thumbnail: /assets/posts/blogger/2011-04-05-image-0000.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-3809757806694887939
+blogger_orig_url: https://www.elvishsu.com/2011/04/wrap-long-string-in-c.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2011-04-05-image-0000.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/assets/posts/blogger/2011-04-05-image-0000.png" /></a></div>
+<br />
+<br />
+Today I was think how to optimize the drawing string method on my library... so far I worked out this... However I still couldn't workout how to really wrap long string within the sentence...<br />
+<br />
+Any help?<br />
+<br />
+<br />
+<pre class="brush:csharp" name="code">public static string[] WrapString(this Graphics gx, Font font, string text, float maxWidth, bool wrap)
+{
+    // find if actual max text width is smaller than max width or maxWidth is smaller than zero or wrap is set to false
+    if (gx.MeasureString(text, font).Width &lt; maxWidth || maxWidth &lt;= 0 || !wrap)
+    {
+        return text.Split(new char[] { '\n' });
+    }
+
+    int maxChars = (int)(maxWidth / (gx.MeasureString("ABCDEFGHIJKLMNOPQRSTUVWXYZ.0123456789", font).Width / 37));
+    //text = text.BreakLongString(maxChars);
+
+    text = text.Replace(Environment.NewLine, "\n");
+    text = text.Replace("\r", "");
+    text = text.Replace("\t", " ");
+
+    string[] words = text.Split(new char[] { ' ' });
+    List<string> lines = new List<string>((int)(text.Length / maxChars));
+    string currentLine = "";
+
+    for (int i = 0; i &lt; words.Length; i++)
+    {
+        // if the word is empty, then repace it to one space
+        if (string.IsNullOrEmpty(words[i]))
+            words[i] = " ";
+
+        float currWidth = gx.MeasureString(currentLine + " " + words[i], font).Width;
+        
+        // check if the current width is greater than max length
+        if (currWidth &lt; maxWidth)
+        {
+            // if first entry, then put current line to the first word
+            if ((lines.Count == 0) &amp;&amp; string.IsNullOrEmpty(currentLine))
+                currentLine = words[i];
+            else
+            {
+                // if not, append each word to current line
+                currentLine += " " + words[i];
+
+                // check if the currentline has \n in there.
+                string[] newLines = currentLine.Split('\n');
+                // if it does, then add a new line
+                if (newLines.Length &gt; 1)
+                {
+                    // do not loop to last as it will be the new currentline
+                    for (int j = 0; j &lt; newLines.Length - 1; j++)
+                        lines.Add(newLines[j]);
+
+                    // the current line is the last line of the new lines
+                    currentLine = newLines[newLines.Length - 1];
+                }
+            }
+        }
+        else
+        {
+            // if the currentline width is greater than max width
+            // then add a new line to the list
+            if (!string.IsNullOrEmpty(currentLine))
+                lines.Add(currentLine);
+
+            // make the current line to the last word
+            currentLine = words[i];
+        }
+    }
+    
+    // if still has word, add it to the list
+    if (!string.IsNullOrEmpty(currentLine))
+        lines.Add(currentLine);
+
+    return lines.ToArray();
+}
+</string></string></pre>

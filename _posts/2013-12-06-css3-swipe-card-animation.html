@@ -1,0 +1,172 @@
+---
+layout: post
+title: CSS3 Swipe Card Animation
+date: '2013-12-06T12:13:00.001+01:00'
+author: Elvis Hsu
+tags:
+- CSS
+- Html
+- Coding
+modified_time: '2014-04-11T11:45:02.757+02:00'
+thumbnail: /assets/posts/blogger/2013-12-06-image-0003.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-1275466389827725065
+blogger_orig_url: https://www.elvishsu.com/2013/12/css3-swipe-card-animation.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2013-12-06-image-0003.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/assets/posts/blogger/2013-12-06-image-0003.png" /></a></div>
+A while ago, I came across designing a kiosk web application for one of my clients. Since it is a web application so I think I should utilise the features of HTML5 and CSS3. Well, as usual, I started to do some researches about the animation functions of CSS3. I read the guide from <a href="https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Using_CSS_animations" target="_blank">Mozilla</a>&nbsp;and other useful articles such as&nbsp;<a href="http://css-tricks.com/snippets/css/keyframe-animation-syntax/" target="_blank">CSS-Tricks</a>, <a href="http://www.w3schools.com/css/css3_animations.asp" target="_blank">W3Schools</a>&nbsp;and <a href="http://css3please.com/" target="_blank">CSS3 Please</a>. I have to admit that CSS3 really makes a developer's job easier on animations. I don't need to write a single code on Javascript and I still can make a good animation.<br />
+<br />
+Anyway, one of the key features of this project is to indicate the patient/customer how to swipe the card when they look at the screen of the kiosk. Instead of reading the boring descriptions, a easy-to-understand animation would guide the patient to swipe the card correctly and properly. This sample code was inspired by&nbsp;<a href="http://beneverard.co.uk/" target="_blank">Ben Everard</a>'s post on <a href="https://github.com/beneverard/CSS3-Swipe-Card-Animation" target="_blank">Github</a>. It was all I needed to start decorating the layout of the swiping card screen.<br />
+<a name='more'></a><br />
+<br />
+In order to make it work, all you need is the below three images and the CSS3 code. You can design the images in Photoshop or Gimp or any other image editor.<br />
+<br />
+<ol>
+<li>The kiosk image with left part of&nbsp;magnetic stripe reader</li>
+<li>The card with the face toward to the user</li>
+<li>The right part of the magnetic reader</li>
+</ol>
+When the three images are ready, you can place the CSS3 code in your HTML file. You may need some adjustments which are "keyframes". You need to adjust the position of the animation start and end (top &amp; left values) positions to fit your desired layout of your project. You may also need to adjust the positions of the three images.<br />
+<br />
+Anyway, I have a sample animation at the end of this article which is applied by the sample code below.<br />
+<br />
+Happy coding and have fun.<br />
+<br />
+<h3>
+CSS3 Code:
+</h3>
+<pre class="brush:css" name="code">@-webkit-keyframes swipe-card{
+ 0%{top:0px;opacity:0;} 
+ 10%,50%{top:0px;left:350px;opacity:1;} 
+ 65%{top:270px;left:380px;opacity:1;} 
+ 75%,100%{top:260px;left:380px;opacity:0;}
+}
+
+@-moz-keyframes swipe-card{
+ 0%{top:0px;opacity:0;} 
+ 10%,50%{top:0px;left:350px;opacity:1;} 
+ 65%{top:270px;left:380px;opacity:1;} 
+ 75%,100%{top:260px;left:380px;opacity:0;}
+}
+
+@-ms-keyframes swipe-card{
+ 0%{top:0px;opacity:0;} 
+ 10%,50%{top:0px;left:350px;opacity:1;} 
+ 65%{top:270px;left:380px;opacity:1;} 
+ 75%,100%{top:260px;left:380px;opacity:0;}
+}
+
+.swipe-card{
+ margin:auto;
+ position:relative;
+ display:block;
+ width:600px;
+ height:600px;
+}
+
+.swipe-card img{
+ position:absolute;
+}
+
+.swipe-card .swipe-left{
+ top:70px;
+ left:0px;
+ z-index:3;
+}
+
+.swipe-card .swipe-right{
+ top:115px;
+ left:382px;
+ z-index:1;
+}
+
+.swipe-card .card{
+ z-index:2;
+ left:390px;
+ top:90px;
+ -webkit-animation:swipe-card 4s ease-in-out infinite normal;
+ -moz-animation:swipe-card 4s ease-in-out infinite normal;
+ -ms-animation:swipe-card 4s ease-in-out infinite normal;
+ animation:swipe-card 4s ease-in-out infinite normal;
+}
+</pre>
+<br />
+<h3>
+Html Code:
+</h3>
+<pre class="brush:html" name="code">&lt;div class="kiosk"&gt;
+&lt;div class="swipe-card"&gt;
+&lt;img class="swipe-left" src="your_image_path/kiosk-left.png" /&gt;
+   &lt;img class="card" src="your_image_path/med-card-front-swipe.png" /&gt;
+   &lt;img class="swipe-right" src="your_image_path/kiosk-right.png" /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<br />
+<style type="text/css">
+@-webkit-keyframes swipe-card{
+ 0%{top:0px;opacity:0;} 
+ 10%,50%{top:0px;left:350px;opacity:1;} 
+ 65%{top:270px;left:380px;opacity:1;} 
+ 75%,100%{top:260px;left:380px;opacity:0;}
+}
+@-moz-keyframes swipe-card{
+ 0%{top:0px;opacity:0;} 
+ 10%,50%{top:0px;left:350px;opacity:1;} 
+ 65%{top:270px;left:380px;opacity:1;} 
+ 75%,100%{top:260px;left:380px;opacity:0;}
+}
+@-ms-keyframes swipe-card{
+ 0%{top:0px;opacity:0;} 
+ 10%,50%{top:0px;left:350px;opacity:1;} 
+ 65%{top:270px;left:380px;opacity:1;} 
+ 75%,100%{top:260px;left:380px;opacity:0;}
+}
+.swipe-card{
+ margin:auto;
+ position:relative;
+ display:block;
+ width:600px;
+ height:600px;
+}
+.swipe-card img{
+ position:absolute;
+}
+.swipe-card .swipe-left{
+ top:70px;
+ left:0px;
+ z-index:3;
+}
+.swipe-card .swipe-right{
+ top:115px;
+ left:382px;
+ z-index:1;
+}
+.swipe-card .card{
+ z-index:2;
+ left:390px;
+ top:90px;
+ -webkit-animation:swipe-card 4s ease-in-out infinite normal;
+ -moz-animation:swipe-card 4s ease-in-out infinite normal;
+ -ms-animation:swipe-card 4s ease-in-out infinite normal;
+ animation:swipe-card 4s ease-in-out infinite normal;
+}
+</style>
+
+<br />
+<h3>
+Demo Animation:
+</h3>
+<br />
+<div class="kiosk">
+<div class="swipe-card">
+<img alt="" class="swipe-left" src="/assets/posts/blogger/2013-12-06-image-0003.png" />
+<img alt="" class="card" src="/assets/posts/blogger/2013-12-06-image-0003.png" />
+<img alt="" class="swipe-right" src="/assets/posts/blogger/2013-12-06-image-0003.png" />
+</div>
+</div>

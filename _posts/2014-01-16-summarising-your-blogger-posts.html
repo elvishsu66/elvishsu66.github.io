@@ -1,0 +1,151 @@
+---
+layout: post
+title: Summarising your Blogger posts
+date: '2014-01-16T19:28:00.000+01:00'
+author: Elvis Hsu
+tags:
+- Blogger
+- Javascript
+- Tips
+modified_time: '2014-01-26T13:18:36.100+01:00'
+thumbnail: /assets/posts/blogger/2014-01-16-image-0002.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-6427896061223775670
+blogger_orig_url: https://www.elvishsu.com/2014/01/summarising-your-blogger-posts.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2014-01-16-image-0002.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img alt="Summarising your Blogger posts" border="0" src="/assets/posts/blogger/2014-01-16-image-0002.png" title="Summarising your Blogger posts" /></a></div>
+I use a simple JavaScript function to summarise the posts on the home page
+    of this blog. It worked quite well since the Blogger.com hasn't complained
+    about it. Well, things have gotten a little bit ugly. Few days ago, I post a
+    new article "<a href="http://www.elvishsu66.com/2014/01/start-your-own-mvc-framework-with-php.html" target="_blank">Start
+      your own MVC Framework with PHP</a>" which is quite a long post. It
+    contains code samples, descriptions and CSS code for presentation.<br />
+<br />
+After I published the article, I noticed that some posts on my home page
+    went missing. I set the setting to display 8 posts per page for home page,
+    categories, paging and search results. However the home page only displayed
+    5 posts and I was not very happy about it. So I went <a href="https://productforums.google.com/forum/?hl=en#%21forum/blogger" target="_blank">Blogger
+      Help Forum</a> to search for solutions. Voilà ~ The reason is that if <a href="http://www.elvishsu66.com/2014/01/start-your-own-mvc-framework-with-php.html" target="_blank">one</a>
+    or more of your recent posts is/are too long/big, Blogger.com will cut down
+    the number of the posts to display. The main reason is to enhance the
+    loading speed. Well, fair enough but what should I do now? Divide the post
+    to two or three parts? Mate, I'm not going to do it. So what then? It must
+    be a way to fix it. So I started to search any possible solutions on Google
+    again and found the term "<a href="https://support.google.com/blogger/answer/154172?hl=en" target="_blank">Jump
+      Break</a>".<br />
+<a name='more'></a><br />
+What does <span style="font-weight: bold;">Jump Break</span> do? When you
+    click the <i style="font-weight: bold;">Jump Break</i> icon on the
+    Blogger's editor, it inserts a "<span style="color: red;">&lt;!--more--&gt;&lt;br /&gt;</span>"
+    Html comment at the place where you want to break the content. So basically
+    when the <b><a href="http://www.bloggersentral.com/2010/08/targeting-specific-pages-with.html" target="_blank">data:blog.pageType</a></b>
+    is not "<b>item</b>", the server only dispatch the post content up to that
+    point. If you want to know more about it, you can have a look at <a href="http://mumsmakelists.blogspot.ch/2013/06/customize-jump-break.html" target="_blank">this
+      tutorial</a>.<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2014-01-16-image-0002.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/assets/posts/blogger/2014-01-16-image-0002.png" height="250" width="320" /></a></div>
+<br />
+Usually I compose the articles with <a href="http://en.wikipedia.org/wiki/WYSIWYG" target="_blank">WYSIWYG</a>
+    html editors (<a href="http://bluegriffon.org/" target="_blank">BlueGriffon</a>&nbsp;or
+    <a href="http://www.kompozer.net/" target="_blank">Kompozer</a>&nbsp;) on my
+    computer. When the article is completed, I copy the Html code and paste it
+    on the Blogger's editor and then publish it. That is probably the reason I
+    didn't notice the feature of Blogger's editor.<br />
+<br />
+I also use a simple function with JavaScript to summarise the "<span style="font-weight: bold;">jump
+      broken</span>" post content and display the first image of the post. It
+    gives me power to control the summary of the post body. So how do I do it?<br />
+<br />
+First of all, you need to <a href="https://support.google.com/blogger/answer/46870?hl=en" target="_blank">edit
+      the Html code</a> of your template. If you don't feel confident to do
+    this, but you are willing to try. You should <a href="https://support.google.com/blogger/answer/97416?hl=en" target="_top">backup</a>
+    your template before changing anything in your template.<br />
+<h6>
+Step 1:</h6>
+<ol>
+<li>When you are in the <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiMAnJTncTXReApDQWQ8y_i6xW1GFkr4-bncF2WPnVQcIQlwphYLGXPRIE7ss2zxiIe9uehbys4D9unWhckUaVUPfZeR-Divpw-nqVnw2_Md17fOoW3Nu1yqBQSiLM25H_PJpv8AM3T10Gc/s1600/post-image-02.png" target="_blank">template
+          Html editor</a>, focus your cursor in the code area. </li>
+<li>Press <span style="font-weight: bold;">Ctrl + F</span> or <span style="font-weight: bold;">Command
+          + F</span> if you are using OSX. This should bring up a little search
+        box at <span style="font-style: italic; font-weight: bold;">right top</span>
+        of the editor. </li>
+<li>Type <span style="color: red;">&lt;/head&gt;</span> in the search box
+        and press <span style="font-style: italic; font-weight: bold;">enter</span>,
+        the editor should bring you to that part of the code and highlight it. </li>
+<li>Now you <span style="font-weight: bold;">copy</span> the code below
+        and <span style="font-weight: bold;">paste</span> it above the <span style="color: red;">&lt;/head&gt;</span>
+        tag.</li>
+</ol>
+<pre class="brush:js; highlight: [1]">    &lt;script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'/&gt;
+    &lt;script language='javascript'&gt;
+     (function($){
+        /**
+         * Summarise the post content
+         */
+        $.fn.summariseContent = function(id, url){
+          var summary_noimg = 650;
+          var summary_img = 450;
+          var img_thumb_height = 150;
+          var img_thumb_width = 200;
+          var block = $("#"+id);
+          var imgtag = "";
+          var imgs = block.find('img');
+          var len = summary_noimg;
+          if(imgs.length&gt;=1) { 
+            imgtag = '&lt;span style="float: left; padding: 0px 10px 5px 0px;"&gt;' + 
+                     '&lt;a href="' + url + '"&gt;' +
+                     '&lt;img src="'+imgs[0].src+'" style="background:#fff;padding:3px;border:1px solid #eee;width:'+img_thumb_width+'px;height:'+img_thumb_height+'px;" /&gt;'+
+                     '&lt;/a&gt;' +
+                     '&lt;/span&gt;';
+            len = summary_img;
+          };
+          var text = block.text().substring(0, len);
+          var summary = imgtag + '&lt;div&gt;' + $.trim(text) + ' [...]&lt;/div&gt;';
+          block.html(summary);    
+        };
+      })(jQuery);
+      &lt;/script&gt;
+    </pre>
+<h6>
+ Step 2:</h6>
+This step is pretty difficult since each template places the post body at
+    different places of the code. Sometimes it appears at the part for mobile
+    layout. You will need to test and find out where the actual post body (<span style="font-weight: bold;">&lt;data:post.body/&gt;</span>)
+    located. Normally it should appears one or two times when you search the key
+    word "<span style="color: red; font-weight: bold;">expr:id='&amp;quot;post-body-&amp;quot;
+      + data:post.id</span>". Once you have found it, then place the code below
+    after <span style="font-weight: bold;">&lt;/div&gt;</span> tag where "<span style="color: red; font-weight: bold;">expr:id='&amp;quot;post-body-&amp;quot;
+      + data:post.id</span>" belongs to. And then replace "<span style="color: #000066; font-weight: bold;">expr:id='&amp;quot;<span style="color: red;">post-body</span>-&amp;quot;
+      + data:post.id</span>" to "<span style="color: #000066; font-weight: bold;">expr:id='&amp;quot;<span style="color: red;">summary</span>-&amp;quot;
+      + data:post.id</span>" to make it unique.<br />
+<br />
+<pre class="brush:js; highlight: [2]"> 
+      &lt;script type='text/javascript'&gt;
+        $().summariseContent(&amp;quote;summary-&lt;data:post.id/&gt;&amp;quote;,&amp;quote;&lt;data:post.url/&gt;&amp;quote;);
+      &lt;/script&gt;
+    </pre>
+<br />
+This is my version which may give you a idea how it should look like. <br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2014-01-16-image-0002.png" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" src="/assets/posts/blogger/2014-01-16-image-0002.png" height="124" width="320" /></a></div>
+<br />
+When the code is placed, then save the template and reload your home page of
+    your blog. Remember that you may need to test few more times until you find
+    the right <span style="font-weight: bold;">&lt;data:post.body/&gt;</span>
+    you want. <br />
+<br />
+I uses the summarise function and jump break together. The jump break
+    feature cuts down the size of post body at home, searchs and categories
+    pages. The summarise function helps me to reorganise it. I just need to be
+    sure that first image falls before the jump break point in order to display
+    it on each summarised post. <br />
+<br />
+If you enjoy this article, please leave a like or a plus and let me know
+    your thoughts in the comments.

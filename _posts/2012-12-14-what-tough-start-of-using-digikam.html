@@ -1,0 +1,66 @@
+---
+layout: post
+title: What a tough start of using digikam!!
+date: '2012-12-14T04:58:00.000+01:00'
+author: Elvis Hsu
+tags:
+- MySQL
+- Tips
+modified_time: '2014-01-26T13:20:30.079+01:00'
+thumbnail: /assets/posts/blogger/2012-12-14-image-0000.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-8507116606870822027
+blogger_orig_url: https://www.elvishsu.com/2012/12/what-tough-start-of-using-digikam.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2012-12-14-image-0000.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/assets/posts/blogger/2012-12-14-image-0000.png" /></a></div>
+Yesterday, I was trying to install digikam on my Macbook Pro and I just followed the instruction to install.
+<br />
+<br />
+Well, it was not that easy to install digikam on Mac. Anyway, here is the story:<br />
+<br />
+I went to "<a href="http://www.macports.org/install.php" target="_blank">Macports</a>" to download the package to install the Macports and when Macports is installed then I type<br />
+<br />
+<span style="color: #990000; font-family: Courier New, Courier, monospace;"># sudo port install digikam</span><br />
+<br />
+to install the digikam and its dependencies (<a href="http://www.digikam.org/download?q=download/binary/">http://www.digikam.org/download?q=download/binary/</a>).<br />
+As per instruction, it mentioned about "<i>be prepared to wait hours for the compilation of digiKam and all its dependencies</i>", so I was waiting and waiting for the installation to complete.<br />
+<br />
+It took about an hour to complete and I was excited to open the application via Launchpad/MacPorts (Other)/digikam.app. Ooops, it throws an error:<br />
+<br />
+<span style="color: #990000;"><b>"</b><span style="font-family: Courier New, Courier, monospace;">Run-time Qt4 SQLite or MySQL database plugin is not available - please install it. <br />Database plugins installed on your computer are listed below:   <br />QSQLITE3</span><b>"</b></span><br />
+<br />
+I googled and googled again and found a quick solution here by running:<br />
+<br />
+<span style="color: #990000; font-family: Courier New, Courier, monospace;"># sudo port install qt4-mac-mysql5-plugin</span><br />
+<br />
+The previous message didn't show up again but another message came up:<br />
+<br />
+<span style="color: #990000;"><b>"</b><span style="font-family: Courier New, Courier, monospace;">error while opening the database.<br /> digikam will try to automatically reconnect to the database</span><b>"</b></span><br />
+<br />
+<br />
+<a name='more'></a>Well, so I kept googling and googling again and found out a way to run it via terminal<br />
+<br />
+<span style="color: #990000; font-family: Courier New, Courier, monospace;"># /Applications/MacPorts/KED4/digikam.app/Contents/MacOS/digikam</span><br />
+<div>
+<span style="color: #990000;"><b><br /></b></span>and I got these messages<br />
+<br />
+<span style="color: #990000; font-family: Courier New, Courier, monospace;">digikam(1099): set session bus address to "unix:path=/tmp/launch-WpzWml/unix_domain_listener"digikam(1099)/KSharedDataCache ensureFileAllocated: This system misses support for posix_fallocate() -- ensure this partition has room for at least 10547296 bytes. QSqlDatabase: QSQLITE driver not loadedQSqlDatabase: available drivers: QSQLITE3 QMYSQL3 QMYSQLdigikam(1099)/digikam (core): Error while opening the database. Error details [ QSqlError(-1, "Driver not loaded", "Driver not loaded") ]</span><br />
+<div>
+<br /></div>
+<div>
+Because digikam needs two databases for SQLite to operate (digikam4.db and thumbnails-digikam.db) and I have tries all sort of methods to find or create these two files. Sadly, none of them worked. But hang on a minute... "<span style="color: red; font-family: Courier New, Courier, monospace;">QSQLITE driver not loaded</span>" is a heads up, so I searched on google again, then I assumed the SQLite plugin for MacPorts might not be installed. So I started to tried calling<br />
+<br />
+<span style="color: #990000; font-family: Courier New, Courier, monospace;"># sudo port install qt4-mac-sqlite3-plugin</span><br />
+<br />
+and then start the digikam again... Cha-Ching!! The digikam started up smoothly.... Yahoo~~<br />
+<br />
+<br />
+Hope someone has same issue as mine can be resolved via my experience.<br />
+<br />
+=======================================================================<br />
+<br />
+PS: if you want to reset the settings of digikam, you can try the following commands (source)<br />
+<br />
+<span style="color: #990000; font-family: Courier New, Courier, monospace;">killall -9 digikam<br />rm -rf $(kde4-config --localprefix)/share/config/digi*<br />rm -rf $(kde4-config --localprefix)/share/apps/digi*/<br />rm -rf /var/tmp/kdecache-$(id -un)/digi*<br />rm -rf /tmp/ksocket-$(id -un)/digi*<br />rm -rf /tmp/kde-$(id -un)/digi*<br />kbuildsycoca4 --noincremental</span></div>
+</div>

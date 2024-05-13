@@ -1,0 +1,103 @@
+---
+layout: post
+title: Sync device Date/Time with http web server
+date: '2011-04-19T04:37:00.000+02:00'
+author: Elvis Hsu
+tags:
+- Coding
+- C#
+- NETCF
+- Windows Mobile
+modified_time: '2014-01-26T13:18:09.257+01:00'
+thumbnail: /assets/posts/blogger/2011-04-19-image-0000.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-4807723490149539930
+blogger_orig_url: https://www.elvishsu.com/2011/04/sync-device-datetime-with-http-web.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEibazTKR8ZYUt5UIuSbBVLrJAW5lv0lL1X5IXoHR-blVCJRO0XJT3H6C9-yLITJM80sWkgn2gmvCCJJaN3ZIAZMLXvHM7oDwUNo8HhP6Zg5RMhgSbJeAeYp46Ivj9jxuNK8mbTnf6bFPM8/s1600/activesync-logo.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="150" src="/assets/posts/blogger/2011-04-19-image-0000.png" width="200" /></a></div>
+Well, this is long way back when I was a rookie to develop Windows Mobile applications with C#.<br />
+I believe there are some people want to sync the device date/time with their web server as the device date/time somehow doesn't tick correctly after certain days. So first of all, you should have a look the <a href="http://msdn.microsoft.com/en-us/library/ms724942(v=vs.85).aspx">SetSystemTime</a> function as you need a <a href="http://msdn.microsoft.com/en-us/library/ms724950(v=vs.85).aspx">SYSTEMTIME</a> structure to pass the value to SetSystemTime function.<br />
+<br />
+We start to P/Invoke the SetSystemTime method.<br />
+<br />
+<pre class="brush:csharp" name="code">[DllImport("coredll.dll", SetLastError = true)]
+private static extern bool SetSystemTime(ref SYSTEMTIME time);
+</pre>
+<br />
+Create the SYSTEMTIME structure.<br />
+<br />
+<pre class="brush:csharp" name="code">public struct SYSTEMTIME
+{
+     public short year;
+     public short month;
+     public short dayOfWeek;
+     public short day;
+     public short hour;
+     public short minute;
+     public short second;
+     public short milliseconds;
+}
+</pre>
+<br />
+Create a simple function to convert <a href="http://msdn.microsoft.com/en-us/library/system.datetime.aspx">DateTime</a> to <a href="http://msdn.microsoft.com/en-us/library/ms724950(v=vs.85).aspx">SYSTEMTIME</a> and also calls the <a href="http://msdn.microsoft.com/en-us/library/ms724942(v=vs.85).aspx">SetSystemTime</a> function.<br />
+<br />
+<pre class="brush:csharp" name="code">public void SetSystemDateTime(DateTime time)
+{
+    SYSTEMTIME s = new SYSTEMTIME();
+     s.Year = (short)time.Year;
+     s.Month = (short)time.Month;
+     s.DayOfWeek = (short)time.DayOfWeek;
+     s.Day = (short)time.Day;
+     s.Hour = (short)time.Hour;
+     s.Minute = (short)time.Minute;
+     s.Second = (short)time.Second;
+     s.Milliseconds = (short)time.Millisecond;
+     SetSystemTime(ref s);
+}
+</pre>
+<br />
+As most http web pages contains "<a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields">Date</a>" part of the document header and the "<a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields">Date</a>" part usually is the server time. So we gets the date/time and sync with our device. We use <a href="http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.aspx">HttpWebRequest</a> and <a href="http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.aspx">HttpWebResponse</a> to get the web page header.<br />
+<br />
+<pre class="brush:csharp" name="code">public bool SyncDateTime(string url)
+{
+    HttpWebRequest myRequest = null;
+    HttpWebResponse myResponse = null;
+    try
+    {
+        //create a HTTP request of the file and capture the response
+        myRequest = (HttpWebRequest)WebRequest.Create(url);
+        myRequest.Accept = "*/*";
+        myRequest.KeepAlive = false;
+
+        // Assign the response object of 'HttpWebRequest' to a 'HttpWebResponse' variable.          
+        myResponse = (HttpWebResponse)myRequest.GetResponse();
+
+        if (myResponse != null)
+        {
+            if (myResponse.Headers["Date"] != null)
+            {
+                DateTime dt = DateTime.Parse(myResponse.Headers["Date"], CultureInfo.CurrentCulture);
+                // Sets the parsed time to device.
+                SetSystemDateTime(dt.ToUniversalTime());
+                return true;
+            }
+        }
+    }
+    finally
+    {
+        // Releases the resources of the response.
+        if (myResponse != null)
+            myResponse.Close();
+
+        myRequest = null;
+        myResponse = null;
+    }
+    return false;
+}
+</pre>
+<br />
+Above method has few millisecond or event seconds inaccuracy as we doesn't calculate the time difference from request to response. However, it is quite good enough for many customers. Ha... I am lazy again...

@@ -287,18 +287,12 @@
       padding: .5em;
 
       .post-thumbnail {
-        position: relative;
         border-radius: 5px;
         border: 1px solid darken($background-color, 5%);
         overflow: hidden;
-        display: inline-flex;
-
-        a {
-          position: relative;
-        }
+        text-align: center;
 
         img {
-          position: relative;
           aspect-ratio: 3/2;
           width: 100%;
           height: 100%; 
@@ -389,11 +383,13 @@
   @include relative-font-size(1.3);
 }
 
+
 .post-date {
   font-size: 90%;
 }
 
-.post {
+
+.post-body {
   padding: $spacing-unit / 4 $spacing-unit;
 
   @include media-query($on-mobile) {
@@ -532,6 +528,7 @@
   }
 }
 
+
 .search {
   &[hidden="true"] { 
     display: none 
@@ -544,7 +541,7 @@
   left:0;
   width: 100vw;
   height: 100vh;
-  background:rgba(255,255,255,0.95);
+  background:rgba(255,255,255,0.98);
   text-align: left;
   
   display: flex;

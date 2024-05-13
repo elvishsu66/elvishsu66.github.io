@@ -1,7 +1,9 @@
 ---
 layout: post
 title: Sed porttitor dapibus odio quis congue
-tags: [architecture, coding]
+tags: 
+- Architecture
+- Coding
 image: /assets/posts/bg-shell-from-beach.jpg
 ---
 

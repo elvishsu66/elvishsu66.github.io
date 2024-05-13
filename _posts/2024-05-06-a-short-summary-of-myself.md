@@ -2,7 +2,8 @@
 layout: post
 title: A short summary of myself
 description: The journey is the reward
-tags: [thoughts]
+tags: 
+- Thoughts
 image: /assets/posts/bg-a-brand-new-start.jpg
 ---
 
@@ -24,7 +25,7 @@ As I progressed to the role of head of desktop development, my focus shifted fro
 
 ## Advanced Leadership Roles: Chief Architect & Director of Engineering
 
-In my subsequent roles as Chief Architect and Director of Engineering, I embraced greater challenges and responsibilities. Steering the architectural direction of software solutions at a corporate level as Chief Architect, I integrated cutting-edge technologies, enhancing system reliability, and ensured scalability. Transitioning to Director of Engineering, I expanded my influence, overseeing multiple engineering teams, guiding complex software development cycles, and ensuring alignment with our strategic business objectives. My leadership style fostered an environment of innovation, collaboration, and excellence, encouraging my teams to push technical boundaries and deliver exceptional results.
+In my subsequent roles as [Chief Architect](https://www.linkedin.com/company/numeus) and [Director of Engineering](https://www.linkedin.com/company/forteus/), I embraced greater challenges and responsibilities. Steering the architectural direction of software solutions at a corporate level as Chief Architect, I integrated cutting-edge technologies, enhancing system reliability, and ensured scalability. Transitioning to Director of Engineering, I expanded my influence, overseeing multiple engineering teams, guiding complex software development cycles, and ensuring alignment with our strategic business objectives. My leadership style fostered an environment of innovation, collaboration, and excellence, encouraging my teams to push technical boundaries and deliver exceptional results.
 
 ## Technical Skills and Specialisations
 

@@ -4,6 +4,7 @@ title: Coding, thoughts, technology and ideas.
 image: /assets/posts/bg-technology-network.png
 description: Don’t limit yourself. Many people limit themselves to what they think they can do. You can go as far as your mind lets you. What you believe, remember, you can achieve.
 ---
+
 <div class="post-list">
     {%- for post in paginator.posts -%}
     <div class="post-item" itemscope itemtype="http://schema.org/BlogPosting">
@@ -12,6 +13,8 @@ description: Don’t limit yourself. Many people limit themselves to what they t
                 <a href="{{ post.url | relative_url }}" title="{{ post.title }}">
                     {%- if post.image -%}
                     <img class="lazy" data-src="{{ post.image }}" alt="{{ post.title }}" itemprop="image"/>
+                    {%- elsif post.thumbnail -%}
+                    <img class="lazy" data-src="{{ post.thumbnail }}" alt="{{ post.title }}" itemprop="image"/>
                     {%- else -%}
                     <img class="lazy" data-src="/assets/images/bg-blogging.png" alt="{{ post.title }}" itemprop="image"/>
                     {%- endif -%}

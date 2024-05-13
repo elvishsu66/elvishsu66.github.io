@@ -1,0 +1,168 @@
+---
+layout: post
+title: Dynamic GridPanel for ExtJs 4
+date: '2011-05-22T11:37:00.000+02:00'
+author: Elvis Hsu
+tags:
+- ExtJs
+- Coding
+- Javascript
+modified_time: '2014-01-26T13:25:14.943+01:00'
+thumbnail: /assets/posts/blogger/2011-05-22-image-0000.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-3456680246917243256
+blogger_orig_url: https://www.elvishsu.com/2011/05/dynamic-gridpanel-for-extjs-4.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgKTv2j7b3Hq0tJM1iN7KG9EyAir5esZ_LDRPRGPTEflNPxIElzDOl6Ioo_SfkER98wFVPXDwNWQpcLnmSlU1kDYvqTBmE68tlLvSZa8oVK9r0lzDqdG7k3u5UIdgUSPJ89gVhyhC_imDo/s1600/Grid.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img alt="Dynamic GridPanel for ExtJs 4" border="0" src="/assets/posts/blogger/2011-05-22-image-0000.png" height="115" title="Dynamic GridPanel for ExtJs 4" width="200" /></a></div>
+Recently, I was trying to update our internal system from ExtJs 3 to version 4. Well, I think many V3 plugins are needed to be updated. So I was a bit busy on that... Anyway, I am going to share a bit of code which is the dynamic grid for ExtJs 4. As the sample from <a href="http://erhanabay.com/2009/01/29/dynamic-grid-panel-for-ext-js/">Erhan Abay</a> is for ExtJs 3, so I made a few changes for ExtJs 4.<br />
+<br />
+<br />
+<pre class="brush:js" name="code">/**
+* Ext.ux.grid.DynamicGridPanel
+*/
+Ext.define('Ext.ux.grid.DynamicGridPanel', {
+    extend: 'Ext.grid.GridPanel',
+    alias: 'widget.dynamicgrid',
+    /**
+    * initialising the components
+    */
+    initComponent: function(){
+        /**
+        * set the config we want
+        */
+        var config = {
+            columns:[],
+            rowNumberer: false
+        };
+        
+        // appy to this config
+        Ext.apply(this, config);
+        // apply to the initialConfig
+        Ext.apply(this.initialConfig, config);
+        // call the arguments
+        this.callParent(arguments);
+    },
+    /**
+    * When the store is loading then reconfigure the column model of the grid
+    */
+    storeLoad: function()
+    {
+        /**
+        * JSON data returned from server has the column definitions
+        */
+        if(typeof(this.store.proxy.reader.jsonData.columns) === 'object') {
+            var columns = [];
+            /**
+            * adding RowNumberer as we need to add them 
+            * before other columns to display first
+            */
+            if(this.rowNumberer) { columns.push(Ext.create('Ext.grid.RowNumberer')); }
+            /**
+            * assign new columns from the json data columns
+            */
+            Ext.each(this.store.proxy.reader.jsonData.columns, function(column){
+                columns.push(column);
+            });
+            /**
+            *  reconfigure the column model of the grid
+            */
+            this.reconfigure(this.store, columns);
+        }
+    },
+    /**
+    * assign the event to itself when the object is initialising
+    */
+    onRender: function(ct, position){
+            /**
+            *  well, old fashion way, but works well.
+            */
+            Ext.ux.grid.DynamicGridPanel.superclass.onRender.call(this, ct, position);
+            /**
+            * hook the store load event to our function
+            */
+            this.store.on('load', this.storeLoad, this);
+    }
+});
+</pre>
+<br />
+<b>Client Side Example</b>: (Tested on ExtJs 4.0.7 and 4.1.1)<br />
+<pre class="brush:js" name="code">// Start loading the page        
+Ext.onReady(function(){
+    // we need to define the model but the field values will be parsed
+    // automatically since we provided fields in the metaData from server
+   Ext.define('dynamicModel', {
+     extend: 'Ext.data.Model',
+     //set the proxy
+     proxy: {
+       type: 'rest',
+       url: 'data.php' // the sample server address
+     }
+   });
+   // create a data store
+   var myStore = Ext.create('Ext.data.Store', {
+         model:'dynamicModel',
+         autoLoad:true,
+   });    
+   // create dynamic grid
+   var myGrid = {
+       title:'Dynamic Grid',
+       xtype:'dynamicgrid',
+       forceFit:true,
+       region:'center',
+       store:myStore,
+       dockedItems: [{
+         xtype: 'pagingtoolbar',
+         store: myStore,
+         dock: 'bottom',
+         displayInfo: true
+       }]              
+   };   
+    // finally, build the main layout once all the pieces are ready.
+    Ext.create('Ext.container.Viewport', {
+        layout:'border',
+        items:[myGrid]
+    });
+});
+</pre>
+<br />
+<b>Server Side Example</b>: (<u><b><span style="color: red;">data.php</span></b></u>)<br />
+<pre class="brush:php" name="code">    
+    $total = 100;
+    // you can pre-define the required property parameters
+    $output["metaData"]["idProperty"]="id";
+    $output["metaData"]["totalProperty"]="total";
+    $output["metaData"]["successProperty"]="success";
+    $output["metaData"]["root"]="data";
+    // you can parse field values via your database schema
+    $output["metaData"]["fields"][]=array("name"=&gt;"id","type"=&gt;"int");
+    $output["metaData"]["fields"][]=array("name"=&gt;"name","type"=&gt;"string");
+    $output["metaData"]["fields"][]=array("name"=&gt;"firstName","type"=&gt;"string");
+    $output["metaData"]["fields"][]=array("name"=&gt;"lastName","type"=&gt;"string");
+    // you can parse column values via your database schema
+    $output["columns"][]=array("dataIndex"=&gt;"id","header"=&gt;"ID", "width"=&gt;10);
+    $output["columns"][]=array("dataIndex"=&gt;"name","header"=&gt;"User Name","width"=&gt;20);
+    $output["columns"][]=array("dataIndex"=&gt;"firstName","header"=&gt;"First Name");
+    $output["columns"][]=array("dataIndex"=&gt;"lastName","header"=&gt;"Last Name");
+    // the misc properties
+    $output["total"]=$total;
+    $output["success"]=true;
+    $output["message"]="success";
+    // parse pages     
+    $start = $_GET['start'] + 1;
+    $max = $_GET['start'] + $_GET['limit'];
+    // make sample data
+    for($i = $start; $i &lt;= $max; $i++ ){
+     $output["data"][]= array(
+                    "id"=&gt;$i,
+                    "name"=&gt;"UserName-". $i,
+                    "firstName"=&gt;"My First Name No. ". $i,
+                    "lastName"=&gt;"My Last Name No. ". $i);
+    }    
+    // output the value
+    echo json_encode($output);
+</pre>
