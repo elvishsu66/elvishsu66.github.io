@@ -31,7 +31,7 @@ description: Don’t limit yourself. Many people limit themselves to what they t
                             <span itemprop="url" hidden>{{ site.author.url }}</span>
                         </a>
                     </div>
-                    <time class="item dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+                    <time class="item post-date dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
                         {{ post.date | date: site.date_format }}
                     </time>
                 </div>

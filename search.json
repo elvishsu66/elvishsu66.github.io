@@ -5,6 +5,7 @@
   {
     "title"       : "{{ post.title | escape }}",
     "description" : "{{ post.description | strip_html | strip_newlines | escape }}",
+    "content"     : "{{ post.content | markdownify | strip_html | truncatewords: 25 }}",
     "url"         : "{{ site.baseurl }}{{ post.url }}",
     "image"       : "{{ post.image }}",
     "tags"        : "{{ post.tags | join: ', ' }}",

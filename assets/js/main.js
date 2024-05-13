@@ -3,6 +3,7 @@ function showSearch(show) {
     var input = document.getElementById('search-input');
     if(show) {
       input.focus();
+      document.getElementById("side-menu").checked = false;
     } else {
       input.value= "";
     }
