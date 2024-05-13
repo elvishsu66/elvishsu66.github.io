@@ -2,7 +2,7 @@
 <div class="search" id="search" hidden="true">
     <div class="search-wrapper">
         <div id="search-container" class="search-container">
-            <input type="text" id="search-input" placeholder="Type to search...">
+            <input type="text" id="search-input" autocomplete="false" placeholder="Type to search...">
             <button id="search-close" class="fa fa-close" onclick="showSearch(false)"></button> 
         </div>
         <div id="results-container" class="post-list results-container"></div>
@@ -24,6 +24,7 @@ SimpleJekyllSearch({
             '<div class="content">'+ 
                 '<div class="result-date">{date}</div>' + 
                 '<div class="post-link"><a href="{url}">{title}</a></div>' +
+                '<div>{description}</div>' +
             '</div>' + 
         '</div>' + 
     '</div>',
