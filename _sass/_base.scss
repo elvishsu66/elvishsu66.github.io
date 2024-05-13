@@ -89,7 +89,7 @@ a {
 
 hr {
   border-top: 1px solid $link-base-color;
-  margin: $spacing-unit;
+  margin: $spacing-unit $spacing-unit / 2;
 }
 
 blockquote {

@@ -6,13 +6,19 @@ $colors: (
     "green": #a4bf9e
 );
 
+.home-content {
+  p {
+    padding: 0 1em;
+  }
+}
 
 .skill-list {
     display: flex;
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
-  
+    justify-content: space-between;
+
     .skill-item {
       padding: 1em;
       box-sizing: border-box;
