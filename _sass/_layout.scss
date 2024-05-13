@@ -276,17 +276,17 @@
   flex-wrap: wrap;
   row-gap: $spacing-unit;
 
-  .item {
+  .post-item {
     flex: 0 0 33.3333%;
     display: flex;
     flex-direction: column;
-    .wrapper {
+    .post-wrapper {
       flex: 1;
       display: flex;
       flex-direction: column;
       padding: .5em;
 
-      .thumbnail {
+      .post-thumbnail {
         border-radius: 5px;
         border: 1px solid darken($background-color, 5%);
         overflow: hidden;
@@ -308,15 +308,15 @@
         margin-top: 1em;
       }
 
-      .content {
+      .post-content {
         flex: 1;
         color: lighten($theme-color, 40%)
       }
 
-      .categories, .tags {
+      .post-categories, .post-tags {
         margin-top: $spacing-unit / 2;
         display: flex;
-        .category, .tag {
+        .post-category, .post-tag {
           flex: 0 0 auto;
           padding: 0 5px;
           margin: 0 5px;
@@ -532,67 +532,54 @@
   width: 100vw;
   height: 100vh;
   background:rgba(255,255,255,0.95);
+  text-align: left;
   
   display: flex;
   justify-content: center;
 
-  .container {
+  .search-wrapper {
     position: relative;
     padding: $spacing-unit;
     max-height: 100%;
-
-    .fa-close {
-      float: right;
-      cursor: pointer;
-    }
-
-    input[type='text'] {
-      padding: .8em 1em .5em .1em;
-      border: 0;
-      border-bottom: 3px solid $theme-color;
-      background-color: transparent;
-      width: 100%;
-      @include relative-font-size(1.5);
-    }
+    max-width: $content-width;
+    width: 100%;
+    overflow: auto;
 
     .search-container {
       max-height: 100%;
       display: flex;
-      flex-direction: column;
+
+      input, button {
+        border: none;
+        border-bottom: 3px solid $theme-color;
+        background: transparent;
+        @include relative-font-size(1.5);
+      }
+
+      button {
+        cursor: pointer;
+      }
+  
+      input[type='text'] {
+        flex: 1;
+        padding: .8em 1em .5em .1em;
+      }
+    }
+    
+    .post-thumbnail {
+      img {
+        transition: transform .5s;
+      }
     }
 
-    .results-container {
-      flex: 1 1 auto;
+    .post-list {
       overflow: auto;
-      .result {
-        a {
-          color: $theme-color;
-          padding: .5em;
-          display: flex;
-          .date {
-            @include relative-font-size(.9);
-            text-decoration: none !important;
-          }
-          .title {
-            flex: 1 1 auto;
-            color: $link-base-color;
-          }
-          img {
-            display: inline-block;
-            max-width: 80px;
-            margin-right: 1em;
-            border-radius: 5px;
-          }
-        }
-      }
     }
 
     @include media-query($on-mobile) {
+      width: 100%;
       margin: $spacing-unit / 2;
       padding: $spacing-unit / 2;
-      input[type='text'] {
-        @include relative-font-size(1);
-      }
     }
   }
 }

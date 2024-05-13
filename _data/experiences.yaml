@@ -1,72 +1,134 @@
-- role: Chief Architect
+- role: Chief Architect & Director of Engineering
   company: Numeus Group
   location: Zug, Switzerland
-  tenure: 09/2021 - 05/2024
+  started: 09/2021
+  ended: 05/2024
+  website: https://numeus.xyz
+  stacks:
+    - Rust
+    - C++
+    - Python
+    - ReactJs 
+    - NodeJs
+    - Redis 
+    - Airflow 
+    - Ray
+    - Dask
+    - Prefect 
+    - Karpenter ,
+    - TimescaleDB 
+    - PostgreSQL
+    - Terraform 
+    - FluxCD
+    - Prometheus
+    - Grafana
+    - Kubernetes
+    - AWS, GCP
+    - GitHub
   content:
-    - Designed and managed technical strategy and blueprint of cloud-native operations
-    - Designed and developed the global distributed high-frequency crypto trading systems
-    - Designed and implemented the automated cloud infrastructure platforms
-    - Implemented preventative measures and manage cyber risks
-    - Focused on continuous detection and response to ensure DevSecOps principles are intact
-    - Ensured the organisation follows engineering and architecture best practices 
-    - Managed and fostered collaboration among dynamic Engineering and Research teams
-    - Technologies - Rust, C++, Python, ReactJs, NodeJs, Redis, Airflow, Ray, Dask, Prefect, Karpenter, 
-              TimescaleDB, PostgreSQL, Terraform, FluxCD, Prometheus, Grafana, Loki, Kubernetes, AWS, GCP
+    - Designing and managing technical strategy and blueprint of cloud operations
+    - Designing and developing global distributed high-frequency crypto trading systems
+    - Designing and implementing the automated cloud infrastructure platforms
+    - Implementing preventative measures and managing cyber risks
+    - Prioritising enhancing detection and response mechanisms to uphold DevSecOps principles consistently
+    - Ensuring the organisation follows engineering and architecture best practices
+    - Managing and fostering collaboration among Engineering and Research teams
+  achievements:
+    - Yielding remarkable results in <strong>3 months</strong> by orchestrating swift cloud infrastructure implementation for trading and research
+    - Reduced operation cost by <strong>25%</strong> by spearheading design and implementation of automated cloud infrastructure platforms
+    - Achieved outstanding <strong>5 stars</strong> security assessment result in implementing comprehensive cyber risk management protocols
+    - Improved efficiency by <strong>65%</strong> through upholding and fortifying engineering and architecture best practices organisation wide
+    - Established <strong>two digital assets funds</strong>, enhancing their performance
+    - Guided design and development of HFT crypto trading systems across diverse regions with <strong>~ $25k</strong> monthly operation cost
+
 - role: Chief Architect
   company: Covario AG
   location: Zug, Switzerland
-  tenure: 05/2020 - 08/2021
+  started: 05/2020
+  ended: 08/2021
+  stacks:
+    - ASP.NET
+    - Akka.NET
+    - GRPC
+    - SignalR
+    - Entity Framework Core
+    - RepoDb
+    - ReactJS
+    - Kafka
+    - Protobuf-net
+    - Kubernetes 
+    - Azure, AWS
+    - GitLab
   content:
-    - Defined and managed the technical strategy and blueprint of Covario's state-of-the-art platform
-    - Architected an enterprise solution for high availability, data protection and disaster recovery mission-critical computing services, on-premises and with multiple cloud vendors
-    - Designed and developed the global distributed high-frequency and ultra-low latency digital assets trading systems
-    - Designed and developed automated digital asset trades clearing and settlement engine
-    - Ensured the consistent of engineering practice, quality assurance and software development process
-    - Led, mentored, supported and coordinated with engineering teams around the world
-    - Laugh, enjoy and complain about things we don't like and transform them into what we love
-    - Technologies - ASP.NET, Akka.NET, GRPC, SignalR, Entity Framework Core, RepoDb, ReactJS, Kafka, Protobuf-net, Kubernetes, Docker, Azure, AWS, GitLab
+    - Led, mentored, supported, and coordinated a team of 15 engineering members
+    - Defined and supervised the firm’s technical strategy and platform blueprint
+    - Architected enterprise solutions for high availability and data protection across on-premises and multiple cloud vendors
+    - Ensured consistency in engineering practices, quality assurance, and software development processes
+  achievements:
+    - Established greenfield Crypto Brokerage Systems within a <strong>6-month</strong> timeline with an initial team of 3 members
+    - Completed the OTC trading platform from UI to backbone within 6 months with <strong>5 collaborative OTC venues</strong>
+    - Reduced operation cost by <strong> ~ 25% within 3 months</strong> through developing automated digital asset trade clearing and settlement engines
+
 - role: Solution Architect
   company: EF Education First
   location: Zurich, Switzerland
-  tenure: 07/2019 - 05/2010
-  content:
-    - Designed, developed, and tested the complete architecture of EF's core commerce system, an in-house built leading-edge SaaS solution leveraging Amazon web services with high availability architecture and utilised the leading-edge technologies
-    - Containerised multiple legacy software services into the enterprise-grade cloud-native environment
-    - Defined IT architecture strategies and technical roadmap with industrial-proven best practices
-    - Led, coached and mentored the Software and DevOps engineering teams in-house and offshore
+  started: 07/2019
+  ended: 05/2010
+  website: https://ef.com
+  stacks:
     - Languages - C#, PostgreSQL, MySQL, T-SQL, Powershell, Python, TypeScript, JavaScript, Sass, Shell, Groovy
     - Technologies - ASP.NET Core, ReactJs, Redux, PostgreSQL, MySQL, MSSQL, Redis, Kafka, Jenkins, GitHub, Docker, Kubernetes, Envoy, Prometheus, Grafana, ELK, AWS, Azure, Salesforce
+  content:
+    - Designed, developed EF’s core commerce system, a cloud-based solution utilising AWS with high availability architecture
+    - Established architecture strategies and a technical roadmap with industrial-proven best practices
+    - Led, coached, and mentored cross-functional engineering teams, comprising a total of 20 members
+  achievements:
+    - Migrated multiple legacy software services into Kubernetes within <strong>6 month</strong>
+
 - role: Principal Software Architect
   company: Argentière Capital AG
   location: Zug, Switzerland
-  tenure: 03/2017 - 06/2019
-  content:
-    - Lead architect and engineer creating solutions architecture, algorithms and designs of a proprietary enterprise solution including Trading, Risk Analysis, Operation, Finance, and Investor Relations systems
-    - Researched, evaluated and developed software applications to create and monitor the complex IT infrastructure and software applications
-    - Invented and designed state-of-the-art Microsoft Excel solution to integrate with proprietary financial systems using the microservice architecture
-    - Led and performed agile product development activities with a complete full-stack design process including a Web portal, RESTful API, database designs and security implementations across multiple teams
-    - Applied software engineering practices to analyse system test results, document risks and recommend countermeasures with the implementation of automation across all elements of solution delivery
-    - Provided guidance and guidelines of the technical development environments, developer tools, and operating systems
-    - Leveraged information servers, including data profiling, data quality, ETL and metadata by designing and architecting enterprise data integration solutions
-    - Collaborated with Portfolio and Operation Management teams to develop functional workflows and business rules
-    - Maintained and analysed financial statistical data and suggested enhancements with rich graphical UI to the trading models and strategies
-    - Ensured compliance with architecture principles and IT strategies from front to back office
+  started: 03/2017
+  ended: 06/2019
+  stacks:
     - Languages - C#, PHP, T-SQL, P/L SQL, MySQL, Powershell, Perl, Python, TypeScript, JavaScript, Sass, VBA, Shell, Groovy
     - Technologies - ASP.NET Core, NancyFx, OpenFin, Angular, RxJs, NgRx, React, Redux, Vue, Icinga2, Phabricator, GitLab, MS SQL, PostgreSQL, MySQL, Oracle, Redis, InfluxDB, RabbitMQ, Kafka, VSTO, Excel-DNA, Bloomberg, TeamCity, Jenkins, SpecFlow, Docker (Swarm), Kubernetes, Azure, AWS
+  content:
+    - Led a team of 5 in architecting and engineering a proprietary enterprise solution across multiple domains
+    - Provided strategic leadership in technical development and collaborated with management teams to establish functional workflows and business rules
+  achievements:
+    - Managed the design and operation of the trading system, overseeing operations totalling <strong>AUM $2.9bn</strong>
+    - Improved productivity by <strong>50%</strong> through designing and implementing an automated trade reconciliation system
+
+
 - role: Head of Desktop Development
   company: Leonteq Securities AG
   location: Zurich, Switzerland
-  tenure: 07/2014 - 02/2017
+  started: 07/2014
+  ended: 02/2017
+  website: https://leonteq.com
+  stacks:
+    - C#, ASP.NET
   content:
-    - Leading agile project management of Desktop Development team leveraging Scrum/Kanban methodologies and incorporating FDD, TDD, BDD, CI/CD, and other XP Programming practices
-    - Leading and coaching product engineering of enterprise platform and APIs across .NET teams
-    - Managing implementation of tools and processes for Change Management activities, including Continuous Integration for enterprise systems
-    - Business clients - Trading, Structuring, Treasury, Sales & Quantitative Analytics 
-    - Specialised in derivatives and structured products (Single Stocks, Indices & FICC)
+    - Directed projects with a team of 4, employing Agile methodologies and adhering to software engineering best practices
+    - Pioneered and led rapid developments of trading software aimed at enhancing transparency, accuracy, and efficiency
+  achievements:
+    - Orchestrated the successful modernisation of financial tools into distributed microservices within a 6-month timeframe
+    - Reduced development effort by <strong>50%</strong> through designing, enhancing, and refining proprietary APIs and libraries
+
+- role: Career Break
+  company: elvishsu.com
+  location: Southeast Asia, Switzerlnad
+  started: 05/2013
+  ended: 07/2014
+  break: true
+
 - role: Senior Software Engineer
   company: Barcode Dynamics
   location: Brisbane, Australia
-  tenure: 11/2006 - 04/2013
+  started: 11/2006
+  ended: 04/2013
+  website: https://barcodedynamics.com.au
   content:
     - Ongoing ASP.NET based solution developments utilising C# and SQL server reporting
     - Lead engineer on designing and implementing enterprise software and hardware solutions
@@ -76,11 +138,21 @@
     - Coached and mentored junior engineers to enhance team force
     - Code review, bugs fixing and development of client application modules (WinForm/ASP.NET)
     - Project management, requirement management and follow-up activities
-    - Carried pre and post sales design engineering. Worked closely with customers to compile requirements and designed specific customisations to meet client needs
+    - Carried pre and post sales design engineering. Worked closely with customers to compile design & requirements
+
+- role: Pursuing MBA & Career Break
+  company: elvishsu.com
+  location: Brisbane, Australia
+  started: 05/2005
+  ended: 10/2006
+  break: true
+
 - role: Application Engineer
   company: Taiwan Semiconductor
   location: Taipei, Taiwan
-  tenure: 09/2003 - 04/2005
+  started: 09/2003
+  ended: 04/2005
+  website: https://www.taiwansemi.com/en/
   content:
     - Developed production testing software applications (.NET C# / Borland C++)
     - Designed and deployed various custom software for partners and end users (PHP + MySQL) 

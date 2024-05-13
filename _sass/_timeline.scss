@@ -1,128 +1,147 @@
-/* Timeline Container */
 .timeline {
-    margin: ($spacing-unit / 2) auto;
-    padding: ($spacing-unit / 2);
-    ol, ul {
-        margin: 0 $spacing-unit;
-        padding: ($spacing-unit / 2);
-    }
-    li {
-        list-style-type: '► '
-    }
-
-    @include media-query($on-mobile) {
-        margin: ($spacing-unit / 4) auto;
-        padding: ($spacing-unit / 4);
-        ol, ul {
-            margin: 0 $spacing-unit / 2;
-            padding: ($spacing-unit / 4);
-        }
+    line-height: 1.4em;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    h1, h2, h3, h4, h5, h6 {
+        line-height: inherit;
+        margin-bottom: .3em;
     }
 }
 
-/* Card container */
-.card {
+.timeline-item {
+    padding-left: 40px;
     position: relative;
-    max-width: calc(#{$content-width} - (#{$spacing-unit}));
-    /* setting padding based on even or odd */
-    &:nth-child(odd) {
-        padding: $spacing-unit 0 $spacing-unit $spacing-unit;
-    }
-    &:nth-child(even) {
-        padding: $spacing-unit $spacing-unit $spacing-unit 0;
-    }
-
-    /* Global ::before */
-    &::before {
-        content: "";
-        position: absolute;
-        width: 50%;
-        border: solid $link-base-color;
-    }
-
-    /* Setting the border of top, bottom, left */
-    &:nth-child(odd)::before {
-        left: 0px;
-        top: -4.5px;
-        bottom: -4.5px;
-        border-width: 5px 0 5px 5px;
-        border-radius: 50px 0 0 50px;
-    }
-
-    /* Setting the border of top, bottom, right */
-    &:nth-child(even)::before {
-        right: 0;
-        top: 0;
-        bottom: 0;
-        border-width: 5px 5px 5px 0;
-        border-radius: 0 50px 50px 0;
-    }
-
-    /* Removing the border if it is the first card */
-    &:first-child::before {
-        border-top: 0;
-        border-top-left-radius: 0;
-    }
-
-    /* Removing the border if it is the last card  and it's odd */
-    &:last-child:nth-child(odd)::before {
-        border-bottom: 0;
-        border-bottom-left-radius: 0;
-    }
-
-    /* Removing the border if it is the last card  and it's even */
-    &:last-child:nth-child(even)::before {
-        border-bottom: 0;
-        border-bottom-right-radius: 0;
-    }
-
-
-    /* Information about the timeline */
-    .info {
-        display: flex;
-        flex-direction: column;
-        background: lighten($theme-color, 5%);
-        color: $background-color;
-        border-radius: $spacing-unit;
-        padding: 10px;
-    }
-
-    /* Title of the card */
-    .title {
-        padding: 0 $spacing-unit;
-        h2, h3 {
-            color: $link-base-color;
-            margin-bottom: .2em;
-        }
-        span {
-            @include relative-font-size(.85);
-        }
-    }
-
-    /* Timeline dot  */
-    .title::before {
-        content: "";
-        position: absolute;
-        width: $spacing-unit;
-        height: $spacing-unit;
-        background: white;
-        border-radius: 999px;
-        border: 5px solid $link-base-color;
-    }
-
-    /* text right if the card is even  */
-    &:nth-child(even) > .info > .title {
-        text-align: right;
-    }
-
-    /* setting dot to the left if the card is odd */
-    &:nth-child(odd) > .info > .title::before {
-        left: -20px;
-    }
-
-    /* setting dot to the right if the card is odd */
-    &:nth-child(even) > .info > .title::before {
-        right: -20px;
+    &:last-child {
+        padding-bottom: 0;
     }
 }
 
+.timeline-info {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin: 0 0 .5em 0;
+    text-transform: uppercase;
+    white-space: nowrap;
+    vertical-align: middle;
+}
+
+.timeline-marker {
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: 15px;
+    &:before {
+        background: $link-base-color;
+        border: 3px solid transparent;
+        border-radius: 100%;
+        content: "";
+        display: block;
+        height: 15px;
+        position: absolute;
+        top: 4px; left: 0;
+        width: 15px;
+        transition: background 0.3s ease-in-out, border 0.3s ease-in-out;
+    }
+    &:after {
+        content: "";
+        width: 3px;
+        background: #CCD5DB;
+        display: block;
+        position: absolute;
+        top: 28px; bottom: 0; left: 8px;
+    }
+    .timeline-item:last-child &:after {
+        content: none;
+    }
+}
+
+.timeline-item:not(.period):hover .timeline-marker:before {
+    background: transparent;
+    border: 3px solid $link-base-color;
+}
+
+.timeline-content {
+    padding-bottom: 40px;
+    p:last-child {
+        margin-bottom: 0;
+    }
+
+    ul, li {
+        @include relative-font-size(.9);
+    }
+    li:before {
+        content: "\f00c";
+        font-family: FontAwesome;
+        display: inline-block;
+        width: 1.5em;
+    }
+}
+
+
+.period {
+    padding: 0;
+    .timeline-info {
+        display: none;
+    }
+    .timeline-marker {
+        &:before {
+            background: transparent;
+            content: "";
+            width: 18px;
+            height: auto;
+            border: none;
+            border-radius: 0;
+            top: 0;
+            bottom: 30px;
+            position: absolute;
+            border-top: 3px solid #CCD5DB;
+            border-bottom: 3px solid #CCD5DB;
+        }
+        &:after {
+            content: "";
+            height: 32px;
+            top: auto;
+        }
+    }
+    .timeline-content {
+        padding: 40px 0 70px;
+    }
+    .timeline-title {
+        margin: 0;
+    }
+}
+
+
+.timeline-split {
+    @media (min-width: $on-mobile) {
+        .timeline {
+            display: table;
+        }
+        .timeline-item {
+            display: table-row;
+            padding: 0;
+        }
+        .timeline-info,
+        .timeline-marker,
+        .timeline-content,
+        .period .timeline-info {
+            display: table-cell;
+            vertical-align: top;
+        }
+        .timeline-marker {
+            position: relative;
+        }
+        .timeline-content {
+            padding-left: 30px;
+        }
+        .timeline-info {
+            padding-right: 30px;
+        }
+        .period .timeline-title {
+            position: relative;
+            left: -45px;
+        }
+    }
+}

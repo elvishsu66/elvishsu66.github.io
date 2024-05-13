@@ -6,9 +6,9 @@ description: Don’t limit yourself. Many people limit themselves to what they t
 ---
 <div class="post-list">
     {%- for post in paginator.posts -%}
-    <div class="item" itemscope itemtype="http://schema.org/BlogPosting">
-        <div class="wrapper">
-            <div class="thumbnail">
+    <div class="post-item" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-wrapper">
+            <div class="post-thumbnail">
                 <a href="{{ post.url | relative_url }}" title="{{ post.title }}">
                     {%- if post.image -%}
                     <img class="lazy" data-src="{{ post.image }}" alt="{{ post.title }}" itemprop="image"/>
@@ -43,13 +43,13 @@ description: Don’t limit yourself. Many people limit themselves to what they t
                 </a>
             </h3>
             
-            <div class="content" itemprop="articleBody">
+            <div class="post-content" itemprop="articleBody">
                 {{ post.content | markdownify | strip_html | truncatewords: 25 }}
             </div>
 
-            <div class="tags">
+            <div class="post-tags">
                 {%- for tag in post.tags -%}
-                <a class="tag" title="{{ tag }}" href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">
+                <a class="post-tag" title="{{ tag }}" href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">
                     {{ tag | capitalize }}
                 </a>
                 {%- endfor -%}

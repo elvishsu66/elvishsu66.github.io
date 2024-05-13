@@ -1,5 +1,11 @@
-function toggleSearch(hidden) {
-    document.getElementById('search').setAttribute('hidden', hidden);
+function showSearch(show) {
+    document.getElementById('search').setAttribute('hidden', !show);
+    var input = document.getElementById('search-input');
+    if(show) {
+      input.focus();
+    } else {
+      input.value= "";
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function() {

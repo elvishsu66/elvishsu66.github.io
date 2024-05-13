@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 $theme-color: #000000;
+$primary-color: $theme-color;
 $text-color: #111111;
 $gutter-color: #303030;
 $background-color: #ffffff;
@@ -22,7 +23,7 @@ $spacing-unit: 2em;
 // Width of the content area
 $content-width: 1300px;
 
-$on-mobile: 720px;
+$on-mobile: 768px;
 $on-tablet: 1024px;
 $on-laptop: 1900px;
 
