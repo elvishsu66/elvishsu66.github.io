@@ -7,7 +7,7 @@
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 1;
+  z-index: 100;
 
   a, nav {
     vertical-align: middle;
@@ -287,19 +287,30 @@
       padding: .5em;
 
       .post-thumbnail {
+        position: relative;
         border-radius: 5px;
         border: 1px solid darken($background-color, 5%);
         overflow: hidden;
         display: inline-flex;
+
+        a {
+          position: relative;
+        }
+
         img {
+          position: relative;
           aspect-ratio: 3/2;
           width: 100%;
           height: 100%; 
           object-fit: cover;
-          // transition: transform .5s;
+          transition: all .3s ease-in-out;
+          transform: scale(1.1);
+          z-index: 1;
+          opacity: .8;
+
           &:hover {
-            opacity: 0.8;
-            transform: scale(1.1);
+            opacity: 1;
+            transform: scale(1);
           }
         }
       }
