@@ -6,7 +6,7 @@ tags: [thoughts]
 image: /assets/posts/bg-a-brand-new-start.jpg
 ---
 
-It has been a while since I post a blog page on [Blogger](https://elvishsu66.blogspot.com) which was created back in 2013. So I took an opportunity to transform my personal site to [GitHub Pages](https://pages.github.com/) with [Jekyll framewor](https://jekyllrb.com/). The following is a short summary of myself in 2024.
+It has been a while since I post a blog page on [Blogger](https://elvishsu66.blogspot.com) which was created back in 2013. So I took an opportunity to transform my personal site to [GitHub Pages](https://pages.github.com/) with [Jekyll framework](https://jekyllrb.com/). The following is a short summary of myself in 2024.
 
 ---
 
