@@ -19,15 +19,13 @@ layout: page
                             <span itemprop="name">{{ site.author.name }}</span>
                             <span itemprop="url" hidden>{{ site.author.url }}</span>
                         </a>
-                        {%- if page.tags -%}
-                        posted in
+                        {% if page.tags %}
+                        posted in 
                         {% for tag in page.tags %}
-                        <a href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">
-                            {{ tag | capitalize }}
-                        </a>
+                        <a href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">{{ tag | capitalize }}</a>
                         {%- if forloop.last == false %}, {% endif -%}
                         {% endfor %}
-                        {%- endif -%}
+                        {% endif %}
                     </div>
                     <time class="item dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
                         {{ page.date | date: site.date_format }}

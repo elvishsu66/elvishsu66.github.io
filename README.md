@@ -1,5 +1,7 @@
-elvishsu66.github.io
+Elvis is still in the building
 ====================
+
+This is repo that hosts my personal website.
 
 ## Install
 ```bash

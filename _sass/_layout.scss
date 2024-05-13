@@ -464,6 +464,7 @@
 .pager {
   margin-top: $spacing-unit;
   justify-content: center !important;
+
   .pagination {
     display: flex;
     justify-content: center;
@@ -498,7 +499,7 @@
       a {
         padding: 8px 12px;
         display: block;
-        color: $text-color;;
+        color: $link-base-color;
         text-decoration: none;
         &:hover {
           background-color: lighten($link-base-color, 10%);
