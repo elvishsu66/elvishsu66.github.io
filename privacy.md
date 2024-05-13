@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Privacy Policy
-image: /assets/images/bg-privacy.webp
+image: /assets/images/bg-privacy.png
 ---
 
 Maintaining a firm commitment to privacy and data integrity, I prioritise transparency and responsible data management. While my main focus isn't on collecting, storing, or selling personal data, it's worth noting that this website employs certain third-party tools, each governed by its own privacy policies:
