@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A short summary of myself
+title: A short update from me
 description: The journey is the reward
 tags: 
 - Thoughts
