@@ -14,7 +14,7 @@ You can also reload this page to see other photos.
 <div id='container'><!-- Nothing here --></div>
 
 <!-- Place your script above the end of </body> -->  
-<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
 <script type='text/javascript' src='/assets/js/flickrGallery.js'></script>
 <script>
     $(document).ready(function() {
@@ -27,11 +27,10 @@ You can also reload this page to see other photos.
             loadOnScroll:true,
             cb_url: 'url_o',
             params:{
-                method:  'flickr.people.getPublicPhotos', //'flickr.photos.search',
+                method:  'flickr.people.getPublicPhotos',
 		    	api_key: 'ad2e1cc1d51162a8ee4ee4b022a711f4',
 		    	user_id: '91190543@N02',
                 api_key: 'ad2e1cc1d51162a8ee4ee4b022a711f4',
-                //tags: 	 'canon',
                 extras:  'url_o'
             }
         };
