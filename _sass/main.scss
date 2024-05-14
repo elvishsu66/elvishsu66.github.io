@@ -30,4 +30,10 @@ $on-laptop: 1900px;
 $on-medium: $on-mobile;
 $on-large: $on-laptop;
 
-@import "mixins", "code", "layout", "base", "timeline", "home";
+@import 
+    "mixins", 
+    "layout", 
+    "base", 
+    "timeline", 
+    "syntax", 
+    "home";

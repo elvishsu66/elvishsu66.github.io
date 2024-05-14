@@ -64,7 +64,10 @@ blogger_orig_url: https://www.elvishsu.com/2014/01/build-your-own-related-posts-
     retrieved, then we start to find and collect posts whose labels contain the
     original article's labels. Finally, we output these collected posts to the
     site. Here is the source code of this plugin.
-    <pre class="brush:js; highlight: [8,9,10,29,41,76,88,106,120,141]">(function($){
+    
+
+{% highlight js %}
+(function($){
  $.fn.relatedPosts=function(config){
   var me = this,
    blogId,
@@ -106,20 +109,20 @@ blogger_orig_url: https://www.elvishsu.com/2014/01/build-your-own-related-posts-
         // get related posts
         var posts = findRelatedPosts(data.feed.entry);
            // add section title
-           me.append($('&lt;h2/&gt;').text(settings.title));
-           var wrapper = $('&lt;div/&gt;',{'class':settings.wrapperClass});
+           me.append($('<h2/>').text(settings.title));
+           var wrapper = $('<div/>',{'class':settings.wrapperClass});
         // construct the output
-           for (var i = 0; i &lt; posts.length; i++){
+           for (var i = 0; i < posts.length; i++){
             var entry = posts[i];
             var href = getLink(entry);
             // the link
-            var link = $('&lt;a/&gt;',{'href':href});
+            var link = $('<a/>',{'href':href});
             // the thumbnail
             var thumb = findThumbnail(entry,entry.title.$t);
             // the post title
-            var pTitle = $('&lt;div/&gt;',{'class':settings.titleClass});
+            var pTitle = $('<div/>',{'class':settings.titleClass});
             // the item block
-            var div = $('&lt;div/&gt;',{'class':settings.itemClass});
+            var div = $('<div/>',{'class':settings.itemClass});
             // add thumbnail
             div.append(thumb);
                // wrap the link
@@ -133,7 +136,7 @@ blogger_orig_url: https://www.elvishsu.com/2014/01/build-your-own-related-posts-
            }
            me.append(wrapper);
            // clear the layout
-          me.append('&lt;div style="clear:both;"&gt;&lt;/div&gt;');
+          me.append('<div style="clear:both;"></div>');
        }
    });   
   }
@@ -155,7 +158,7 @@ blogger_orig_url: https://www.elvishsu.com/2014/01/build-your-own-related-posts-
    var posts = [];
    var cats = settings.labels;
 
-   for (var i = 0; i &lt; entries.length; i++){
+   for (var i = 0; i < entries.length; i++){
     if(!matchCurrentPost(entries[i])){    
      if(matchCategory(entries[i],cats)){
       posts.push(entries[i]);
@@ -172,14 +175,14 @@ blogger_orig_url: https://www.elvishsu.com/2014/01/build-your-own-related-posts-
   function findThumbnail(entry, title){
    if(settings.thumbUsePost){
     if(entry.content){
-     var div = $('&lt;div/&gt;').html(entry.content.$t);
+     var div = $('<div/>').html(entry.content.$t);
      var imgs = div.find('img');
-     if(imgs.length &gt; 0){     
-      return $('&lt;img/&gt;',{'src':imgs[0].src, 'alt': imgs[0].alt, 'title': title, 'width':settings.thumbWidth,'height':settings.thumbHeight});
+     if(imgs.length > 0){     
+      return $('<img/>',{'src':imgs[0].src, 'alt': imgs[0].alt, 'title': title, 'width':settings.thumbWidth,'height':settings.thumbHeight});
      }
     }
    }else{
-    return $('&lt;img/&gt;',{'src':entry.media$thumbnail.url,'title': title,'alt':title,'width':entry.media$thumbnail.width,'height':entry.media$thumbnail.height});
+    return $('<img/>',{'src':entry.media$thumbnail.url,'title': title,'alt':title,'width':entry.media$thumbnail.width,'height':entry.media$thumbnail.height});
    }
   }
 
@@ -206,9 +209,9 @@ blogger_orig_url: https://www.elvishsu.com/2014/01/build-your-own-related-posts-
   // find any matched category
   function matchCategory(entry, tags){
    if(entry.category){
-    for(var i = 0; i &lt; entry.category.length; i++){
+    for(var i = 0; i < entry.category.length; i++){
      var tag = entry.category[i].term;
-     if($.inArray(tag,tags) &gt;= 0){
+     if($.inArray(tag,tags) >= 0){
       return true;
      }
     }    
@@ -217,7 +220,9 @@ blogger_orig_url: https://www.elvishsu.com/2014/01/build-your-own-related-posts-
   }
  };
 })(jQuery);
-</pre> <br>
+{% endhighlight %}
+
+ <br>
     You may notice that I use the url <span style="font-weight: bold;">/feeds/posts/default</span>
     instead of <span style="font-weight: bold;">/feeds/posts/summary</span>. If
     I use summary, then I cannot extract the original images for thumbnails.
@@ -239,36 +244,42 @@ blogger_orig_url: https://www.elvishsu.com/2014/01/build-your-own-related-posts-
     Let's get started and we only need 3 steps to make it work<br>
     <h4>1. Place the code to the section you want to show the related posts</h4>
     Below is the code you need to put to the place you want to show on your page
+
+
+{% highlight js %} 
+<b:if cond='data:blog.pageType == &amp;quot;item&amp;quot;'>
+ <!-- related posts -->
+ <div id='related_posts'></div>
+ <script>var labels = &amp;#39;<b:loop values='data:post.labels' var='label'><data:label.name/><b:if cond='data:label.isLast != &amp;quot;true&amp;quot;'>,</b:if></b:loop>&amp;#39;;</script>                  
+</b:if>
+{% endhighlight %}
+
+ First you need to open your HTML template editor and search for<br>
     <br>
-    <pre class="brush:js; highlight: [1,3,8]">&lt;b:if cond='data:blog.pageType == &amp;quot;item&amp;quot;'&gt;
- &lt;!-- related posts --&gt;
- &lt;div id='related_posts'&gt;&lt;/div&gt;
- &lt;script&gt;var labels = &amp;#39;&lt;b:loop values='data:post.labels' var='label'&gt;&lt;data:label.name/&gt;&lt;b:if cond='data:label.isLast != &amp;quot;true&amp;quot;'&gt;,&lt;/b:if&gt;&lt;/b:loop&gt;&amp;#39;;&lt;/script&gt;                  
-&lt;/b:if&gt;
-</pre> First you need to open your HTML template editor and search for<br>
-    <br>
-    <span style="font-family: Courier New,Courier,monospace;">&lt;div
-      class='post-footer'&gt;</span><br>
+    <span style="font-family: Courier New,Courier,monospace;"><div
+      class='post-footer'></span><br>
     <br>
     if you cannot find above, then we need to find below text<br>
     <br>
-    <span style="font-family: Courier New,Courier,monospace;">&lt;b:includable
-      id='post' var='post'&gt;</span><br>
+    <span style="font-family: Courier New,Courier,monospace;"><b:includable
+      id='post' var='post'></span><br>
     <br>
     when you found above part, you need to scroll down until you see<br>
     <br>
-    <span style="font-family: Courier New,Courier,monospace;">&lt;/b:includable&gt;</span><br>
+    <span style="font-family: Courier New,Courier,monospace;"></b:includable></span><br>
     <br>
     when you see it, place the sample code above it.<br>
     <br>
     <h4> 2. Place the CSS code to your skin</h4>
     Search the text below in your HTML template editor<br>
     <br>
-    <span style="font-family: Courier New,Courier,monospace;">]]&gt;&lt;/b:skin&gt;</span><br>
+    <span style="font-family: Courier New,Courier,monospace;">]]></b:skin></span><br>
     <br>
-    then place the code below above the <span style="font-family: Courier New,Courier,monospace;">]]&gt;&lt;/b:skin&gt;</span><br>
-    <br>
-    <pre class="brush:css">#related_posts{
+    then place the code below above the <span style="font-family: Courier New,Courier,monospace;">]]></b:skin></span><br>
+
+
+{% highlight css %} 
+#related_posts{
  border-top: 1px solid #d0d0d0;
  border-bottom: 1px solid #d0d0d0;         
 }
@@ -345,24 +356,28 @@ blogger_orig_url: https://www.elvishsu.com/2014/01/build-your-own-related-posts-
  text-decoration: none;
  color:#fff;
 }
-</pre>
+{% endhighlight %}
+
     <h4> 3. Execute the plugin</h4>
     Search the text below in your HTML template editor<br>
     <br>
-    <span style="font-family: Courier New,Courier,monospace;">&lt;/body&gt;</span><br>
+    <span style="font-family: Courier New,Courier,monospace;"></body></span><br>
     <br>
-    then place the code below above the <span style="font-family: Courier New,Courier,monospace;">&lt;/body&gt;</span><br>
+    then place the code below above the <span style="font-family: Courier New,Courier,monospace;"></body></span><br>
     <br>
-    <pre class="brush:js;highlight:[3,7]">      &lt;!-- comment out below if you have jQuery library loaded already --&gt;
-      &lt;script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'/&gt;
-      &lt;script src='https://dl.dropboxusercontent.com/u/99319532/Blogger/host/related_posts.js'/&gt;
-      &lt;script&gt;
+
+    {% highlight js %}       
+    <!-- comment out below if you have jQuery library loaded already -->
+      <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'/>
+      <script src='https://dl.dropboxusercontent.com/u/99319532/Blogger/host/related_posts.js'/>
+      <script>
         // related posts
-        if($('#related_posts').length &gt; 0){
+        if($('#related_posts').length > 0){
           $('#related_posts').relatedPosts({labels:labels,title:'You may also like -'});
         };
-      &lt;script/&gt;
-    </pre>
+      <script/>
+    {% endhighlight %}
+
     <br>
     Now, you should be able to see your related post on your page. You can tweak
     the query to search articles related to the author or give it a date range.

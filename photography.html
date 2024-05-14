@@ -1,0 +1,40 @@
+---
+layout: default
+title: Photography
+description: Share my vision through camera lens 
+image: /assets/images/bg-photography.jpg
+---
+
+<p>
+I am a digital photography enthusiast. When programming hurts my brain, I like to go out and shoot some photos. 
+If you are interested in my photos, please visit <a href="https://flickr.com/photos/elvishsu66" target="_blank"> my Flickr</a> for more images. 
+You can also reload this page to see other photos.
+</p>
+
+<div id='container'><!-- Nothing here --></div>
+
+<!-- Place your script above the end of </body> -->  
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+<script type='text/javascript' src='/assets/js/flickrGallery.js'></script>
+<script>
+    $(document).ready(function() {
+        var config={
+            rows: 10,
+            rowHeight: 200,
+            borderWidth: 3,
+            shuffle: true,
+            maxPages: 10,
+            loadOnScroll:true,
+            cb_url: 'url_o',
+            params:{
+                method:  'flickr.people.getPublicPhotos', //'flickr.photos.search',
+		    	api_key: 'ad2e1cc1d51162a8ee4ee4b022a711f4',
+		    	user_id: '91190543@N02',
+                api_key: 'ad2e1cc1d51162a8ee4ee4b022a711f4',
+                //tags: 	 'canon',
+                extras:  'url_o'
+            }
+        };
+        $('#container').flickrGallery(config);
+    });
+</script>

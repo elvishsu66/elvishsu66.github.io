@@ -24,13 +24,17 @@ I believe there are some people want to sync the device date/time with their web
 <br />
 We start to P/Invoke the SetSystemTime method.<br />
 <br />
-<pre class="brush:csharp" name="code">[DllImport("coredll.dll", SetLastError = true)]
+
+{% highlight cs %}
+[DllImport("coredll.dll", SetLastError = true)]
 private static extern bool SetSystemTime(ref SYSTEMTIME time);
-</pre>
+{% endhighlight %}
+
 <br />
 Create the SYSTEMTIME structure.<br />
 <br />
-<pre class="brush:csharp" name="code">public struct SYSTEMTIME
+{% highlight cs %}
+public struct SYSTEMTIME
 {
      public short year;
      public short month;
@@ -41,11 +45,14 @@ Create the SYSTEMTIME structure.<br />
      public short second;
      public short milliseconds;
 }
-</pre>
+{% endhighlight %}
+
 <br />
 Create a simple function to convert <a href="http://msdn.microsoft.com/en-us/library/system.datetime.aspx">DateTime</a> to <a href="http://msdn.microsoft.com/en-us/library/ms724950(v=vs.85).aspx">SYSTEMTIME</a> and also calls the <a href="http://msdn.microsoft.com/en-us/library/ms724942(v=vs.85).aspx">SetSystemTime</a> function.<br />
 <br />
-<pre class="brush:csharp" name="code">public void SetSystemDateTime(DateTime time)
+
+{% highlight cs %}
+public void SetSystemDateTime(DateTime time)
 {
     SYSTEMTIME s = new SYSTEMTIME();
      s.Year = (short)time.Year;
@@ -58,11 +65,14 @@ Create a simple function to convert <a href="http://msdn.microsoft.com/en-us/lib
      s.Milliseconds = (short)time.Millisecond;
      SetSystemTime(ref s);
 }
-</pre>
+{% endhighlight %}
+
 <br />
 As most http web pages contains "<a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields">Date</a>" part of the document header and the "<a href="http://en.wikipedia.org/wiki/List_of_HTTP_header_fields">Date</a>" part usually is the server time. So we gets the date/time and sync with our device. We use <a href="http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.aspx">HttpWebRequest</a> and <a href="http://msdn.microsoft.com/en-us/library/system.net.httpwebresponse.aspx">HttpWebResponse</a> to get the web page header.<br />
 <br />
-<pre class="brush:csharp" name="code">public bool SyncDateTime(string url)
+
+{% highlight cs %}
+public bool SyncDateTime(string url)
 {
     HttpWebRequest myRequest = null;
     HttpWebResponse myResponse = null;
@@ -98,6 +108,7 @@ As most http web pages contains "<a href="http://en.wikipedia.org/wiki/List_of_H
     }
     return false;
 }
-</pre>
+{% endhighlight %}
+
 <br />
 Above method has few millisecond or event seconds inaccuracy as we doesn't calculate the time difference from request to response. However, it is quite good enough for many customers. Ha... I am lazy again...

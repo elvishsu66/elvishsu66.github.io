@@ -20,7 +20,8 @@ Today, I was browsing around the web and found some interesting articles which a
 <br />
 Bang~ It is faster than just minify the content. But so far I just tested with Apache server as it is most used http server in my projects.&nbsp;I just added the following code in my .htaccess file<br />
 <br />
-<pre class="brush:js" name="code"># compress text, html, javascript, css, xml:
+{% highlight js %}
+# compress text, html, javascript, css, xml:
 AddOutputFilterByType DEFLATE text/plain
 AddOutputFilterByType DEFLATE text/html
 AddOutputFilterByType DEFLATE text/xml
@@ -30,7 +31,8 @@ AddOutputFilterByType DEFLATE application/xhtml+xml
 AddOutputFilterByType DEFLATE application/rss+xml
 AddOutputFilterByType DEFLATE application/javascript
 AddOutputFilterByType DEFLATE application/x-javascript
-</pre>
+{% endhighlight %}
+
 <br />
 By the way, you may want to enable the <b>mod_deflate.so</b> in your <b>httpd.conf</b> to make it work.<br />
 <br />

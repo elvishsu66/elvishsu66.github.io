@@ -31,7 +31,8 @@ Anyway in order to make this widget to work, you may need the following three ex
 The default file field from ExtJs only allows you to upload single file at a time. To enable uploading multiple file, you need to tweak the DOM settings.<br />
 <br />
 <b>Multiple file field (inspired from <a href="http://www.sencha.com/forum/showthread.php?143951-Multiple-select-in-a-FileField" target="_blank">here</a>)</b><br />
-<pre class="brush:js; highlight: [12, 13, 14]">Ext.define('Ext.ux.form.field.MultipleFileField', {
+{% highlight js %}
+Ext.define('Ext.ux.form.field.MultipleFileField', {
     extend: 'Ext.form.field.File',
     alias:['widget.multifilefield',
            'widget.multiplefilefield',
@@ -47,7 +48,8 @@ The default file field from ExtJs only allows you to upload single file at a tim
         });
     }
 });
-</pre>
+{% endhighlight %}
+
 </div>
 <div>
 <br /></div>
@@ -75,7 +77,8 @@ You can download the widget from <a href="http://www.sencha.com/forum/showthread
 <div>
 <br />
 <b>File upload grid panel</b><br />
-<pre class="brush:js; highlight: [418,419,420,421]">Ext.define('Ext.ux.form.FileUploadPanel', {
+{% highlight js %}
+Ext.define('Ext.ux.form.FileUploadPanel', {
     extend: 'Ext.panel.Panel',
     alias: ['widget.filepanel','fileuploadpanel'],
     requires:[
@@ -138,7 +141,7 @@ You can download the widget from <a href="http://www.sencha.com/forum/showthread
            me.bbar = [{
                xtype:'tbtext',
                text:'Drap and drop your files to the grid'
-           },'-&gt;',{
+           },'->',{
                xtype:'multifile',
                buttonOnly:true,
                allowBlank:true,
@@ -270,7 +273,7 @@ You can download the widget from <a href="http://www.sencha.com/forum/showthread
                     align:'center',
                     width:90,
                     renderer: function (value, meta, record) {
-                        var color = (value &lt; 100) ? 'red' : 'green';
+                        var color = (value < 100) ? 'red' : 'green';
                         return Ext.String.format('<b style="color: {0};">{1}%</b>', color, value);
                     }                    
                 }],
@@ -301,7 +304,7 @@ You can download the widget from <a href="http://www.sencha.com/forum/showthread
             // change title when load
             me.store.on('load',function(){
                var count = me.store.count();
-               if(count &gt; 0){
+               if(count > 0){
                 me.setTitle(me.titlePrefix + ' (' + count + ')');
                }else{
                 me.setTitle(me.titlePrefix);
@@ -329,19 +332,19 @@ You can download the widget from <a href="http://www.sencha.com/forum/showthread
             invalidList = [];
             
         Ext.each(files, function(file){
-           if(file.size &gt; me.maxFileSize){
+           if(file.size > me.maxFileSize){
              invalidList.push(file);  
            }; 
         });
         
-        if(invalidList.length &gt; 0){
+        if(invalidList.length > 0){
             var msg = '<ul>';
             Ext.each(invalidList, function(file){
                 msg += '<li>' + file.name + '</li>';
             });
             
             msg += '</ul>';
-            var pl = invalidList.length &gt; 1;
+            var pl = invalidList.length > 1;
             msg += Ext.String.format('{0} file{1} exceed{2} file upload limit. Please try again!!', invalidList.length, (pl ? 's': ''), (pl ? '': 's'));
             
             Ext.Msg.show({
@@ -355,7 +358,7 @@ You can download the widget from <a href="http://www.sencha.com/forum/showthread
         };
         
         // check the current file list
-        if(me.store.count() &gt; 0){
+        if(me.store.count() > 0){
             Ext.each(files, function(file){
                if(me.store.findExact('name',file.name) !== -1){
                  invalidList.push(file);  
@@ -363,14 +366,14 @@ You can download the widget from <a href="http://www.sencha.com/forum/showthread
             });        
             
             
-            if(invalidList.length &gt; 0){
+            if(invalidList.length > 0){
                 var msg = '<ul>';
                 Ext.each(invalidList, function(file){
                     msg += '<li>' + file.name + '</li>';
                 });
                 
                 msg += '</ul>';
-                var pl = invalidList.length &gt; 1;
+                var pl = invalidList.length > 1;
                 msg += Ext.String.format('{0} file{1} already exist{2}.Please try again!!', invalidList.length, (pl ? 's': ''), (pl ? '': 's'));
                 
                 Ext.Msg.show({
@@ -385,21 +388,21 @@ You can download the widget from <a href="http://www.sencha.com/forum/showthread
         };
         
         // check the current uploading list
-        if(me.progressStore.count() &gt; 0){
+        if(me.progressStore.count() > 0){
             Ext.each(files, function(file){
                if(me.progressStore.findExact('name',file.name) !== -1){
                  invalidList.push(file);  
                }; 
             });            
             
-            if(invalidList.length &gt; 0){
+            if(invalidList.length > 0){
                 var msg = '<ul>';
                 Ext.each(invalidList, function(file){
                     msg += '<li>' + file.name + '</li>';
                 });
                 
                 msg += '</ul>';
-                var pl = invalidList.length &gt; 1;
+                var pl = invalidList.length > 1;
                 msg += Ext.String.format('{0} file{1} exist{2} in uploading list. Please try again!!', invalidList.length, (pl ? 's': ''), (pl ? '': 's'));
                 
                 Ext.Msg.show({
@@ -547,13 +550,16 @@ You can download the widget from <a href="http://www.sencha.com/forum/showthread
         me.iframe.load(url);
     }
 });
-</pre>
+{% endhighlight %}
+
 </div>
 <br />
 <b>Server Side (PHP Code)</b>
 <br />
 <br />
-<pre class="brush:php" name="code">private function upload($dstPath){
+
+{% highlight php %}
+private function upload($dstPath){
         $fileName = $_SERVER['HTTP_X_FILE_NAME']; 
         $fileSize = $_SERVER['HTTP_X_FILE_SIZE'];
         $fileType = $_SERVER['HTTP_X_FILE_TYPE'];
@@ -572,10 +578,10 @@ You can download the widget from <a href="http://www.sencha.com/forum/showthread
         fclose($output);
             
         $result= array(
-            'success'    =&gt; true,
-            'data'       =&gt; array('src'=&gt;$dstPath . $fileName, 'file'=&gt;$fileName, 'size'=&gt;$fileSize, 'type'=&gt;$fileType),
-            'total'      =&gt; '1',
-            'message'    =&gt; 'File uploaded successfully'
+            'success'    => true,
+            'data'       => array('src'=>$dstPath . $fileName, 'file'=>$fileName, 'size'=>$fileSize, 'type'=>$fileType),
+            'total'      => '1',
+            'message'    => 'File uploaded successfully'
         );
         
         return $result;
@@ -587,11 +593,12 @@ private function delete($filePath){
            $result = unlink($filePath);
         }
         $result= array(
-         'success'=&gt; $result,
-         'message'=&gt; 'Success',
-         'file'=&gt;$filePath
+         'success'=> $result,
+         'message'=> 'Success',
+         'file'=>$filePath
  );
  return $result;
 }
-</pre>
+{% endhighlight %}
+
 </div>

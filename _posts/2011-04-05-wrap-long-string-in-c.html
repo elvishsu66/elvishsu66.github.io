@@ -12,22 +12,21 @@ thumbnail: /assets/posts/blogger/2011-04-05-image-0000.png
 blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-3809757806694887939
 blogger_orig_url: https://www.elvishsu.com/2011/04/wrap-long-string-in-c.html
 ---
-
 <div class="separator" style="clear: both; text-align: center;">
 </div>
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/assets/posts/blogger/2011-04-05-image-0000.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" src="/assets/posts/blogger/2011-04-05-image-0000.png" /></a></div>
-<br />
-<br />
+
 Today I was think how to optimize the drawing string method on my library... so far I worked out this... However I still couldn't workout how to really wrap long string within the sentence...<br />
 <br />
 Any help?<br />
 <br />
 <br />
-<pre class="brush:csharp" name="code">public static string[] WrapString(this Graphics gx, Font font, string text, float maxWidth, bool wrap)
+{% highlight cs %}
+public static string[] WrapString(this Graphics gx, Font font, string text, float maxWidth, bool wrap)
 {
     // find if actual max text width is smaller than max width or maxWidth is smaller than zero or wrap is set to false
-    if (gx.MeasureString(text, font).Width &lt; maxWidth || maxWidth &lt;= 0 || !wrap)
+    if (gx.MeasureString(text, font).Width < maxWidth || maxWidth <= 0 || !wrap)
     {
         return text.Split(new char[] { '\n' });
     }
@@ -43,7 +42,7 @@ Any help?<br />
     List<string> lines = new List<string>((int)(text.Length / maxChars));
     string currentLine = "";
 
-    for (int i = 0; i &lt; words.Length; i++)
+    for (int i = 0; i < words.Length; i++)
     {
         // if the word is empty, then repace it to one space
         if (string.IsNullOrEmpty(words[i]))
@@ -52,7 +51,7 @@ Any help?<br />
         float currWidth = gx.MeasureString(currentLine + " " + words[i], font).Width;
         
         // check if the current width is greater than max length
-        if (currWidth &lt; maxWidth)
+        if (currWidth < maxWidth)
         {
             // if first entry, then put current line to the first word
             if ((lines.Count == 0) &amp;&amp; string.IsNullOrEmpty(currentLine))
@@ -65,10 +64,10 @@ Any help?<br />
                 // check if the currentline has \n in there.
                 string[] newLines = currentLine.Split('\n');
                 // if it does, then add a new line
-                if (newLines.Length &gt; 1)
+                if (newLines.Length > 1)
                 {
                     // do not loop to last as it will be the new currentline
-                    for (int j = 0; j &lt; newLines.Length - 1; j++)
+                    for (int j = 0; j < newLines.Length - 1; j++)
                         lines.Add(newLines[j]);
 
                     // the current line is the last line of the new lines
@@ -94,4 +93,4 @@ Any help?<br />
 
     return lines.ToArray();
 }
-</string></string></pre>
+{% endhighlight %}

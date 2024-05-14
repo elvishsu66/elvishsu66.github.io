@@ -22,7 +22,8 @@ blogger_orig_url: https://www.elvishsu.com/2011/05/dynamic-gridpanel-for-extjs-4
 Recently, I was trying to update our internal system from ExtJs 3 to version 4. Well, I think many V3 plugins are needed to be updated. So I was a bit busy on that... Anyway, I am going to share a bit of code which is the dynamic grid for ExtJs 4. As the sample from <a href="http://erhanabay.com/2009/01/29/dynamic-grid-panel-for-ext-js/">Erhan Abay</a> is for ExtJs 3, so I made a few changes for ExtJs 4.<br />
 <br />
 <br />
-<pre class="brush:js" name="code">/**
+{% highlight js %}
+/**
 * Ext.ux.grid.DynamicGridPanel
 */
 Ext.define('Ext.ux.grid.DynamicGridPanel', {
@@ -88,10 +89,12 @@ Ext.define('Ext.ux.grid.DynamicGridPanel', {
             this.store.on('load', this.storeLoad, this);
     }
 });
-</pre>
+{% endhighlight %}
+
 <br />
 <b>Client Side Example</b>: (Tested on ExtJs 4.0.7 and 4.1.1)<br />
-<pre class="brush:js" name="code">// Start loading the page        
+{% highlight js %}
+// Start loading the page        
 Ext.onReady(function(){
     // we need to define the model but the field values will be parsed
     // automatically since we provided fields in the metaData from server
@@ -128,10 +131,11 @@ Ext.onReady(function(){
         items:[myGrid]
     });
 });
-</pre>
+{% endhighlight %}
+
 <br />
 <b>Server Side Example</b>: (<u><b><span style="color: red;">data.php</span></b></u>)<br />
-<pre class="brush:php" name="code">    
+{% highlight php %}   
     $total = 100;
     // you can pre-define the required property parameters
     $output["metaData"]["idProperty"]="id";
@@ -139,15 +143,15 @@ Ext.onReady(function(){
     $output["metaData"]["successProperty"]="success";
     $output["metaData"]["root"]="data";
     // you can parse field values via your database schema
-    $output["metaData"]["fields"][]=array("name"=&gt;"id","type"=&gt;"int");
-    $output["metaData"]["fields"][]=array("name"=&gt;"name","type"=&gt;"string");
-    $output["metaData"]["fields"][]=array("name"=&gt;"firstName","type"=&gt;"string");
-    $output["metaData"]["fields"][]=array("name"=&gt;"lastName","type"=&gt;"string");
+    $output["metaData"]["fields"][]=array("name"=>"id","type"=>"int");
+    $output["metaData"]["fields"][]=array("name"=>"name","type"=>"string");
+    $output["metaData"]["fields"][]=array("name"=>"firstName","type"=>"string");
+    $output["metaData"]["fields"][]=array("name"=>"lastName","type"=>"string");
     // you can parse column values via your database schema
-    $output["columns"][]=array("dataIndex"=&gt;"id","header"=&gt;"ID", "width"=&gt;10);
-    $output["columns"][]=array("dataIndex"=&gt;"name","header"=&gt;"User Name","width"=&gt;20);
-    $output["columns"][]=array("dataIndex"=&gt;"firstName","header"=&gt;"First Name");
-    $output["columns"][]=array("dataIndex"=&gt;"lastName","header"=&gt;"Last Name");
+    $output["columns"][]=array("dataIndex"=>"id","header"=>"ID", "width"=>10);
+    $output["columns"][]=array("dataIndex"=>"name","header"=>"User Name","width"=>20);
+    $output["columns"][]=array("dataIndex"=>"firstName","header"=>"First Name");
+    $output["columns"][]=array("dataIndex"=>"lastName","header"=>"Last Name");
     // the misc properties
     $output["total"]=$total;
     $output["success"]=true;
@@ -156,13 +160,14 @@ Ext.onReady(function(){
     $start = $_GET['start'] + 1;
     $max = $_GET['start'] + $_GET['limit'];
     // make sample data
-    for($i = $start; $i &lt;= $max; $i++ ){
+    for($i = $start; $i <= $max; $i++ ){
      $output["data"][]= array(
-                    "id"=&gt;$i,
-                    "name"=&gt;"UserName-". $i,
-                    "firstName"=&gt;"My First Name No. ". $i,
-                    "lastName"=&gt;"My Last Name No. ". $i);
+                    "id"=>$i,
+                    "name"=>"UserName-". $i,
+                    "firstName"=>"My First Name No. ". $i,
+                    "lastName"=>"My Last Name No. ". $i);
     }    
     // output the value
     echo json_encode($output);
-</pre>
+{% endhighlight %}
+

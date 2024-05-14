@@ -16,9 +16,11 @@ blogger_orig_url: https://www.elvishsu.com/2011/04/update-application-via-httpwe
 <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjzUC6HEWJhlqM3ZcddfZhEvVU13Au97Kf_JlGe6y2Q3O10A0wAIAEr9qLgWv0DjmESQ40drCLKzmFljmWVyH8u-PYkKGzdnZJBYcH7Ved8dahZHwY2984yQrOJ-LMoF147qfcXOo0y-DM/s1600/URL-Encode-Decode.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" height="193" src="/assets/posts/blogger/2011-04-06-image-0000.jpg" width="320" /></a></div>
 <div class="separator" style="clear: both; text-align: center;">
 <br /></div>
-I just tried to write a function to validate URL address. Well, as usual, I've done some researches on Google and not many efficient and satisfy solutions. However, I've got a solution which is using Regex in C# to validate a URL and it seems a acceptable method to test the URL input.<br />
+I've just tried to write a function to validate URL address. Well, as usual, I've done some researches on Google and not many efficient and satisfy solutions. However, I've got a solution which is using Regex in C# to validate a URL and it seems a acceptable method to test the URL input.<br />
 <br />
-<pre class="brush:csharp" name="code">public static bool IsValidUrl(this string url)
+
+{% highlight cs %}
+public static bool IsValidUrl(this string url)
 {
     string strRegex = "^(https?://)"
         + "?(([0-9a-z_!~*'().&amp;=+$%-]+: )?[0-9a-z_!~*'().&amp;=+$%-]+@)?" // user@
@@ -33,4 +35,4 @@ I just tried to write a function to validate URL address. Well, as usual, I've d
 
     return new Regex(strRegex).IsMatch(url);
 }
-</pre>
+{% endhighlight %}

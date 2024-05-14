@@ -25,7 +25,9 @@ For example, we want to display a data grid with <a href="http://docs.sencha.com
 We now just need to create a simple <b><a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.JsonStore" target="_blank">JsonStore</a></b> and let the <b><a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.proxy.Ajax" target="_blank">proxy</a></b> retrieves the information by '<b>MetaDataExample.php</b>'.<br />
 <br />
 <br />
-<pre class="brush:js; highlight: [4,9,11,26]">// File Name: index.php
+
+{% highlight js %}
+// File Name: index.php
 // Start loading the page        
 Ext.onReady(function(){
  Ext.create('Ext.data.JsonStore', {
@@ -60,57 +62,63 @@ Ext.onReady(function(){
   renderTo: Ext.getBody()
  }); 
 });  
-</pre>
+{% endhighlight %}
+
 <br />
 <br />
 <br />
 The following function feeds the meta data to the client and it indicates that we want to show all records from all fields of&nbsp;<strong>items</strong> table. The '<b>db</b>' variable is a custom class to handle the database operation and I will explain the functions <a href="http://www.blogger.com/blogger.g?blogID=1691872865366176972#MySqlDataAdapter">later</a>. The '<b>ret</b>' variable contains output data to feed the JSON reader.<br />
 <br />
 <br />
-<pre class="brush:php; highlight: [3,7,11,25,27]">// File Name: MetaDataExample.php
+
+{% highlight php %}
+// File Name: MetaDataExample.php
 public function getItems(){
- $this-&gt;tableName =  "items";
+ $this->tableName =  "items";
  $start = isset($_GET['start']) ? $_GET['start'] : 0;
  $limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
  
- $query = "SELECT * FROM `{$this-&gt;tableName}` LIMIT {$start},{$limit}";
+ $query = "SELECT * FROM `{$this->tableName}` LIMIT {$start},{$limit}";
  
- $stmt = $this-&gt;db-&gt;query($query);
+ $stmt = $this->db->query($query);
  // get the number of records
- $r = $this-&gt;db-&gt;query("SELECT COUNT(*) FROM `{$this-&gt;tableName}`", PDO::FETCH_NUM);
+ $r = $this->db->query("SELECT COUNT(*) FROM `{$this->tableName}`", PDO::FETCH_NUM);
  // gets the first column as value
- $nbrows = $r-&gt;fetchColumn();
+ $nbrows = $r->fetchColumn();
 
  // initialize the default output array
  $data = array();
  // if we have rows
- if($nbrows&gt;0){
-   while($row = $stmt-&gt;fetch(PDO::FETCH_ASSOC)) {
+ if($nbrows>0){
+   while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $data[] = $row;
    }
  }  
  
  // prepare the metadata
- $ret['metaData'] =   $this-&gt;makeMetaData($stmt);
+ $ret['metaData'] =   $this->makeMetaData($stmt);
  $ret['total']    =   $nbrows;
- $ret['data']     =   $this-&gt;Char2Utf8($data);
+ $ret['data']     =   $this->Char2Utf8($data);
  $ret['success']  =   true;
  $ret['message']  =   true;
  
  echo json_encode($ret);
 }
-</pre>
+{% endhighlight %}
+
 <br />
 <br />
 We want to avoid some unwanted characters to appear on the data, we need to convert some characters to <a href="http://ch1.php.net/utf8_encode" target="_blank">UTF8</a> format characters.<br />
 <br />
 <br />
-<pre class="brush:php; highlight: [11]">// File Name: MetaDataExample.php
+
+{% highlight php %}
+// File Name: MetaDataExample.php
 protected function Char2Utf8($var){
         if (is_array($var)) {
             $out = array();
-            foreach ($var as $key =&gt; $v) {
-                $out[$key] = $this-&gt;Char2Utf8($v);
+            foreach ($var as $key => $v) {
+                $out[$key] = $this->Char2Utf8($v);
             }
         } else {
             if(gettype($var)=='string'){
@@ -122,14 +130,17 @@ protected function Char2Utf8($var){
         }       
         return $out;                   
     }
-</pre>
+{% endhighlight %}
+
 <br />
 <br />
 At the following function, we start to generate the metadata for output. The key part is the value of <strong>'fields'</strong>, since we want to output the field types and default values based by the database's table structure.
 <br />
 <br />
 <br />
-<pre class="brush:php; highlight: [22]">// File Name: MetaDataExample.php
+
+{% highlight php %}
+// File Name: MetaDataExample.php
 protected function makeMetaData($result, $overrides = false){
         /*
         metaData: {
@@ -150,29 +161,32 @@ protected function makeMetaData($result, $overrides = false){
         $metaData['totalProperty'] = 'total';
         $metaData['successProperty'] = 'success';
         $metaData['root'] = 'data';        
-        $metaData['fields'] = $this-&gt;parseMetaDataFields($result, $overrides);        
+        $metaData['fields'] = $this->parseMetaDataFields($result, $overrides);        
         
         return $metaData;
     }
-</pre>
+{% endhighlight %}
+
 <br />
 <br />
 We start to parse the meta data output fields from the data columns of the data table. First of all, we find out the name of the data table from the query result object and gather the columns' information by calling '<b>getFullColumnsInfo</b>' function which is in the database class. Then we begin to collect the list of database output fields from the query result and match the names to the columns' information we have collected. The columns' information has pretty much enough properties we need in order to generate the settings of <b>field name, field type, default value</b> and <b>allowBlank</b> for meta data fields.<br />
 <br />
 <br />
-<pre class="brush:php; highlight: [6,13,25]">// File Name: MetaDataExample.php
+
+{% highlight php %}
+// File Name: MetaDataExample.php
 protected function parseMetaDataFields($stmt, $overrides = false){
         // gets the table of the $result
-        $table = $this-&gt;tableName;
+        $table = $this->tableName;
         // gets the table descriptions for future use
-        $columnsInfo = $this-&gt;db-&gt;getFullColumnsInfo($table);
+        $columnsInfo = $this->db->getFullColumnsInfo($table);
         // gets the number of fields
-        $nbFields = $stmt-&gt;columnCount();
+        $nbFields = $stmt->columnCount();
         // starts a empty array
         $fields = array();
         // loop through the fields
-        for ($i=0; $i &lt; $nbFields; $i++){
-          $meta = $stmt-&gt;getColumnMeta($i);
+        for ($i=0; $i < $nbFields; $i++){
+          $meta = $stmt->getColumnMeta($i);
           $name  = $meta['name'];
           $fields[$i]['name']  = $name; 
             
@@ -184,7 +198,7 @@ protected function parseMetaDataFields($stmt, $overrides = false){
             else if($type == 'datetime')
                $fields[$i]['dateFormat'] = 'c';   
                
-            $fields[$i]['type']  = $this-&gt;convertType($type);
+            $fields[$i]['type']  = $this->convertType($type);
             
             if($name != 'id'){
                 $fields[$i]['allowBlank'] = ($columnsInfo[$name]['Null'] == 'YES') ? true : false;
@@ -203,7 +217,7 @@ protected function parseMetaDataFields($stmt, $overrides = false){
           
           if(!empty($overrides) &amp;&amp; is_array($overrides)){
             if(array_key_exists($name, $overrides)){
-                foreach($overrides[$name] as $key=&gt;$value){
+                foreach($overrides[$name] as $key=>$value){
                     $fields[$i][$key]=$value;
                 }
             }
@@ -211,7 +225,8 @@ protected function parseMetaDataFields($stmt, $overrides = false){
         }
         return $fields;
     }
-</pre>
+{% endhighlight %}
+
 <br />
 <br />
 The <b>convertType</b> function plays an important role. We want to convert MySQL's data type to ExtJs data type. This function contains my most used types. The rest of less used types, I leave them to be 'auto'. If you have further types need to be converted, feel free to add them in.<br />
@@ -219,7 +234,9 @@ The <b>convertType</b> function plays an important role. We want to convert MySQ
 Please note that MySQL does <b>not</b> have '<b><a href="http://dev.mysql.com/doc/refman/5.0/en/numeric-type-overview.html" target="_blank">Boolean</a></b>' type, but it uses '<b><a href="http://dev.mysql.com/doc/refman/5.0/en/integer-types.html" target="_blank">tinyint</a></b>' instead.<br />
 <br />
 <br />
-<pre class="brush:php; highlight: [4,20,21]">// File Name: MetaDataExample.php
+
+{% highlight php %}
+// File Name: MetaDataExample.php
 public function convertType($type){
         if(strpos($type,'(') !== false){
             $type = substr($type, 0, strpos($type,'('));
@@ -253,7 +270,8 @@ public function convertType($type){
                 return 'auto';        
         }
     }
-</pre>
+{% endhighlight %}
+
 <br />
 <br />
 The following simple database class wraps functions we need together. In this example, we use&nbsp;&nbsp;<b><a href="http://www.php.net/manual/en/ref.pdo-mysql.php" target="_blank">PDO</a></b>&nbsp;class to connect to our MySQL database. You might want to use&nbsp;<b><a href="http://www.php.net/manual/en/book.mysqli.php" target="_blank">mysqli</a></b> extension for MySQL functions instead. However I don't recommend using&nbsp;<b><a href="http://www.php.net/manual/en/ref.mysql.php" target="_blank">mysql</a></b>&nbsp;extension since <b>mysql</b> extension is <a href="http://www.php.net/manual/en/mysqlinfo.api.choosing.php" target="_blank">deprecated</a> since PHP version 5.5.0.<br />
@@ -261,7 +279,9 @@ The following simple database class wraps functions we need together. In this ex
 <a href="http://www.blogger.com/blogger.g?blogID=1691872865366176972#" name="MySqlDataAdapter"></a>
 
 <br />
-<pre class="brush:php; highlight: [46,68,70,102]">// File Name: MySqlDataAdapter.php
+
+{% highlight php %}
+// File Name: MySqlDataAdapter.php
 class MySqlDataAdapter
 {
     protected $server, $user, $password;    
@@ -284,11 +304,11 @@ class MySqlDataAdapter
      * Constructor
      */              
     public function __construct($server, $user, $password, $dbName){
-        $this-&gt;server   = $server;      // Host address
-        $this-&gt;user     = $user;        // User
-        $this-&gt;password = $password;    // Password
-        $this-&gt;dbName   = $dbName;      // Database         
-        $this-&gt;connect();
+        $this->server   = $server;      // Host address
+        $this->user     = $user;        // User
+        $this->password = $password;    // Password
+        $this->dbName   = $dbName;      // Database         
+        $this->connect();
     }
  
     /**
@@ -297,8 +317,8 @@ class MySqlDataAdapter
      * @return void
      */
     public function __destruct(){
-     $this-&gt;stmt = null;
-        $this-&gt;pdo = null;
+     $this->stmt = null;
+        $this->pdo = null;
     }
  
     /**
@@ -306,15 +326,15 @@ class MySqlDataAdapter
      */
     public function connect(){
        // create the pdo object     
-    $this-&gt;pdo = new PDO('mysql:host='.$this-&gt;server.';dbname='.$this-&gt;dbName, $this-&gt;user, $this-&gt;password);       
+    $this->pdo = new PDO('mysql:host='.$this->server.';dbname='.$this->dbName, $this->user, $this->password);       
        // if connection is failed, then trigger user error
-       if ($this-&gt;pdo === false){
+       if ($this->pdo === false){
             trigger_error('Could not connect to the database.', E_USER_ERROR);
     }else{
-      $this-&gt;pdo-&gt;exec("set names utf8");
+      $this->pdo->exec("set names utf8");
     }
        // return the connection object
-       return $this-&gt;pdo;
+       return $this->pdo;
     }    
     
     /**
@@ -326,39 +346,40 @@ class MySqlDataAdapter
     public function query($queryStr){
      try{
       //calling beginTransaction() turns off auto commit automatically
-      $this-&gt;pdo-&gt;beginTransaction();
+      $this->pdo->beginTransaction();
    // prepare the statement
-   $this-&gt;stmt = $this-&gt;pdo-&gt;prepare($queryStr);
+   $this->stmt = $this->pdo->prepare($queryStr);
    // execute the statement
-   $this-&gt;stmt-&gt;execute();
+   $this->stmt->execute();
    // commit the statement if everything is alright
-   $this-&gt;pdo-&gt;commit();
+   $this->pdo->commit();
   }
   catch(PDOException $ex){
    //Something went wrong rollback!
-      $this-&gt;pdo-&gt;rollBack();
+      $this->pdo->rollBack();
    // trigger an sql error
-   trigger_error($ex-&gt;getMessage(), E_USER_ERROR);
+   trigger_error($ex->getMessage(), E_USER_ERROR);
   }
   // return the statement object
-  return $this-&gt;stmt;
+  return $this->stmt;
     } 
 
  /**
   * Get column info from table name
   */
     function getFullColumnsInfo($table){
-        $stmt = $this-&gt;query("SHOW FULL COLUMNS FROM `{$table}`");
+        $stmt = $this->query("SHOW FULL COLUMNS FROM `{$table}`");
         $data = array();
         // gets the information
-        while($row = $stmt-&gt;fetch(PDO::FETCH_ASSOC)){
+        while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             $data[$row['Field']] = $row;
         }
         // return the data array
         return $data;        
     }
 }
-</pre>
+{% endhighlight %}
+
 <br />
 <br />
 You can also use the same concept to configure the Grid Panel column settings via the meta data. Have a look at '<a href="http://www.elvishsu66.com/2011/05/dynamic-gridpanel-for-extjs-4.html" target="_blank">Dynamic GridPanel for ExtJs 4</a>' and it may give you some ideas to apply column settings via meta data to the Grid Panel.<br />

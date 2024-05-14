@@ -12,13 +12,14 @@ twitter:
   card: summary
 disqus:
   shortname: elvishsu66
-logo: /assets/icon/favicon-64x64.png
+logo: /assets/icon/favicon-128x128.png
 social:
   name: Elvis Hsu
   links:
     - https://twitter.com/elvishsu
     - https://www.linkedin.com/in/elvishsu
     - https://github.com/elvishsu66
+google_analytics: G-M47EN9ZR37
 
 # Site settings
 permalink: /:year/:month/:title.html
@@ -38,18 +39,19 @@ plugins:
   - jekyll-sitemap
   - jekyll-tagging-related_posts
 
-# sass:
-#   sass_dir: _sass
-#   style: compressed
+sass:
+  sass_dir: _sass
+  style: compressed
 
-# compress_html:
-#   clippings: all
-#   comments: all
-#   endings: all
-#   profile: false
-#   startings: [head, body]
-
-google_analytics: G-M47EN9ZR37
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  startings: [head, body]
+  ignore:
+    envs: # We need to ignore development otherwise the --livereload will not work
+      - development
 
 navigation:
   - title: home
@@ -58,11 +60,13 @@ navigation:
     url: /blog/
   - title: topics
     url: /blog/topics
+  - title: photography
+    url: /photography
   - title: about
     url: /about
 
 exclude:
-- Gemfile
-- Gemfile.lock
-- utils
-- README.md
+  - Gemfile
+  - Gemfile.lock
+  - utils
+  - README.md

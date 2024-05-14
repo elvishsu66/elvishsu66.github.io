@@ -23,6 +23,10 @@ pre {
   }
 }
 
+figure.highlight {
+  border: 3px solid $code-background-colour;
+}
+
 .highlight {
   border-radius: 5px;
   color: $code-foreground-colour;

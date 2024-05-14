@@ -464,6 +464,19 @@
         transform: scale(1.02);
       }
     }
+
+    ul {
+      li {
+        list-style: circle inside;
+      }
+    }
+
+    ol {
+      li {
+        list-style: decimal inside;
+      }
+    }
+
   }
 }
 

@@ -17,7 +17,8 @@ blogger_orig_url: https://www.elvishsu.com/2011/04/check-application-has-install
 <a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjbtYtLFeRx6DE78XFE5jew-mYQq2tLqGsvWtite17gzrsNaDqcJz9IFzaB3dfnTgasza49vBNSN-CvhCPqoVnHeSXg6suywKzYXODbpYdzegzW3gBlF-gGKHEN-XB_CsuiJkDe-gR8rBI/s1600/installation_time.jpg" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" height="163" src="/assets/posts/blogger/2011-04-14-image-0000.jpg" width="200" /></a></div>
 When I deploy the application to customers, I like to wrap all cabs in one as it would be much easier. For example, .NETCF and SQLCE. If the device is new, the .NETCF or SQLCE needs to be installed prior running my application. Thanks for <a href="http://social.msdn.microsoft.com/Forums/en-US/windowsmobiledev/thread/0ffa03ec-1b14-4e71-8858-e0c3ff49ad26/">CeSetupDriver</a> and <a href="http://windowsmobilepro.blogspot.com/2006/03/source-code-to-find-out-all-programs.html">here</a>. They helped me a lot to deploy the application with the way I want. However, I don't want to prompt user every time that the .NETCF or SQLCE has already installed. So I come up with a checking method to validate that the application has already installed and skip to next cab installation. All you need to do is passing you name of application and <a href="http://msdn.microsoft.com/en-us/library/ms889539.aspx">CSP (Configuration Service Provider)</a> xml to validate. However, somehow I feel the code is a bit long. Can anyone shorten it? Ha... I am just lazy...<br />
 <br />
-<pre class="brush:cpp" name="code">/** 
+{% highlight cpp %}
+/** 
  * Query the installation files
  *
  * @param LPTSTR xmlDoc The xml document 
@@ -40,36 +41,36 @@ BOOL Utils::QueryInstalledByCSP(LPTSTR xmlDoc, const TCHAR *appName)
    IID_IXMLDOMDocument, (LPVOID *) &amp;pDOM)))
   {
    // Tell the "doc" that we're not going to load asynchronously.
-   if (SUCCEEDED(pDOM-&gt;put_async(VARIANT_FALSE)))
+   if (SUCCEEDED(pDOM->put_async(VARIANT_FALSE)))
    {
     VARIANT_BOOL vBool;
-    pDOM-&gt;loadXML(xmlDoc,&amp;vBool);
+    pDOM->loadXML(xmlDoc,&amp;vBool);
     if (vBool == VARIANT_TRUE)
     {
      IXMLDOMNode *pNode;
-     if (SUCCEEDED(pDOM-&gt;selectSingleNode(_T("wap-provisioningdoc"), &amp;pNode)))
+     if (SUCCEEDED(pDOM->selectSingleNode(_T("wap-provisioningdoc"), &amp;pNode)))
           {   
       IXMLDOMNodeList *pNodeList;
       IXMLDOMNode *pNodeChild;
       IXMLDOMNode *pNodeValue;
       IXMLDOMNamedNodeMap *pXMLNamedNodeMap;
-      if (SUCCEEDED(pNode-&gt;selectSingleNode(_T("characteristic"), &amp;pNode)))
+      if (SUCCEEDED(pNode->selectSingleNode(_T("characteristic"), &amp;pNode)))
       {   
-       if(SUCCEEDED(pNode-&gt;selectNodes(_T("characteristic"), &amp;pNodeList)))
+       if(SUCCEEDED(pNode->selectNodes(_T("characteristic"), &amp;pNodeList)))
        {
         long length = 0;
-        pNodeList-&gt;get_length(&amp;length);
-        if(length &gt; 0)
+        pNodeList->get_length(&amp;length);
+        if(length > 0)
         {
-         HRESULT hr = pNodeList-&gt;nextNode(&amp;pNodeChild);
+         HRESULT hr = pNodeList->nextNode(&amp;pNodeChild);
          while(hr == S_OK)
          {         
-          if(SUCCEEDED(pNodeChild-&gt;get_attributes(&amp;pXMLNamedNodeMap)))
+          if(SUCCEEDED(pNodeChild->get_attributes(&amp;pXMLNamedNodeMap)))
           {
-           if(SUCCEEDED(pXMLNamedNodeMap-&gt;getNamedItem(_T("type"), &amp;pNodeValue)))
+           if(SUCCEEDED(pXMLNamedNodeMap->getNamedItem(_T("type"), &amp;pNodeValue)))
            {
             VARIANT varNodeValue;
-            if(SUCCEEDED(pNodeValue-&gt;get_nodeValue(&amp;varNodeValue)))
+            if(SUCCEEDED(pNodeValue->get_nodeValue(&amp;varNodeValue)))
             {
              if(lstrcmpi(varNodeValue.bstrVal, appName) == 0)
              {
@@ -77,34 +78,36 @@ BOOL Utils::QueryInstalledByCSP(LPTSTR xmlDoc, const TCHAR *appName)
               break;
              }
             }
-            pNodeValue-&gt;Release();
+            pNodeValue->Release();
            }
           }
-          hr = pNodeList-&gt;nextNode(&amp;pNodeChild);
+          hr = pNodeList->nextNode(&amp;pNodeChild);
          }
-         pXMLNamedNodeMap-&gt;Release();
+         pXMLNamedNodeMap->Release();
         }
-        pNodeList-&gt;Release();
+        pNodeList->Release();
        }
       }
            }
-     pNode-&gt;Release();
+     pNode->Release();
      pNode = NULL;
     }
    }
-   pDOM-&gt;Release();
+   pDOM->Release();
    // release COM
    CoUninitialize();
   }
  }
   return szResult;
 }
-</pre>
+{% endhighlight %}
+
 <br />
 So now what you have to do is add another method to check name of the cabs.<br />
 So far, it works all fine on all <a href="http://www.motorola.com/Business/US-EN/Business+Product+and+Services/Mobile+Computers">Motorola (Symbol)</a> devices.<br />
 <br />
-<pre class="brush:cpp" name="code">/** 
+{% highlight cpp %}
+/** 
  * Check the installed application name with related cab file 
  */
 BOOL Utils::CheckCabInstalled(LPTSTR xmlDoc, const TCHAR *cabName)
@@ -122,4 +125,5 @@ BOOL Utils::CheckCabInstalled(LPTSTR xmlDoc, const TCHAR *cabName)
  else 
   return FALSE;
 }
-</pre>
+{% endhighlight %}
+

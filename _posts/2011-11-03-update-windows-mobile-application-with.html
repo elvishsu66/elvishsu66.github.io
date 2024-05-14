@@ -42,7 +42,9 @@ Once user clicks "Yes", the we start to download and install the cab file.
 Have a look the following example in C#. It handles downloading the cab file with progress bar.
 <br />
 <br />
-<pre class="brush:csharp" name="code">private void backgroundWorker1_DoWork(object sender, BCD.ComponentModel.DoWorkEventArgs e)
+
+{% highlight cs %}
+private void backgroundWorker1_DoWork(object sender, BCD.ComponentModel.DoWorkEventArgs e)
 {
     HttpWebRequest myRequest = null;
     HttpWebResponse myResponse = null;
@@ -95,9 +97,9 @@ Have a look the following example in C#. It handles downloading the cab file wit
                                     inBuffer.Length);
 
                                 // we need to put e.Cancel as user may cancel downloading
-                                while (nRead &gt; 0 &amp;&amp; !e.Cancel)
+                                while (nRead > 0 &amp;&amp; !e.Cancel)
                                 {
-                                    if (nRead &gt; 0)
+                                    if (nRead > 0)
                                         fileStream.Write(inBuffer, 0, nRead);
 
                                     byteTotal += nRead;
@@ -155,4 +157,5 @@ Have a look the following example in C#. It handles downloading the cab file wit
         myResponse = null;
     }
 }
-</pre>
+{% endhighlight %}
+

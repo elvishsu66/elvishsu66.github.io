@@ -20,12 +20,14 @@ blogger_orig_url: https://www.elvishsu.com/2011/04/darken-or-lighten-colour-with
 It was a while ago to play the colours in .NETCF. The case was drawing darker or lighter colour when user clicks my custom design buttons. Well, I believe it would be much easier to change the colour by its original colour. So I came up with two methods to extend the existing <a href="http://msdn.microsoft.com/en-us/library/system.drawing.color.aspx">System.Drawing.Color</a> object. These two methods can be found similar over the Internet. So, I have to thank all the developers in the Internet...<br />
 <br />
 <br />
-<br />
-<pre class="brush:csharp" name="code">public static Color GetColorDarker(this Color color, double factor)
+
+
+{% highlight cs %}
+public static Color GetColorDarker(this Color color, double factor)
 {
     // The factor value value cannot be greater than 1 or smaller than 0.
     // Otherwise return the original colour
-    if (factor &lt; 0 || factor &gt; 1)
+    if (factor < 0 || factor > 1)
         return color;
 
     int r = (int)(factor * color.R);
@@ -33,14 +35,15 @@ It was a while ago to play the colours in .NETCF. The case was drawing darker or
     int b = (int)(factor * color.B);
     return Color.FromArgb(r, g, b);
 }
-</pre>
-<br />
-<br />
-<pre class="brush:csharp" name="code">public static Color GetColorLighter(this Color color, double factor)
+{% endhighlight %}
+
+
+{% highlight cs %}
+public static Color GetColorLighter(this Color color, double factor)
 {
     // The factor value value cannot be greater than 1 or smaller than 0.
     // Otherwise return the original colour
-    if (factor &lt; 0 || factor &gt; 1)
+    if (factor < 0 || factor > 1)
         return color;
 
     int r = (int)(factor * color.R + (1 - factor) * 255);
@@ -48,4 +51,4 @@ It was a while ago to play the colours in .NETCF. The case was drawing darker or
     int b = (int)(factor * color.B + (1 - factor) * 255);
     return Color.FromArgb(r, g, b);
 }
-</pre>
+{% endhighlight %}

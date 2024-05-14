@@ -221,16 +221,17 @@ Routing plays an important role in MVC framework since it translate your URL
 <br />
 <br />
 <a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="htdocs.htaccess">htdocs/.htaccess</a> <br />
-<pre class="brush:js; highlight: [6,7]">   
+{% highlight js %}  
       Options +FollowSymLinks
-      &lt;ifmodule mod_rewrite.c=""&gt;         
+      <ifmodule mod_rewrite.c="">         
           # Tell PHP that the mod_rewrite module is ENABLED.
           SetEnv HTTP_MOD_REWRITE On
           RewriteEngine on
           RewriteRule ^$   public/    [L]    
           RewriteRule (.*) public/$1  [L]
-      &lt;/ifmodule&gt;
-    </pre>
+      </ifmodule>
+    {% endhighlight %}
+
 <br />
 In the root of the public folder, we have another <span style="font-weight: bold;">.htaccess</span>
     waiting for us to process the requests (sample below). We put every public
@@ -245,17 +246,18 @@ In the root of the public folder, we have another <span style="font-weight: bold
 <br />
 <br />
 <a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="public-.htaccess">/public/.htaccess</a> <br />
-<pre class="brush:js; highlight: [6,7,8]">        
+{% highlight js %}      
         Options +FollowSymLinks
-        &lt;ifmodule mod_rewrite.c=""&gt;
+        <ifmodule mod_rewrite.c="">
           # Tell PHP that the mod_rewrite module is ENABLED.
           SetEnv HTTP_MOD_REWRITE On
           RewriteEngine On
           RewriteCond %{REQUEST_FILENAME} !-f
           RewriteCond %{REQUEST_FILENAME} !-d
           RewriteRule ^(.*)$ index.php?_route=$1?%{QUERY_STRING} [PT,L]
-        &lt;/ifmodule&gt;
-    </pre>
+        </ifmodule>
+    {% endhighlight %}
+
 <br />
 Once we have an actual page request, then our MVC bootstrap process starts
     from here. The only difference here between Anant Garg's code is we need to
@@ -263,8 +265,8 @@ Once we have an actual page request, then our MVC bootstrap process starts
     of URL entity.<br />
 <br />
 <a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="public-index.php">/public/index.php</a> <br />
-<pre class="brush:php; highlight: [10,13,16]">   
-      &lt;?php
+{% highlight php %}  
+      <?php
         // Ensure we have session
         if(session_id() === ""){
             session_start();
@@ -280,7 +282,8 @@ Once we have an actual page request, then our MVC bootstrap process starts
         
         // start to dispatch
         require_once (ROOT . DS . 'library' . DS . 'bootstrap.php');
-    </pre>
+    {% endhighlight %}
+
 <br />
 <h3>
 Bootstrap</h3>
@@ -304,7 +307,9 @@ Basically, this part does not have big differences between Anant Garg's
 <br />
 <a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="library-bootstrap.php">/library/bootstrap.php</a>
     <br />
-<pre class="brush:php; highlight: [7,49,52,55,62]">      &lt;?php 
+
+{% highlight php %}
+    <?php 
         // Ensure we have session
         if(session_id() === ""){
             session_start();
@@ -361,12 +366,13 @@ Basically, this part does not have big differences between Anant Garg's
         $router = new Router($_route);
         
         // finaly we dispatch the output
-        $router-&gt;dispatch();
+        $router->dispatch();
         
         // close session to speed up the concurrent connections
         // http://php.net/manual/en/function.session-write-close.php
         session_write_close();
-      </pre>
+      {% endhighlight %}
+
 <br />
 <h3>
 The Router (Router.class.php)</h3>
@@ -404,12 +410,14 @@ We start to validate the existence of controller class, model class and
       120 - 152</span>). <br />
 <br />
 The last action would be deliver the results to the clients which you can
-    see at <span style="font-style: italic;">Line 155</span>. The <span style="font-weight: bold;">$this-&gt;_view</span>
+    see at <span style="font-style: italic;">Line 155</span>. The <span style="font-weight: bold;">$this->_view</span>
     value is actually the result from the Template.class.php.<br />
 <br />
 <a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="library-mvc-Router.class.php">/library/mvc/Router.class.php</a>
     <br />
-<pre class="brush:php; highlight: [11,25,26,27,28,29,55,59,71,79,86,94,98,100,108,132,135,137,138,144,152,155]">&lt;?php
+
+{% highlight php %}
+    <?php
     class Router
     {
       protected $_controller,
@@ -419,19 +427,19 @@ The last action would be deliver the results to the clients which you can
                 $_route;
             
       public function __construct($_route){
-          $this-&gt;_route = $_route;
-          $this-&gt;_controller = 'Controller';
-          $this-&gt;_action = 'index';
-          $this-&gt;_params = array(); 
-          $this-&gt;_view = false; // the initial view
+          $this->_route = $_route;
+          $this->_controller = 'Controller';
+          $this->_action = 'index';
+          $this->_params = array(); 
+          $this->_view = false; // the initial view
       }
  
       private function parseRoute(){
           $id = false;
           // parse path info
-          if (isset($this-&gt;_route)){
+          if (isset($this->_route)){
               // the request path
-              $path = $this-&gt;_route;
+              $path = $this->_route;
               // the rules to route
               $cai =  '/^([\w]+)\/([\w]+)\/([\d]+).*$/';  //  controller/action/id
               $ci =   '/^([\w]+)\/([\d]+).*$/';           //  controller/id
@@ -442,21 +450,21 @@ The last action would be deliver the results to the clients which you can
               $matches = array();
               // if this is home page route
               if (empty($path)){
-                  $this-&gt;_controller = 'index';
-                  $this-&gt;_action = 'index';
+                  $this->_controller = 'index';
+                  $this->_action = 'index';
               } else if (preg_match($cai, $path, $matches)){
-                  $this-&gt;_controller = $matches[1];
-                  $this-&gt;_action = $matches[2];
+                  $this->_controller = $matches[1];
+                  $this->_action = $matches[2];
                   $id = $matches[3];
               } else if (preg_match($ci, $path, $matches)){
-                  $this-&gt;_controller = $matches[1];
+                  $this->_controller = $matches[1];
                   $id = $matches[2];
               } else if (preg_match($ca, $path, $matches)){
-                  $this-&gt;_controller = $matches[1];
-                  $this-&gt;_action = $matches[2];
+                  $this->_controller = $matches[1];
+                  $this->_action = $matches[2];
               } else if (preg_match($c, $path, $matches)){
-                $this-&gt;_controller = $matches[1];
-                  $this-&gt;_action = 'index';    
+                $this->_controller = $matches[1];
+                  $this->_action = 'index';    
               } else if (preg_match($i, $path, $matches)){
                   $id = $matches[1];
               }
@@ -487,7 +495,7 @@ The last action would be deliver the results to the clients which you can
                   // we need to remove _route in the $_GET params
                   unset($_GET['_route']);
                   // merege the params
-                  $this-&gt;_params = array_merge($this-&gt;_params, $_GET);               
+                  $this->_params = array_merge($this->_params, $_GET);               
               break;
               case "POST": // create
               case "PUT":  // update
@@ -497,7 +505,7 @@ The last action would be deliver the results to the clients which you can
                   if(!array_key_exists('HTTP_X_FILE_NAME',$_SERVER))
                   {
                       if($method == "POST"){
-                          $this-&gt;_params = array_merge($this-&gt;_params, $_POST); 
+                          $this->_params = array_merge($this->_params, $_POST); 
                       }else{           
                           // temp params 
                           $p = array();
@@ -508,7 +516,7 @@ The last action would be deliver the results to the clients which you can
                           // if we have data field
                           $p = json_decode($content, true);
                           // merge the data to existing params
-                          $this-&gt;_params = array_merge($this-&gt;_params, $p);
+                          $this->_params = array_merge($this->_params, $p);
                       }   
                   }          
               }
@@ -516,42 +524,42 @@ The last action would be deliver the results to the clients which you can
           }
           // set param id to the id we have
           if(!empty($id)){   
-           $this-&gt;_params['id']=$id;
+           $this->_params['id']=$id;
           }
   
-          if($this-&gt;_controller == 'index'){
-              $this-&gt;_params = array($this-&gt;_params);
+          if($this->_controller == 'index'){
+              $this->_params = array($this->_params);
           }       
       }
       
       public function dispatch() {
           // call to parse routes
-          $this-&gt;parseRoute();
+          $this->parseRoute();
           // set controller name
-          $controllerName = $this-&gt;_controller;
+          $controllerName = $this->_controller;
           // set model name
-          $model = $this-&gt;_controller.'Model';
+          $model = $this->_controller.'Model';
           // if we have extended model
           $model = class_exists($model) ? $model : 'Model';
           // assign controller full name
-          $this-&gt;_controller .= 'Controller';
+          $this->_controller .= 'Controller';
           // if we have extended controller
-          $this-&gt;_controller = class_exists($this-&gt;_controller) ? $this-&gt;_controller : 'Controller';
+          $this->_controller = class_exists($this->_controller) ? $this->_controller : 'Controller';
           // construct the controller class
-          $dispatch = new $this-&gt;_controller($model, $controllerName, $this-&gt;_action);
+          $dispatch = new $this->_controller($model, $controllerName, $this->_action);
           // if we have action function in controller
-          $hasActionFunction = (int)method_exists($this-&gt;_controller, $this-&gt;_action);
+          $hasActionFunction = (int)method_exists($this->_controller, $this->_action);
           // we need to reference the parameters to a correct order in order to match the arguments order 
           // of the calling function
-          $c = new ReflectionClass($this-&gt;_controller);
-          $m = $hasActionFunction ? $this-&gt;_action : 'defaultAction';
-          $f = $c-&gt;getMethod($m);
-          $p = $f-&gt;getParameters();            
+          $c = new ReflectionClass($this->_controller);
+          $m = $hasActionFunction ? $this->_action : 'defaultAction';
+          $f = $c->getMethod($m);
+          $p = $f->getParameters();            
           $params_new = array();
-          $params_old = $this-&gt;_params;
+          $params_old = $this->_params;
           // re-map the parameters
-          for($i = 0; $i&lt;count($p);$i++){
-              $key = $p[$i]-&gt;getName();
+          for($i = 0; $i<count($p);$i++){
+              $key = $p[$i]->getName();
               if(array_key_exists($key,$params_old)){
                   $params_new[$i] = $params_old[$key];
                   unset($params_old[$key]);
@@ -560,14 +568,15 @@ The last action would be deliver the results to the clients which you can
           // after reorder, merge the leftovers
           $params_new = array_merge($params_new, $params_old);
           // call the action method
-          $this-&gt;_view = call_user_func_array(array($dispatch, $m), $params_new);  
+          $this->_view = call_user_func_array(array($dispatch, $m), $params_new);  
           // finally, we print it out
-          if($this-&gt;_view){
-             echo $this-&gt;_view;
+          if($this->_view){
+             echo $this->_view;
           }
       }
   }
-  </pre>
+  {% endhighlight %}
+
 <br />
 <h3>
  The Controller (Controller.class.php)</h3>
@@ -593,7 +602,8 @@ Please note that I use <span style="font-weight: bold;">MySqlDataAdapter.class.p
 <br />
 <a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="library-mvc-Controller.class.php">/library/mvc/Controller.class.php</a>
     <br />
-<pre class="brush:php; highlight:[18,23,25,27,57,60,62,80,82,85,86,103,104,105,106]">   &lt;?php
+{% highlight php %}
+    <?php
       class Controller {
           protected $_model,
                     $_controller,
@@ -610,18 +620,18 @@ Please note that I use <span style="font-weight: bold;">MySqlDataAdapter.class.p
               // register configurations from config.php
               global $cfg;      
               // set config
-              $this-&gt;cfg = $cfg;              
+              $this->cfg = $cfg;              
               // construct MVC
-              $this-&gt;_controller = $controller;
-              $this-&gt;_action = $action;
+              $this->_controller = $controller;
+              $this->_action = $action;
               // initialise the template class
-              $this-&gt;view = new Template($controller, $action);   
+              $this->view = new Template($controller, $action);   
               // call the function for derived class      
-              $this-&gt;init();
+              $this->init();
               // start contruct models
-              $this-&gt;_model = new $model($this-&gt;db);
-              $this-&gt;_model-&gt;controller = $this;
-              $this-&gt;table = $controller;
+              $this->_model = new $model($this->db);
+              $this->_model->controller = $this;
+              $this->table = $controller;
           }
           
           /**
@@ -649,22 +659,22 @@ Please note that I use <span style="font-weight: bold;">MySqlDataAdapter.class.p
           */
           public function defaultAction($params = null){
             // make the default action path
-            $path = MyHelpers::UrlContent("~/views/{$this-&gt;_controller}/{$this-&gt;_action}.php");  
+            $path = MyHelpers::UrlContent("~/views/{$this->_controller}/{$this->_action}.php");  
             // if we have action name
             if(file_exists($path)){
-                $this-&gt;view-&gt;viewPath = $path;
+                $this->view->viewPath = $path;
             }else{
-                $this-&gt;unknownAction();
+                $this->unknownAction();
             }
             // if we have parameters
             if(!empty($params) &amp;&amp; is_array($params)){
                   // assign local variables
-                  foreach($params as $key=&gt;$value){
-                   $this-&gt;view-&gt;set($key, $value);   
+                  foreach($params as $key=>$value){
+                   $this->view->set($key, $value);   
                   }
             }
             // dispatch the result
-            return $this-&gt;view();
+            return $this->view();
           }
 
           /**
@@ -677,8 +687,8 @@ Please note that I use <span style="font-weight: bold;">MySqlDataAdapter.class.p
             $path = MyHelpers::UrlContent("~/views/shared/_404.php");
             // if we have custom 404 page, then use it
             if(file_exists($path)){
-              $this-&gt;view-&gt;viewPath = $path;
-              return $this-&gt;view();
+              $this->view->viewPath = $path;
+              return $this->view();
             }else{
               exit; //Do not do any more work in this script. 
             }
@@ -689,7 +699,7 @@ Please note that I use <span style="font-weight: bold;">MySqlDataAdapter.class.p
           */
           public function set($name,$value) {
             // set the parameters to the template class
-            $this-&gt;view-&gt;set($name, $value);
+            $this->view->set($name, $value);
           }      
             
           /**
@@ -697,10 +707,11 @@ Please note that I use <span style="font-weight: bold;">MySqlDataAdapter.class.p
           */
           public function view(){
             // dispatch the result of the template class
-            return $this-&gt;view;
+            return $this->view;
           }
       }
-    </pre>
+    {% endhighlight %}
+
 <br />
 <h3>
 The Model (Model.class.php)</h3>
@@ -709,7 +720,8 @@ Well, since most of database operations are handled by MySqlDataAdapter.php,
 <br />
 <a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="library-mvc-Model.class.php">/library/mvc/Model.class.php</a>
     <br />
-<pre class="brush:php; highlight:[11,16]">      &lt;?php
+{% highlight php %}
+ <?php
       class Model{
         protected $_model;
         public $db, $controller;
@@ -719,22 +731,23 @@ Well, since most of database operations are handled by MySqlDataAdapter.php,
           * 
           */
         public function __construct($db) {
-              $this-&gt;db = $db;
-              $this-&gt;_model = get_class($this);
-              $defaultModel = ($this-&gt;_model=='Model');
+              $this->db = $db;
+              $this->_model = get_class($this);
+              $defaultModel = ($this->_model=='Model');
               
               if(!$defaultModel){
-                  $this-&gt;table = preg_replace('/Model$/', '', $this-&gt;_model);// remove ending Model        
+                  $this->table = preg_replace('/Model$/', '', $this->_model);// remove ending Model        
               }
               
-              $this-&gt;init();
+              $this->init();
         }
       
         protected function init(){
           /* Put your code here*/     
         }
       }
-    </pre>
+    {% endhighlight %}
+
 <br />
 <h3>
 The Template (Template.class.php)</h3>
@@ -757,7 +770,8 @@ At the end, we override the <a href="http://www.php.net/manual/en/language.oop5.
 <br />
 <a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="library-mvc-Template.class.php">/library/mvc/Template.class.php</a>
     <br />
-<pre class="brush:php; highlight:[24,40,49,62,70,72,78,82,87,93,94,95,96]">      &lt;?php
+{% highlight php %}      
+    <?php
       class Template {                      
         protected $_variables = array(),
                   $_controller,
@@ -769,25 +783,25 @@ At the end, we override the <a href="http://www.php.net/manual/en/language.oop5.
                     $layout;
           
           public function __construct($controller, $action) {
-            $this-&gt;_controller = $controller;
-            $this-&gt;_action = $action;
+            $this->_controller = $controller;
+            $this->_action = $action;
                 // we set the configuration variables to local variables for rendering
                 global $cfg;
-                $this-&gt;set('cfg',$cfg);
+                $this->set('cfg',$cfg);
           }
         
           /** 
            * Set Variables 
            */
           public function set($name, $value) {
-            $this-&gt;_variables[$name] = $value;
+            $this->_variables[$name] = $value;
           }
           
           /**
           * set action
           */
           public function setAction($action){
-              $this-&gt;_action = $action;
+              $this->_action = $action;
           }
           
           /**
@@ -795,8 +809,8 @@ At the end, we override the <a href="http://www.php.net/manual/en/language.oop5.
           */
           public function renderBody(){
             // if we have content, then deliver it
-              if(!empty($this-&gt;_bodyContent)){
-                  echo $this-&gt;_bodyContent;
+              if(!empty($this->_bodyContent)){
+                  echo $this->_bodyContent;
               }
           }
           
@@ -804,8 +818,8 @@ At the end, we override the <a href="http://www.php.net/manual/en/language.oop5.
           * RenderSection
           */
           public function renderSection($section){
-              if(!empty($this-&gt;section) &amp;&amp; array_key_exists($section, $this-&gt;section)){
-                  echo $this-&gt;section[$section];
+              if(!empty($this->section) &amp;&amp; array_key_exists($section, $this->section)){
+                  echo $this->section[$section];
               }
           }
       
@@ -814,33 +828,33 @@ At the end, we override the <a href="http://www.php.net/manual/en/language.oop5.
         */
           public function render() {  
               // extract the variables for view pages
-              extract($this-&gt;_variables);
+              extract($this->_variables);
               // the view path
               $path = MyHelpers::UrlContent('~/views/');
               // start buffering
               ob_start();
               // render page content
-              if(empty($this-&gt;viewPath)){ 
-                  include ($path . $this-&gt;_controller . DS . $this-&gt;_action . '.php');
+              if(empty($this->viewPath)){ 
+                  include ($path . $this->_controller . DS . $this->_action . '.php');
               }else{
-                  include ($this-&gt;viewPath);
+                  include ($this->viewPath);
               }
               // get the body contents
-              $this-&gt;_bodyContent = ob_get_contents();
+              $this->_bodyContent = ob_get_contents();
               // clean the buffer
               ob_end_clean();
               // check if we have any layout defined
-              if(!empty($this-&gt;layout) &amp;&amp; (!MyHelpers::isAjax())){
+              if(!empty($this->layout) &amp;&amp; (!MyHelpers::isAjax())){
                   // we need to check the path contains app prefix (~)
-                  $this-&gt;layout = MyHelpers::UrlContent($this-&gt;layout);
+                  $this->layout = MyHelpers::UrlContent($this->layout);
                   // start buffer (minify pages)
                   ob_start('MyHelpers::minify_content');
                   // include the template
-                  include($this-&gt;layout);
+                  include($this->layout);
               }else{
                   ob_start('MyHelpers::minify_content_js');
                   // just output the content
-                  echo $this-&gt;_bodyContent;
+                  echo $this->_bodyContent;
               }
               // end buffer
               ob_end_flush();
@@ -850,54 +864,60 @@ At the end, we override the <a href="http://www.php.net/manual/en/language.oop5.
           * return the renderred html string
           */
           public function __toString(){
-              $this-&gt;render();
+              $this->render();
               return '';
           }
       }   
-    </pre>
+    {% endhighlight %}
+
 <br />
 <h3>
 How to use template?</h3>
 The logic is similar to .NET MVC's template operations. We have shared pages
     to accommodate each view page. Simply assign the main page layout at top of
-    each view page (<span style="font-weight: bold;">$this-&gt;layout="~/view/shared/_defaultLayout.php"</span>).
-    If we have dynamic sections, then we place <span style="font-weight: bold;">$this-&gt;section['param']</span>
+    each view page (<span style="font-weight: bold;">$this->layout="~/view/shared/_defaultLayout.php"</span>).
+    If we have dynamic sections, then we place <span style="font-weight: bold;">$this->section['param']</span>
     at the view page.<br />
 <br />
 <a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="application-view-shared-_defaultLayout.php">/application/view/shared/_defaultLayout.php</a><br />
-<pre class="brush:php;highlight:[3,6]">      &lt;html&gt;
-        &lt;head&gt;
-          &lt;?php $this-&gt;renderSection('head');?&gt;
-        &lt;/head&gt;
-        &lt;body&gt;
-          &lt;?php $this-&gt;renderBody();?&gt;
-        &lt;/body&gt;
-      &lt;/html&gt;
-    </pre>
+{% highlight php %}
+<html>
+    <head>
+        <?php $this->renderSection('head');?>
+    </head>
+    <body>
+        <?php $this->renderBody();?>
+    </body>
+    </html>
+{% endhighlight %}
+
 <br />
 When you put your content of the page, you can also place sections to
     defined place in the _defaultLayout.php<br />
 <br />
 <a class="filepath" href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" name="application-view-index-index.php">/application/view/index/index.php</a><br />
-<pre class="brush:php;highlight:[3,5]">        &lt;?php
+{% highlight php %}        <?php
           // The default layout template
-          $this-&gt;layout = '~/views/shared/_defaultLayout.php';
+          $this->layout = '~/views/shared/_defaultLayout.php';
           // The value to put on the head section
-          $this-&gt;section['head']="&lt;script src='http://code.jquery.com/jquery-latest.min.js'&gt;&lt;/script&gt;";
-        ?&gt;
-        &lt;strong&gt;This is the text I want to show in the body&lt;/strong&gt;
-    </pre>
+          $this->section['head']="<script src='http://code.jquery.com/jquery-latest.min.js'></script>";
+        ?>
+        <strong>This is the text I want to show in the body</strong>
+    {% endhighlight %}
+
 <br />
 <span style="font-weight: bold;">The output result </span><br />
-<pre class="brush:html;highlight:[3,6]">      &lt;html&gt;
-        &lt;head&gt;
-          &lt;script src='http://code.jquery.com/jquery-latest.min.js'&gt;&lt;/script&gt;
-        &lt;/head&gt;
-        &lt;body&gt;
-          &lt;strong&gt;This is the text I want to show in the body&lt;/strong&gt;
-        &lt;/body&gt;
-      &lt;/html&gt;
-   </pre>
+{% highlight html %}
+      <html>
+        <head>
+          <script src='http://code.jquery.com/jquery-latest.min.js'></script>
+        </head>
+        <body>
+          <strong>This is the text I want to show in the body</strong>
+        </body>
+      </html>
+   {% endhighlight %}
+
 <a name='download'></a>
 <br />
 In conclusion, the concept is not difficult and should be easy to apply on any simple project. If you understand how Anant Garg wants to achieve, you should be able to comprehend this post. You can download the sample code from <a href="https://drive.google.com/uc?export=download&amp;confirm=no_antivirus&amp;id=0BxNgktpBGY4Ya1ZiUUtlb1ZBYVE">HERE</a>

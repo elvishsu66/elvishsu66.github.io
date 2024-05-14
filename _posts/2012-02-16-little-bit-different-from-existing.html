@@ -21,9 +21,10 @@ blogger_orig_url: https://www.elvishsu.com/2011/12/little-bit-different-from-exi
 Recently, one of my clients needed to have a date/time field to update/create their records. So I googled a bit and found a great sample/extension for my existing project.<br />
 <br />
 Yes, it is <a href="http://www.sencha.com/forum/showthread.php?134345-Ext.ux.form.field.DateTime" target="_blank">Ext.ux.form.field.DateTime</a>. However the existing extension does not have validation function so I just made a few changes on it.<br />
-<br />
-<br />
-<pre class="brush:js" name="code">/**
+
+
+{% highlight js %}
+/**
 * @auther Elvis Hsu
 * @class Ext.ux.form.field.DateTime
 * @extends Ext.form.FieldContainer  
@@ -117,7 +118,7 @@ Ext.define('Ext.ux.form.field.DateTime', {
         }, me.timeConfig));
         me.items.push(me.timeField);
         
-        for (var i = 0; i &lt; me.items.length; i++) {
+        for (var i = 0; i < me.items.length; i++) {
             me.items[i].on('focus', Ext.bind(me.onItemFocus, me));
             me.items[i].on('blur', Ext.bind(me.onItemBlur, me));
             me.items[i].on('specialkey', function(field, event){
@@ -282,4 +283,5 @@ Ext.define('Ext.ux.form.field.DateTime', {
         return me.dateField.validate();
     }
 }); 
-</pre>
+{% endhighlight %}
+
