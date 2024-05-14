@@ -1,0 +1,55 @@
+---
+layout: page
+title: About me
+description: Professional Experiences
+image: /assets/images/elvis.jpg
+---
+
+<ul class="timeline timeline-split" itemscope itemtype="http://schema.org/ProfilePage">
+  {% for experience in site.data.experiences %}
+  {% if experience.break %}
+  <li class="timeline-item period">
+    <div class="timeline-info"></div>
+    <div class="timeline-marker"></div>
+    <div class="timeline-content">
+      <h3 class="timeline-title">{{ experience.role }}</h3>
+    </div>
+  </li>
+  {% else %}
+  <li class="timeline-item">
+    <div class="timeline-info">
+      <span>{{ experience.started }}</span>
+    </div>
+    <div class="timeline-marker"></div>
+    <div class="timeline-content">
+      <h3 class="timeline-title">{{ experience.role }}</h3>
+      <h5 class="timeline-title">
+        {% if experience.website %}
+        <a href="{{ experience.website }}" target="_blank" title=" {{ experience.company }}"> {{ experience.company }}</a>
+        {% else %}
+        <span>{{ experience.company }}</span>
+        {% endif %}
+        <span>- {{ experience.location }}</span>
+      </h5>
+      <p>
+        <ul>
+          {% for item in experience.content %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </p>
+      {% if experience.achievements %}
+      <i>Key Achievements</i>
+      <p>
+        <ul>
+          {% for item in experience.achievements %}
+          <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </p>
+      {% endif %}
+    </div>
+  </li>
+  {% endif %}
+  {% endfor %}
+</ul>

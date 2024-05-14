@@ -1,0 +1,39 @@
+---
+layout: post
+title: Tricky VPN settings on Ubuntu 11.04
+date: "2011-05-03T14:03:00.001+02:00"
+author: Elvis Hsu
+tags:
+  - Linux
+  - Ubuntu
+  - Tips
+modified_time: "2014-01-26T13:16:45.915+01:00"
+thumbnail: /assets/posts/blogger/2011-05-03-image-0000.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-1955202964242078876
+blogger_orig_url: https://www.elvishsu.com/2011/05/tricky-vpn-settings-on-ubuntu-1104.html
+---
+
+<span>
+  Today, I was trying to connect to our VPN with Ubuntu 11.04 and found out that was not working. Well, after a bit
+  searches on Google, I found out there are some points of VPN settings that I needed to change.
+</span>
+<br />
+
+<img
+  alt="Tricky VPN settings on Ubuntu 11.04"
+  src="/assets/posts/blogger/2011-05-03-image-0000.png"
+  title="Tricky VPN settings on Ubuntu 11.04"
+/>
+
+<ol>
+  <li>
+    <span>Username should be <b>domain\username</b>.</span>
+  </li>
+  <li><span>Do not fill out domain in the VPN configuration.</span></li>
+  <li>
+    <span
+      >Under the advanced option make sure you tick "<b>Use Point-to-Point encryption (MPPE)</b>" option. (see above
+      screenshot)</span
+    >
+  </li>
+</ol>

@@ -1,0 +1,53 @@
+---
+layout: post
+title: Darken or lighten the colour with C#
+date: '2011-04-12T01:31:00.001+02:00'
+author: Elvis Hsu
+tags:
+- Coding
+- C#
+modified_time: '2014-01-30T14:36:47.192+01:00'
+thumbnail: /assets/posts/blogger/2011-04-12-image-0000.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-2118636701649579486
+blogger_orig_url: https://www.elvishsu.com/2011/04/darken-or-lighten-colour-with-c.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj0kY1ftRw0n57fqTbsGQT2IaV07q6pKX8kddnxUwuNj5WR6mePUI6CFBbO6ahMZeoiH9DKOd6MZX8H_6EbtmRWgSopNhgSFOVl55GyAQWplEdP4xdhmNptO94cH28pESkfWnLEyx_VESY/s1600/color_settings.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" height="200" src="/assets/posts/blogger/2011-04-12-image-0000.png" width="200" /></a></div>
+<br />
+<br />
+It was a while ago to play the colours in .NETCF. The case was drawing darker or lighter colour when user clicks my custom design buttons. Well, I believe it would be much easier to change the colour by its original colour. So I came up with two methods to extend the existing <a href="http://msdn.microsoft.com/en-us/library/system.drawing.color.aspx">System.Drawing.Color</a> object. These two methods can be found similar over the Internet. So, I have to thank all the developers in the Internet...<br />
+<br />
+<br />
+
+
+{% highlight cs %}
+public static Color GetColorDarker(this Color color, double factor)
+{
+    // The factor value value cannot be greater than 1 or smaller than 0.
+    // Otherwise return the original colour
+    if (factor < 0 || factor > 1)
+        return color;
+
+    int r = (int)(factor * color.R);
+    int g = (int)(factor * color.G);
+    int b = (int)(factor * color.B);
+    return Color.FromArgb(r, g, b);
+}
+{% endhighlight %}
+
+
+{% highlight cs %}
+public static Color GetColorLighter(this Color color, double factor)
+{
+    // The factor value value cannot be greater than 1 or smaller than 0.
+    // Otherwise return the original colour
+    if (factor < 0 || factor > 1)
+        return color;
+
+    int r = (int)(factor * color.R + (1 - factor) * 255);
+    int g = (int)(factor * color.G + (1 - factor) * 255);
+    int b = (int)(factor * color.B + (1 - factor) * 255);
+    return Color.FromArgb(r, g, b);
+}
+{% endhighlight %}

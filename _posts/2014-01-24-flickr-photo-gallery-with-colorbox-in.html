@@ -1,0 +1,136 @@
+---
+layout: post
+title: Flickr Photo Gallery with Colorbox in jQuery
+date: '2014-01-24T01:13:00.000+01:00'
+author: Elvis Hsu
+tags:
+- Coding
+- Javascript
+modified_time: '2018-01-04T00:12:12.416+01:00'
+thumbnail: /assets/posts/blogger/2014-01-24-image-0000.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-7552590070986230498
+blogger_orig_url: https://www.elvishsu.com/2014/01/flickr-photo-gallery-with-colorbox-in.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2014-01-24-image-0000.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img alt="Flickr Photo Gallery" border="0" src="/assets/posts/blogger/2014-01-24-image-0000.png" height="148" title="Flickr Photo Gallery" width="200" /></a></div>
+Last week I updated my Blogger site to be responsive and optimised the <a href="https://developers.google.com/speed/pagespeed/insights/?url=www.elvishsu66.com" target="_blank" title="Google PageSpeed Insights">page
+      load time</a>. Whilst doing those optimisation, I was looking for a simple
+    photo gallery to display the photos from my <a href="http://www.flickr.com/photos/elvishsu66" target="_blank" title="Elvis's Photostream">Flickr
+      photo stream</a>. I've tried <a href="http://www.flickrslideshow.com/" target="_blank" title="flickr sideshow">flickr
+      sideshow</a><span style="text-decoration: underline;"></span>, <a href="http://www.db798.com/pictobrowser/" target="_blank" title="pictobrowser">pictobrowser
+      </a>and <a href="http://www.slideflickr.com/" target="_blank" title="slideflickr">slideflickr</a>
+    however I was not satisfied with them. I then started to study the <a href="http://www.flickr.com/services/api/" target="_blank" title="Flickr API">Flickr
+      API</a> and tried to make a Flickr-like justified layout for my <a href="https://www.blogger.com/p/photography.html" target="_blank" title="My Phtos">photography
+      page</a>. While trying to code the jQuery plugin, I found two great
+    articles by Sam from <a href="http://www.wackylabs.net/2012/03/flickr-justified-layout-in-jquery/" target="_blank" title="wackylabs">Wackylabs.net</a>
+    and <a href="http://miromannino.com/projects/justified-gallery/" target="_top">Miro
+      Mannino</a>. Miro explained how the layout could be done with a detailed
+    illustrations but I decided to use Sam's algorithm to build my own jQuery
+    plugin.<br />
+<a name='more'></a><br />
+The plugin loads 5 rows when scrolling to the end of the page until photos
+    all are loaded. If the configuration specifies more than one page, then it
+    calls and loads next page until it reaches maximum pages. The current
+    solution is not perfect and may affect the performance when it loads more
+    than <span style="font-weight: bold;">800</span> photos. I will be working
+    on optimising the performance to allow loading more photos.<br />
+<br />
+This jQuery plugin also uses <a href="http://www.jacklmoore.com/colorbox/" target="_blank" title="Colorbox">Colorbox</a>
+    to show larger version of photos when user clicks on the photo.<br />
+<br />
+Okay, let me explain the configuration and how to use the plugin. However
+    feel free to jump straight to the <a href="https://dl.dropboxusercontent.com/u/99319532/Blogger/host/flickrGallery.html" target="_blank">demo</a>
+    to view-source.<br />
+<br />
+<ul>
+<li><span style="font-weight: bold;">rows</span>: the total/initial rows
+        to show (default to 5)</li>
+<li> <span style="font-weight: bold;">rowHeight</span>: the desired
+        height of row (default to 150)</li>
+<li><span style="font-weight: bold;">borderWidth</span>: the border width
+        of each photo (default to 5)</li>
+<li><span style="font-weight: bold;">shuffle</span>: shuffles the photo
+        array when value is true (default to false)</li>
+<li><span style="font-weight: bold;">maxPage</span>: the maximum flickr
+        pages to load (default to 3)</li>
+<li><span style="font-weight: bold;">loadOnScroll</span>: loads new photos
+        when scrolling to page end (default to false)</li>
+<li><span style="font-weight: bold;">params->method</span>: the <a href="http://www.flickr.com/services/api/" target="_blank">Flick
+          API</a> method (default to '<a href="http://www.flickr.com/services/api/flickr.photos.search.html" target="_blank">flickr.photos.search</a>')</li>
+<li><span style="font-weight: bold;">params->api_key</span>: the API
+        key which you can get it from <a href="http://www.flickr.com/services/apps/create/apply" target="_blank" title="Apply Flickr API key">here</a></li>
+<li><span style="font-weight: bold;">params->user_id</span>: your user
+        id for fetching your photo stream. You can get it from <a href="http://idgettr.com/" target="_blank" title="Flickr user id">here</a><a href="https://www.blogger.com/blogger.g?blogID=1691872865366176972" target="_blank" title="Flickr user id"><br />
+        </a><span style="font-weight: bold;"></span></li>
+<li><span style="font-weight: bold;">params->per_page</span>: the
+        available photos per page from the results of API call (default to 100)</li>
+<li><span style="font-weight: bold;">params->page</span>: the start
+        page (default to 1)</li>
+<li><span style="font-weight: bold;">params->tags</span>: the tag of
+        photos to search (default to blank)</li>
+</ul>
+<br />
+The following example uses "<a href="http://www.flickr.com/services/api/flickr.photos.search.html" target="_blank" title="search flickr photos">flickr.photos.search</a>"
+    method to load photos with tag "<span style="font-weight: bold;">canon</span>".
+    It shuffles loaded photos to randomly display photos. If you want to display
+    your photo stream, you should add "<a href="http://idgettr.com/" target="_blank" title="Your Flickr id">user_id</a>"
+    to <span style="font-weight: bold;">params</span> and change the method to
+    "<a href="https://www.flickr.com/services/api/flickr.people.getPhotos.html" target="_blank" title="Get your photos">flickr.people.getPhotos</a>".<br />
+
+
+{% highlight js %} 
+<!DOCTYPE html>
+<html lang='en'>
+ <head>
+ <meta charset='utf-8' />
+  <title>Flickr Photo Gallery with Colorbox in jQuery</title>
+ </head>
+ <body>
+  <div id='container'><!-- Nothing here --></div>
+
+  <!-- Place your script above the end of </body> -->  
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+  <script type='text/javascript' src='flickrGallery.js'></script>
+  <script>
+   $(document).ready(function() {
+    var config={
+     rows: 5, // total rows
+     rowHeight: 150, // the height of each row
+     borderWidth: 3, // the width of the border
+     shuffle: true, // shuffle the images
+     maxPages: 3, // max flickr pages to load
+     loadOnScroll:true, // load more phots when scrolling
+     cb_url:'url_o', // the link for colorbox
+     params:{
+      method:  'flickr.photos.search', // flickr api method
+      api_key: 'ad2e1cc1d51162a8ee4ee4b022a711f4',// your API key
+      per_page: 100, // max 500
+      page: 1, // page to load
+      tags: 'canon' // search tag,
+      extras: 'url_o' // add to existing params (url_n,url_c,url_m,url_z,owner_name)
+     }
+    };
+    // start loading the gallery
+    $('#container').flickrGallery(config);
+   });
+  </script>
+ </body>
+</html>
+    {% endhighlight %}
+
+You can see it in action at below or from <a href="http://elvishsu66.github.io/flickrGallery.html" target="_blank" title="Flickr Photo Gallery with Colorbox in jQuery">here</a>.
+    You can also read and study the plugin from <a href="https://raw.githubusercontent.com/elvishsu66/Blogger/master/host/flickrGallery.js" target="_blank" title="Plugin source">here</a>.<br />
+<br />
+<script>
+var flickrConfig = {rows:5,rowHeight: 120, borderWidth:3}
+</script>
+
+<br />
+<div id="fGallery">
+</div>
+<br />
+<br />
+Well, if you enjoy this article, please leave a like or a plus and let me know your thoughts in the comments.
+<br />
+<br />

@@ -1,0 +1,399 @@
+---
+layout: post
+title: Build your own Related Posts widget for Blogger
+date: '2014-01-30T14:33:00.000+01:00'
+author: Elvis Hsu
+tags:
+- Blogger
+- Coding
+- Javascript
+modified_time: '2014-06-25T15:12:37.628+02:00'
+thumbnail: /assets/posts/blogger/2014-01-30-image-0000.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-4019223296447387421
+blogger_orig_url: https://www.elvishsu.com/2014/01/build-your-own-related-posts-widget-for-blogger.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+<a href="/assets/posts/blogger/2014-01-30-image-0000.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img border="0" src="/assets/posts/blogger/2014-01-30-image-0000.png" height="227" width="320"/></a></div>
+    I have visited many blog sites and most of them have "<b>Related Posts</b>"
+    or "<b>You may also like -</b> " section for visitors who like to discover
+    more related articles or stories. I am one of those visitors who likes to
+    find out more interesting posts which are related to the original article I
+    have read. Indeed, having related posts section will increase your exposures
+    of your site. That is no doubt about it.<br>
+    <br>
+    Unfortunately, I didn't have this feature on my site since I started to
+    customise it. Of course I then started to do some research about building a
+    "<span style="font-weight: bold;">Related Posts</span>" widget for Blogger.
+    Obviously, there are lots of articles talking about "<b>adding</b>" related
+    posts widget to your Blogger site but not many of them have detailed
+    explanations. Well, fortunately some of them guided me to create this jQuery
+    plugin.&nbsp;
+    <a name='more'></a><br>
+    <br>
+    So first of all, what does related posts mean? Are they related to the title
+    of the original article? Or are they related to the category of the original
+    post? Or are they related to the author's posts? Well, I would answer yes to
+    all of them. You may have other supportive answers too. &nbsp; <br>
+    <br>
+    In this plugin, I find related posts based on the current article's "<b>labels</b>"
+    via the Blogger's <b>RSS feed</b>. So you need to label your article in
+    order to make this plugin work. Since the RSS feed provides all information
+    I needed, I just need to extract and parse the data to what I need for
+    "related posts". So what do I need from the RSS feed? <br>
+    <br>
+    <ul>
+      <li>The <b>post id</b> or <b>labels</b> of current article</li>
+      <li>The labels of each article</li>
+      <li>The URL link of each article</li>
+      <li>The title of each article</li>
+      <li>The thumbnail link of each article</li>
+    </ul>
+    <br>
+    Luckily Google provides a comprehensive documentation for its data APIs for
+    Blogger developers so if you want to dig more information out, just pay a
+    visit to <a href="https://developers.google.com/gdata/docs/2.0/reference#Queries"
+      target="_blank">here</a>.
+    <br>
+    <br>
+    Anyway, the concept is to use the <b>labels</b> of current article to find
+    related posts and the post id or article link as identifier to exclude
+    current article from the collection of related posts. When the labels are
+    retrieved, then we start to find and collect posts whose labels contain the
+    original article's labels. Finally, we output these collected posts to the
+    site. Here is the source code of this plugin.
+    
+
+{% highlight js %}
+(function($){
+  $.fn.relatedPosts=function(config){
+   var me = this,
+    blogId,
+    postId;
+ 
+   var settings = $.extend(true,{
+    url: '',
+    postId:'',
+    labels:[],
+    title:'Related Posts: ',
+    itemClass: 'related_item',
+       wrapperClass: 'related_items_wapper',
+    titleClass: 'title',
+    shuffle:true,
+    thumbUsePost:true,
+    thumbWidth:100,
+    thumbHeight:75,
+    maxPosts: 6
+   },config);
+ 
+   if(!$.isArray(settings.labels)){
+    settings.labels = settings.labels.trim().split(',');
+   }
+   return init();
+ 
+   function init(){
+    $.ajax({
+        url: settings.url + '/feeds/posts/default?alt=json&max-results=500',
+        type: 'get',
+        dataType: "jsonp",
+        cache:true,
+        success: function(data){
+         // get the blog feed id
+         blogId = data.feed.id.$t;
+         if(settings.postId !== ''){
+          // get the current post id
+          postId = blogId + '.post-' + settings.postId;
+         }
+         // get related posts
+         var posts = findRelatedPosts(data.feed.entry);
+            // add section title
+            me.append($('<h2/>').text(settings.title));
+            var wrapper = $('<div/>',{'class':settings.wrapperClass});
+         // construct the output
+            for (var i = 0; i < posts.length; i++){
+             var entry = posts[i];
+             var href = getLink(entry);
+             // the link
+             var link = $('<a/>',{'href':href});
+             // the thumbnail
+             var thumb = findThumbnail(entry,entry.title.$t);
+             // the post title
+             var pTitle = $('<div/>',{'class':settings.titleClass});
+             // the item block
+             var div = $('<div/>',{'class':settings.itemClass});
+             // add thumbnail
+             div.append(thumb);
+                // wrap the link
+                thumb.wrap(link);
+             // add post title
+                      div.append(pTitle);
+                      pTitle.append(link.text(entry.title.$t));
+                      // add the item block
+                wrapper.append(div);
+                div.click(function() { window.location = href; })
+            }
+            me.append(wrapper);
+            // clear the layout
+           me.append('<div style="clear:both;"></div>');
+        }
+    });   
+   }
+   
+   // gets the entry link
+   function getLink(entry){
+    var href = '#';
+    $.each(entry.link, function(i, v){
+     if(v.rel=='alternate'){
+      href = v.href;
+      return false;
+     };
+    });
+    return href;
+   }
+ 
+   // find related entries
+   function findRelatedPosts(entries){
+    var posts = [];
+    var cats = settings.labels;
+ 
+    for (var i = 0; i < entries.length; i++){
+     if(!matchCurrentPost(entries[i])){    
+      if(matchCategory(entries[i],cats)){
+       posts.push(entries[i]);
+      }
+     }
+    }
+    // shuffle array
+    if(settings.shuffle){
+     posts.sort(function() { return 0.5 - Math.random() });
+    }
+    return posts.slice(0,settings.maxPosts);
+   }
+ 
+   function findThumbnail(entry, title){
+    if(settings.thumbUsePost){
+     if(entry.content){
+      var div = $('<div/>').html(entry.content.$t);
+      var imgs = div.find('img');
+      if(imgs.length > 0){     
+       return $('<img/>',{'src':imgs[0].src, 'alt': imgs[0].alt, 'title': title, 'width':settings.thumbWidth,'height':settings.thumbHeight});
+      }
+     }
+    }else{
+     return $('<img/>',{'src':entry.media$thumbnail.url,'title': title,'alt':title,'width':entry.media$thumbnail.width,'height':entry.media$thumbnail.height});
+    }
+   }
+ 
+   function matchCurrentPost(entry){
+    var match = false;
+    if(postId){
+     var id = entry.id.$t
+     match = (id == postId);    
+    }else{
+     var href = location.href.replace(location.hash,'');
+     href = href.split('?')[0].toLowerCase();
+     $.each(entry.link, function(i,v){
+      if(v.rel == 'alternate'){
+       if(v.href.toLowerCase() == href){
+        match = true;
+        return false;
+       }
+      }
+     });
+    }
+    return match;
+   }
+ 
+   // find any matched category
+   function matchCategory(entry, tags){
+    if(entry.category){
+     for(var i = 0; i < entry.category.length; i++){
+      var tag = entry.category[i].term;
+      if($.inArray(tag,tags) >= 0){
+       return true;
+      }
+     }    
+    }
+    return false;
+   }
+  };
+ })(jQuery);
+{% endhighlight %}
+
+You may notice that I use the url <span style="font-weight: bold;">/feeds/posts/default</span>
+instead of <span style="font-weight: bold;">/feeds/posts/summary</span>. If
+I use summary, then I cannot extract the original images for thumbnails.
+Also if the images of the article were not uploaded via Blogger then you
+don't have the thumbnail link from the feed. Therefore the most secure way
+is use the original image link from the article itself. 
+<br>
+<br>
+
+<h2>So how can I use this widget? </h2>
+
+There are 4 key factors you need to do:
+<ol>
+  <li> Make sure you have jQuery library loaded </li>
+  <li> Make sure you have the plugin placed after the jQuery library link </li>
+  <li> Place the div container to the place you want to show (usually we
+    place it at the end of the article)&nbsp;</li>
+  <li>Call the plugin when the document is ready</li>
+</ol>
+
+<br>
+Let's get started and we only need 3 steps to make it work<br>
+<br>
+
+<h3>1. Place the code to the section you want to show the related posts</h3>
+Below is the code you need to put to the place you want to show on your page
+
+
+{% highlight html %} 
+<b:if cond='data:blog.pageType == &quot;item&quot;'>
+ <!-- related posts -->
+ <div id='related_posts'></div>
+ <script>var labels = &#39;<b:loop values='data:post.labels' var='label'><data:label.name/><b:if cond='data:label.isLast != &quot;true&quot;'>,</b:if></b:loop>&#39;;</script>                  
+</b:if>
+{% endhighlight %}
+
+ First you need to open your HTML template editor and search for<br>
+<br>
+{% highlight html %} 
+  <div class='post-footer'></div>
+{% endhighlight %}
+
+<br>
+if you cannot find above, then we need to find below text<br>
+<br>
+{% highlight html %} 
+  <b:includable id='post' var='post'>
+{% endhighlight %}
+<br>
+when you found above part, you need to scroll down until you see<br>
+<br>
+{% highlight html %} 
+  </b:includable>
+{% endhighlight %}
+<br>
+when you see it, place the sample code above it.<br>
+<br>
+<hr>
+<h3> 2. Place the CSS code to your skin</h3>
+Search the text below in your HTML template editor<br>
+<br>
+{% highlight html %} 
+  ]]></b:skin>
+{% endhighlight %}
+<br>
+then place the code below above the <span style="font-family: Courier New,Courier,monospace;">]]></b:skin></span><br>
+
+
+{% highlight css %} 
+#related_posts{
+ border-top: 1px solid #d0d0d0;
+ border-bottom: 1px solid #d0d0d0;         
+}
+
+#related_posts h2 {
+ background: #211f1c url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjWn7_a5I7J7O5g_kfWL4RQed7bkH1F52l7DaNt6BB-xn1T1aSarlkfwbdA5uzlMtiTLDw7bCZLCuQKgSFKLCQ7WhadJhHwzQBY0P9-TT6pTvex8A30pmb77GMLo_09T1xdO7lQM7MsRes/s1600/texture-dark.jpg) fixed;
+ display:block;
+ height:35px;
+ color:white;
+ font-weight: normal;
+ letter-spacing: -0.5px;
+ font-size: 18px;
+ padding-left:20px;
+ line-height: 33px;
+ font-family:"Trebuchet MS", Helvetica, sans-serif;
+}
+
+.related_items_wapper{
+ padding: 10px;
+ overflow:hidden;
+}
+
+.related_item{
+ float:left;
+ overflow: hidden;
+ width:100px;
+ height:190px;
+ text-align: center;
+ border-radius: 10px;
+ border: 1px solid #ececec;
+ background:#fff;
+ margin-right: 10px;
+ -moz-box-shadow: 0 8px 4px -4px #000;
+ -webkit-box-shadow: 0 8px 4px -4px #000;
+ box-shadow: 0 8px 4px -4px #000;
+   -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+   -ms-transition: all .5s ease;
+    transition: all .5s ease;
+}
+
+.related_item:hover{
+ -moz-box-shadow: 0 0 4px 4px #ddd;
+ -webkit-box-shadow: 0 0 4px 4px #ddd;
+ box-shadow: 0 0 4px 4px #ddd;
+ border: 1px solid #ddd;
+ background: #eee;
+ cursor: pointer;
+}
+
+.related_item:hover img, .related_item:hover .title{
+ opacity: .7;
+}
+
+.related_item img{
+ float:left;
+ border-top-left-radius: 10px;
+ border-top-right-radius: 10px;
+}
+
+.related_item .title{
+ float:left;
+ font-size: 90%;
+ text-align: center;
+ background: #555;
+ padding:10px 5px;
+ height:100%;
+ max-width: 90px;
+ word-wrap:break-word;
+}
+
+.related_item .title a{
+ text-decoration: none;
+ color:#fff;
+}
+{% endhighlight %}
+<hr>
+
+<h3> 3. Execute the plugin</h3>
+
+Search the text below in your HTML template editor<br>
+<br>
+{% highlight html %} 
+  </body>
+{% endhighlight %}
+<br>
+then place the code below above</span><br>
+<br>
+
+{% highlight js %}       
+<!-- comment out below if you have jQuery library loaded already -->
+<script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js' />
+<script src='https://dl.dropboxusercontent.com/u/99319532/Blogger/host/related_posts.js'/>
+<script>
+  // related posts
+  if($('#related_posts').length > 0){
+    $('#related_posts').relatedPosts({labels:labels,title:'You may also like -'});
+  };
+<script/>
+{% endhighlight %}
+
+
+Now, you should be able to see your related post on your page. You can tweak
+the query to search articles related to the author or give it a date range.
+If you don't know how to do it, just leave a comment and I will help you. If
+you have other suggestions or ideas, please also leave your comment.

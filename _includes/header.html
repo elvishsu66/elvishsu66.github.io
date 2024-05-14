@@ -1,0 +1,30 @@
+<header class="site-header">
+  <!-- Title -->
+  <a href="{{ '/' | relative_url }}" title="Home">
+    <img class="logo" src="{{ '/assets/images/icon-logo.webp' | relative_url }}" alt="Logo"/>
+  </a>
+  <a class="title" title="Home" href="{{ '/' | relative_url }}">{{ site.title | escape }}</a>
+  <!-- Hamburger icon -->
+  <input class="side-menu" type="checkbox" id="side-menu"/>
+  <label class="hamburger" for="side-menu">
+    <span class="hamburger-line"></span>
+  </label>
+  <!-- Menu -->
+  <nav class="site-nav">
+    <ul class="site-menu">
+      {%- for nav in site.navigation -%} 
+      <li aria-label="{{ nav.url }}">
+        <a href="{{ nav.url }}" {% if nav.url == page.url %} class="active"{% endif %}>
+          {{ nav.title | capitalize }}
+        </a> 
+      </li>
+      {%- endfor -%}
+      <li>
+        <a id="search-open" class="fa fa-search" style="line-height: 1.5;cursor: pointer;">&nbsp;</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+{%- if page.title and page.image -%}
+{%- include banner.html -%}
+{%- endif -%}

@@ -1,0 +1,159 @@
+---
+layout: post
+title: Update Windows Mobile Application via your Http Server
+date: '2011-11-03T05:18:00.000+01:00'
+author: Elvis Hsu
+tags:
+- Coding
+- C#
+modified_time: '2014-01-26T13:24:00.402+01:00'
+thumbnail: /assets/posts/blogger/2011-11-03-image-0002.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-525404291778586802
+blogger_orig_url: https://www.elvishsu.com/2011/11/update-windows-mobile-application-with.html
+---
+
+Um, I haven't touch this Blog for a while... So... just a case study.<br />
+Usually, I use FTP to find available files to update my mobile application. However,I have a client who doesn't want to install FTP but they have web server.
+Therefore, I use the traditional way to update the application, "Make a http query"...
+It is pretty simple to use <a href="http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.aspx" target="_blank">HttpWebRequest</a> and <a href="http://www.google.com.au/search?gcx=c&amp;sourceid=chrome&amp;ie=UTF-8&amp;q=HttpWebResponse" target="_blank">HttpWebResponse </a>to validate the version. If the server returns a file link, then I download it and install it.
+
+<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg7tIEulPuvWlOazW8G6uDb5NlUEJI_wFiRrOHzlqppSbaeJM1PPfcp74qpzXGx5Hmqu5W-0NGb7dgU8bzHhX3eZwIXE2tLRD2zj843EyTU3I9ZeKrKQKb7xL3kAmbmlLZIgwhAz6BVPBA/s1600/pc_capture1.PNG" imageanchor="1"><img border="0" height="320" src="/assets/posts/blogger/2011-11-03-image-0002.png" width="240" /></a></div>
+<br />
+<br />
+You can make a HttpWebRequest (http://yourwebsite/?version=1.0.2.0) to find available update. If server redirects you to a cab file, so we have an update.
+<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9NVH7FHGkCKs0KL4ng5jt1W4rsr0ERarITJNVoAnMYJTk-3lHljJCSmykfAej47hHTf6tvmdP26oMn9X3eGSK-kvvUVa5IRheH4RsQ6ppvAg97o1wgxGp7jrPVuV4OLdFrGyhh0ZCwnw/s1600/pc_capture2.png" imageanchor="1"><img border="0" height="320" src="/assets/posts/blogger/2011-11-03-image-0002.png" width="240" /></a></div>
+<br />
+<br />
+Once user clicks "Yes", the we start to download and install the cab file.
+<br />
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgSduWSyh3MYZuEJ2UqMKBlp4aIhMLXUOJaDOfNHmFe4zqTmlEypO4lnbH0woM5NX1rIwHLPLAKVu75-biw_z_rQalP9GmerEp1qKVDKkj46dOKxSUY2FE7fWC0ic2nskYohFniaZTdPOY/s1600/pc_capture3.png" imageanchor="1"><img border="0" height="320" src="/assets/posts/blogger/2011-11-03-image-0002.png" width="240" /></a></div>
+<br />
+<br />
+Have a look the following example in C#. It handles downloading the cab file with progress bar.
+<br />
+<br />
+
+{% highlight cs %}
+private void backgroundWorker1_DoWork(object sender, BCD.ComponentModel.DoWorkEventArgs e)
+{
+    HttpWebRequest myRequest = null;
+    HttpWebResponse myResponse = null;
+    string newurl = (string)e.Argument;
+    string fileName = "", filePath = "";
+    try
+    {
+        bool redirecting = true;
+
+        while (redirecting)
+        {
+            try
+            {
+                myRequest = (HttpWebRequest)WebRequest.Create(newurl);
+                // we accept any type of file
+                myRequest.Accept = "*/*";
+                // set the timeout to 5 seconds
+                myRequest.Timeout = 5000;
+                // casts the response
+                myResponse = (HttpWebResponse)myRequest.GetResponse();
+                // if we have redirection
+                if ((int)myResponse.StatusCode == 301 || (int)myResponse.StatusCode == 302)
+                {
+                    string uriString = myResponse.Headers["Location"];
+                    newurl = uriString;
+                    // and keep going
+                }
+                else
+                {
+                    // gets the final uri
+                    fileName = Path.GetFileName(myResponse.ResponseUri.LocalPath);
+                    // we only want CAB file
+                    if (fileName.ToLower().EndsWith(".cab"))
+                    {
+                        filePath = Path.Combine(Utils.TempPath, fileName);
+                        // gets the total lenth for progress bar
+                        long fileLength = myResponse.ContentLength;
+                        // start with zero
+                        int byteTotal = 0;
+                        // start writing file
+                        using (FileStream fileStream = File.OpenWrite(filePath))
+                        {
+                            // gets the stream from response object
+                            using (Stream remoteStream = myResponse.GetResponseStream())
+                            {
+                                // we make 4 MB as our buffer
+                                byte[] inBuffer = new byte[4 * 1024];
+
+                                int nRead = remoteStream.Read(inBuffer, 0, 
+                                    inBuffer.Length);
+
+                                // we need to put e.Cancel as user may cancel downloading
+                                while (nRead > 0 &amp;&amp; !e.Cancel)
+                                {
+                                    if (nRead > 0)
+                                        fileStream.Write(inBuffer, 0, nRead);
+
+                                    byteTotal += nRead;
+                                    // calculate the progress out of a base "100"
+                                    double percentage = 
+                                        (double)(byteTotal) / (double)fileLength;
+
+                                    // update the progress
+                                    backgroundWorker1.ReportProgress(
+                                        (int)(percentage * 100));
+
+                                    nRead = remoteStream.Read(inBuffer, 0, 
+                                        inBuffer.Length);
+                                }
+                                myResponse.Close();
+                                myRequest.Abort();
+                            }
+                        }
+
+                        // if everything is fine
+                        if (!e.Cancel)
+                        {
+                            // write the file time to be same as the original file time
+                            BCD.IO.FileEx.SetCreationTime(filePath, 
+                                myResponse.LastModified);
+                            e.Result = filePath;
+                        }
+                        else
+                        {
+                            if (File.Exists(filePath))
+                                File.Delete(filePath);
+                        }
+                    }
+                    redirecting = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                redirecting = false;
+                Utils.WriteToLog(ex);
+            }
+        }
+    }
+    catch (Exception ex)
+    {
+        // if error happens on retriving map, assign the error image instead
+        Utils.WriteToLog(ex);
+    }
+    finally
+    {
+        if (myResponse != null)
+            myResponse.Close();
+
+        myRequest = null;
+        myResponse = null;
+    }
+}
+{% endhighlight %}
+

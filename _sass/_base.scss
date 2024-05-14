@@ -1,0 +1,185 @@
+/**
+ * Reset some basic elements
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ 
+ /**
+  * Basic styling
+  */
+body {
+  font: $base-font-weight #{$base-font-size}/#{$base-line-height} $base-font-family;
+  color: $text-color;
+  background-color: $background-color;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-feature-settings: "kern" 1;
+    -moz-font-feature-settings: "kern" 1;
+      -o-font-feature-settings: "kern" 1;
+          font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  overflow-wrap: break-word;
+  line-height: $base-line-height;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, blockquote, pre,
+ul, ol, dl, figure,
+%vertical-rhythm {
+  margin-bottom: $spacing-unit / 2.5;
+}
+
+main {
+  display: block; /* Default value of `display` of `main` element is 'inline' in IE 11. */
+}
+
+img {
+  max-width: 100%;
+  vertical-align: middle;
+
+  &.center {
+  margin: 0 auto;
+  display: block;
+  }
+
+  &.right {
+  float:right;
+  padding: 10px;
+  }
+}
+
+figure > img {
+  display: block;
+}
+
+figcaption {
+  font-size: $small-font-size;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: $base-font-weight;
+  clear: both;
+}
+
+input {
+  outline: none;
+}
+
+a {
+  color: $link-base-color;
+  text-decoration: none;
+
+  &:visited {
+    color: $link-visited-colour;
+  }
+
+  &:hover {
+    color: $text-color;
+    text-decoration: underline;
+  }
+}
+
+hr {
+  position: relative;
+  height: 7px;
+  margin: 60px 0;
+  font-size: 26px;
+  border: 0;
+  &::before {
+    content: ". . .";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 0;
+    color: $text-color;
+  }
+}
+
+blockquote {
+  color: $theme-color;
+  border-left: 4px solid $theme-color;
+  padding: $spacing-unit / 2;
+  @include relative-font-size(1.8);
+  letter-spacing: -1px;
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  cite {
+    @include relative-font-size(1.1);
+    display: inline-block;
+    font-style: italic;
+  }
+}
+
+table {
+  margin-bottom: $spacing-unit;
+  width: 100%;
+  color: $text-color;
+  border-collapse: collapse;
+  tr {
+    &:nth-child(even) {
+      background-color: darken($background-color, 3%);
+    }
+  }
+  th, td {
+    padding: ($spacing-unit / 3) ($spacing-unit / 2);
+  }
+  th {
+    background-color: $header-background-color;
+    color: $header-color;
+    border: 1px solid $header-background-color;
+  }
+  td {
+    border: 1px solid darken($background-color, 10%);
+  }
+
+  @include media-query($on-laptop) {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
+}
+ 
+.wrapper {
+  background-color: $background-color;
+  max-width: calc(#{$content-width} - (#{$spacing-unit}));
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $spacing-unit / 2;
+  padding-left: $spacing-unit / 2;
+  padding-bottom: $spacing-unit / 2;
+  @extend %clearfix;
+
+  @media screen and (min-width: $on-large) {
+    max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
+    padding-right: $spacing-unit;
+    padding-left: $spacing-unit;
+    padding-bottom: $spacing-unit;
+  }
+}
+ 
+%clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.lazy {
+  opacity: 0;
+  transition: all .3s ease-in-out;
+  &.loaded {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,77 @@
+---
+layout: post
+title: PageSize plugin for Paging Toolbar for ExtJs 4
+date: '2011-05-22T11:53:00.000+02:00'
+author: Elvis Hsu
+tags:
+- ExtJs
+- Coding
+- Javascript
+modified_time: '2014-01-26T13:25:05.560+01:00'
+thumbnail: /assets/posts/blogger/2011-05-22-image-0000.png
+blogger_id: tag:blogger.com,1999:blog-1691872865366176972.post-1052253487233213627
+blogger_orig_url: https://www.elvishsu.com/2011/05/pagesize-plugin-for-paging-toolbar-for.html
+---
+
+<div class="separator" style="clear: both; text-align: center;">
+</div>
+<br />
+<div class="separator" style="clear: both; text-align: center;">
+<a href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjP5PympUSeGnruL4wKcsbMVBm2dkJl-73Q_Rq1SGzi3R-v3ILbq5ZN-gsR5m3bOE8mnR7VHpCvYnm6BqdyiIjzO10LhyQobxg_iC6PI-EK3c60tUBayQBIfUTld-DoMkNt0y1UMTm6bQA/s1600/pagingtoolbar.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img border="0" height="137" src="/assets/posts/blogger/2011-05-22-image-0000.png" width="200" /></a></div>
+Hey... here is another one for everybody... As the standard paging toolbar of ExtJs 4 does not have function to change the page size of the data store, so I make a simple plugin for the paging toolbar. I believe there are many examples if you Google it, but just another sample to share though...<br />
+<br />
+<br />
+<br />
+{% highlight js %}
+/**
+* Ext.ux.grid.PageSize
+*/
+Ext.define('Ext.ux.grid.PageSize', {
+    extend      : 'Ext.form.field.ComboBox',
+    alias       : 'plugin.pagesize',
+    beforeText  : 'Show',
+    afterText   : 'rows/page',
+    mode        : 'local',
+    displayField: 'text',
+    valueField  : 'value',
+    allowBlank  : false,
+    triggerAction: 'all',
+    width       : 50,
+    maskRe      : /[0-9]/,    
+    /**
+    * initialize the paging combo after the pagebar is randered
+    */
+    init: function(paging) {
+        paging.on('afterrender', this.onInitView, this);
+    },
+    /**
+    * create a local store for availabe range of pages
+    */
+    store: new Ext.data.SimpleStore({
+        fields: ['text', 'value'],
+        data: [['5', 5], ['10', 10], ['15', 15], ['20', 20], ['25', 25], ['50', 50], ['100', 100], ['200', 200], ['500', 500]]
+    }),    
+    /**
+    * assing the select and specialkey events for the combobox 
+    * after the pagebar is rendered.
+    */
+    onInitView: function(paging) {
+        this.setValue(paging.store.pageSize); 
+        paging.add('-', this.beforeText, this, this.afterText);
+        this.on('select', this.onPageSizeChanged, paging);
+        this.on('specialkey', function(combo, e) {
+            if(13 === e.getKey()) {
+                this.onPageSizeChanged.call(paging, this);        
+            }
+        });
+    },
+    /**
+    * refresh the page when the value is changed
+    */
+    onPageSizeChanged: function(combo) {
+        this.store.pageSize = parseInt(combo.getRawValue(), 10);
+        this.doRefresh();
+    }
+}); 
+{% endhighlight %}
+

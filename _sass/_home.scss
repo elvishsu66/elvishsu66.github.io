@@ -1,0 +1,62 @@
+
+$colors: (
+    "pink": #d698b5,
+    "purple": #848abd,
+    "blue": #5ca7db,
+    "green": #a4bf9e
+);
+
+.home-content {
+  p {
+    padding: 0 1em;
+  }
+}
+
+.skill-list {
+    display: flex;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .skill-item {
+      padding: 1em;
+      box-sizing: border-box;
+      width: 50%;
+      display: flex;
+      color: $background-color;
+      @include media-query($on-mobile) {
+        padding: .5em;
+        width: 100%;
+      }
+  
+      .skill-wrapper {
+        border-radius: 10px;
+        padding: $spacing-unit;
+        transition: border-top 300ms ease-in-out, padding-top 300ms ease-in-out;
+  
+        &:hover {
+          border-top: 0.5rem solid lighten($color: $theme-color, $amount: 50);
+        }
+  
+        .skill-icon {
+          @include relative-font-size(3);
+          text-align: center;
+        }
+  
+        .skill-title {
+          text-align: center;
+        }
+        
+        .skill-content {
+          @include relative-font-size(1);
+        }
+      }
+    }
+
+    @each $name, $code in $colors {
+        .bg-#{$name} {
+            background-color: $code;
+        }
+    }
+  }

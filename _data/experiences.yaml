@@ -1,0 +1,163 @@
+- role: Chief Architect & Director of Engineering
+  company: Numeus Group
+  location: Zug, Switzerland
+  started: 09/2021
+  ended: 05/2024
+  website: https://numeus.xyz
+  stacks:
+    - Rust
+    - C++
+    - Python
+    - ReactJs 
+    - NodeJs
+    - Redis 
+    - Airflow 
+    - Ray
+    - Dask
+    - Prefect 
+    - Karpenter ,
+    - TimescaleDB 
+    - PostgreSQL
+    - Terraform 
+    - FluxCD
+    - Prometheus
+    - Grafana
+    - Kubernetes
+    - AWS, GCP
+    - GitHub
+  content:
+    - Designing and managing technical strategy and blueprint of cloud operations
+    - Designing and developing global distributed high-frequency crypto trading systems
+    - Designing and implementing the automated cloud infrastructure platforms
+    - Implementing preventative measures and managing cyber risks
+    - Prioritising enhancing detection and response mechanisms to uphold DevSecOps principles consistently
+    - Ensuring the organisation follows engineering and architecture best practices
+    - Managing and fostering collaboration among Engineering and Research teams
+  achievements:
+    - Yielding remarkable results in <strong>3 months</strong> by orchestrating swift cloud infrastructure implementation for trading and research
+    - Reduced operation cost by <strong>25%</strong> by spearheading design and implementation of automated cloud infrastructure platforms
+    - Achieved outstanding <strong>5 stars</strong> security assessment result in implementing comprehensive cyber risk management protocols
+    - Improved efficiency by <strong>65%</strong> through upholding and fortifying engineering and architecture best practices organisation wide
+    - Established <strong>two digital assets funds</strong>, enhancing their performance
+    - Guided design and development of HFT crypto trading systems across diverse regions with <strong>~ $25k</strong> monthly operation cost
+
+- role: Chief Architect
+  company: Covario AG
+  location: Zug, Switzerland
+  started: 05/2020
+  ended: 08/2021
+  stacks:
+    - ASP.NET
+    - Akka.NET
+    - GRPC
+    - SignalR
+    - Entity Framework Core
+    - RepoDb
+    - ReactJS
+    - Kafka
+    - Protobuf-net
+    - Kubernetes 
+    - Azure, AWS
+    - GitLab
+  content:
+    - Led, mentored, supported, and coordinated a team of 15 engineering members
+    - Defined and supervised the firm’s technical strategy and platform blueprint
+    - Architected enterprise solutions for high availability and data protection across on-premises and multiple cloud vendors
+    - Ensured consistency in engineering practices, quality assurance, and software development processes
+  achievements:
+    - Established greenfield Crypto Brokerage Systems within a <strong>6-month</strong> timeline with an initial team of 3 members
+    - Completed the OTC trading platform from UI to backbone within 6 months with <strong>5 collaborative OTC venues</strong>
+    - Reduced operation cost by <strong> ~ 25% within 3 months</strong> through developing automated digital asset trade clearing and settlement engines
+
+- role: Solution Architect
+  company: EF Education First
+  location: Zurich, Switzerland
+  started: 07/2019
+  ended: 05/2010
+  website: https://ef.com
+  stacks:
+    - Languages - C#, PostgreSQL, MySQL, T-SQL, Powershell, Python, TypeScript, JavaScript, Sass, Shell, Groovy
+    - Technologies - ASP.NET Core, ReactJs, Redux, PostgreSQL, MySQL, MSSQL, Redis, Kafka, Jenkins, GitHub, Docker, Kubernetes, Envoy, Prometheus, Grafana, ELK, AWS, Azure, Salesforce
+  content:
+    - Designed, developed EF’s core commerce system, a cloud-based solution utilising AWS with high availability architecture
+    - Established architecture strategies and a technical roadmap with industrial-proven best practices
+    - Led, coached, and mentored cross-functional engineering teams, comprising a total of 20 members
+  achievements:
+    - Migrated multiple legacy software services into Kubernetes within <strong>6 month</strong>
+
+- role: Principal Software Architect
+  company: Argentière Capital AG
+  location: Zug, Switzerland
+  started: 03/2017
+  ended: 06/2019
+  stacks:
+    - Languages - C#, PHP, T-SQL, P/L SQL, MySQL, Powershell, Perl, Python, TypeScript, JavaScript, Sass, VBA, Shell, Groovy
+    - Technologies - ASP.NET Core, NancyFx, OpenFin, Angular, RxJs, NgRx, React, Redux, Vue, Icinga2, Phabricator, GitLab, MS SQL, PostgreSQL, MySQL, Oracle, Redis, InfluxDB, RabbitMQ, Kafka, VSTO, Excel-DNA, Bloomberg, TeamCity, Jenkins, SpecFlow, Docker (Swarm), Kubernetes, Azure, AWS
+  content:
+    - Led a team of 5 in architecting and engineering a proprietary enterprise solution across multiple domains
+    - Provided strategic leadership in technical development and collaborated with management teams to establish functional workflows and business rules
+  achievements:
+    - Managed the design and operation of the trading system, overseeing operations totalling <strong>AUM $2.9bn</strong>
+    - Improved productivity by <strong>50%</strong> through designing and implementing an automated trade reconciliation system
+
+
+- role: Head of Desktop Development
+  company: Leonteq Securities AG
+  location: Zurich, Switzerland
+  started: 07/2014
+  ended: 02/2017
+  website: https://leonteq.com
+  stacks:
+    - C#, ASP.NET
+  content:
+    - Directed projects with a team of 4, employing Agile methodologies and adhering to software engineering best practices
+    - Pioneered and led rapid developments of trading software aimed at enhancing transparency, accuracy, and efficiency
+  achievements:
+    - Orchestrated the successful modernisation of financial tools into distributed microservices within a 6-month timeframe
+    - Reduced development effort by <strong>50%</strong> through designing, enhancing, and refining proprietary APIs and libraries
+
+- role: Career Break
+  company: elvishsu.com
+  location: Southeast Asia, Switzerlnad
+  started: 05/2013
+  ended: 07/2014
+  break: true
+
+- role: Senior Software Engineer
+  company: Barcode Dynamics
+  location: Brisbane, Australia
+  started: 11/2006
+  ended: 04/2013
+  website: https://barcodedynamics.com.au
+  content:
+    - Ongoing ASP.NET based solution developments utilising C# and SQL server reporting
+    - Lead engineer on designing and implementing enterprise software and hardware solutions
+    - Focused on web-based and standalone developments for desktop and mobile platforms
+    - Developed and maintained web APIs (SOAP/RESTful) and DLLs in .NET environment
+    - Conducted software lifecycle management, testing, documentation and quality assurance
+    - Coached and mentored junior engineers to enhance team force
+    - Code review, bugs fixing and development of client application modules (WinForm/ASP.NET)
+    - Project management, requirement management and follow-up activities
+    - Carried pre and post sales design engineering. Worked closely with customers to compile design & requirements
+
+- role: Pursuing MBA & Career Break
+  company: elvishsu.com
+  location: Brisbane, Australia
+  started: 05/2005
+  ended: 10/2006
+  break: true
+
+- role: Application Engineer
+  company: Taiwan Semiconductor
+  location: Taipei, Taiwan
+  started: 09/2003
+  ended: 04/2005
+  website: https://www.taiwansemi.com/en/
+  content:
+    - Developed production testing software applications (.NET C# / Borland C++)
+    - Designed and deployed various custom software for partners and end users (PHP + MySQL) 
+    - Carried pre and post sales design engineering
+    - Participated the mechanical design and firmware developments
+    - Modified and applied newly developed mechanisms into OEM thermal printer products
+    - Focused on testing and evaluating products through performance, operational conditions and safety
+    - Coordinated team members with customer services and inbound info with R&D department

@@ -1,0 +1,72 @@
+# Site information
+title: Elvis is still in the building
+email: me@elvishsu.com
+description: A simple yet creative software designer
+baseurl: ""
+author:
+  name: Elvis Hsu
+  twitter: elvishsu
+  url: https://elvishsu.com
+twitter:
+  username: elvishsu
+  card: summary
+disqus:
+  shortname: elvishsu66
+logo: /assets/icon/favicon-128x128.png
+social:
+  name: Elvis Hsu
+  links:
+    - https://twitter.com/elvishsu
+    - https://www.linkedin.com/in/elvishsu
+    - https://github.com/elvishsu66
+google_analytics: G-M47EN9ZR37
+
+# Site settings
+permalink: /:year/:month/:title.html
+paginate: 9
+paginate_path: /blog/p/:num/
+
+date_format: "%-d %b, %Y"
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
+  input: GFM
+
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-tagging-related_posts
+
+sass:
+  sass_dir: _sass
+  style: compressed
+
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  profile: false
+  startings: [head, body]
+  ignore:
+    envs: # We need to ignore development otherwise the --livereload will not work
+      - development
+
+navigation:
+  - title: home
+    url: /
+  - title: blog
+    url: /blog/
+  - title: topics
+    url: /blog/topics
+  - title: photography
+    url: /photography
+  - title: about
+    url: /about
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - utils
+  - README.md
