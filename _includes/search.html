@@ -3,7 +3,7 @@
     <div class="search-wrapper">
         <div id="search-container" class="search-container">
             <input type="text" id="search-input" autocomplete="false" placeholder="Type to search...">
-            <button id="search-close" class="fa fa-circle-xmark" onclick="showSearch(false)"></button> 
+            <button id="search-close" class="fa fa-circle-xmark"></button> 
         </div>
         <div id="results-container" class="post-list results-container"></div>
     </div>
@@ -19,7 +19,7 @@ SimpleJekyllSearch({
     resultsContainer: document.getElementById('results-container'),
     searchResultTemplate: 
     '<div class="post-item">' + 
-        '<div class="post-wrapper">' + 
+        '<div class="post-inner">' + 
             '<div class="post-thumbnail"><a href="{url}"><img src="{image}"/ alt="{title}"></a></div>' + 
             '<div class="post-wraper">'+ 
                 '<time class="post-date">{date}</time>' + 

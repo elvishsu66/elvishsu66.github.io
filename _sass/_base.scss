@@ -89,20 +89,37 @@ a {
 }
 
 hr {
-  border-top: 1px solid $link-base-color;
-  margin: $spacing-unit $spacing-unit / 2;
+  position: relative;
+  height: 7px;
+  margin: 60px 0;
+  font-size: 26px;
+  border: 0;
+  &::before {
+    content: ". . .";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    line-height: 0;
+    color: $text-color;
+  }
 }
 
 blockquote {
   color: $theme-color;
   border-left: 4px solid $theme-color;
   padding: $spacing-unit / 2;
-  @include relative-font-size(1.125);
+  @include relative-font-size(1.8);
   letter-spacing: -1px;
-  font-style: italic;
 
   > :last-child {
     margin-bottom: 0;
+  }
+
+  cite {
+    @include relative-font-size(1.1);
+    display: inline-block;
+    font-style: italic;
   }
 }
 

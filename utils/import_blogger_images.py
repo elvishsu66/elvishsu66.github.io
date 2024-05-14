@@ -1,5 +1,4 @@
 import re
-import sys
 import urllib.request
 from pathlib import Path
 
@@ -24,7 +23,7 @@ for file in files:
             print('{} => {}'.format(sourceurl, newfile))
             urllib.request.urlretrieve(sourceurl, '../assets/posts/blogger/' + newfile)
             contents = contents.replace(sourceurl, '/assets/posts/blogger/' + newfile)
-            contents = contents.replace(thumburl, '/assets/posts/blogger/' + newfile)
+            contents = contents.replace(thumburl, '/assets/posts/blogger/' + contents)
 
     with open(filename, 'w') as f:
         f.write(contents)

@@ -23,7 +23,7 @@ google_analytics: G-M47EN9ZR37
 
 # Site settings
 permalink: /:year/:month/:title.html
-paginate: 6
+paginate: 9
 paginate_path: /blog/p/:num/
 
 date_format: "%-d %b, %Y"

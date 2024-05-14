@@ -4,9 +4,15 @@ layout: page
 <div class="post-body">
     <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
         <header class="post-header">
+            {%- if page.image -%}
             <span class="post-title p-name" itemprop="name headline" hidden>
                 {{ page.title | escape }}
             </span>
+            {%- else -%}
+            <h1 class="post-title p-name" itemprop="name headline">
+                {{ page.title | escape }}
+            </h1>
+            {%- endif -%}
             <div class="post-meta">
                 <div class="avatar">
                     <a href="{% link about.html %}">

@@ -8,7 +8,7 @@ description: Don’t limit yourself. Many people limit themselves to what they t
 <div class="post-list">
     {%- for post in paginator.posts -%}
     <div class="post-item" itemscope itemtype="http://schema.org/BlogPosting">
-        <div class="post-wrapper">
+        <div class="post-inner">
             <div class="post-thumbnail">
                 <a href="{{ post.url | relative_url }}" title="{{ post.title }}">
                     {%- if post.image -%}
