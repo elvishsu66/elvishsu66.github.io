@@ -19,6 +19,7 @@ image: /assets/posts/bg-lisbon-skyline.jpg
 ### H3 Default styles for headings
 #### H4 Default styles for headings
 ##### H5 Default styles for headings
+###### H6 Default styles for headings
 
 ---
 
@@ -111,14 +112,14 @@ for file in files:
 ---
 
 ## YouTube Embed
-
-<iframe width="100%" height="468" src="https://www.youtube.com/embed/B3szaVzQx0o?si=WyOlq3ZfHGYs3DWf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
+<p>
+<iframe width="640" height="360" src="https://www.youtube.com/embed/B3szaVzQx0o?si=WyOlq3ZfHGYs3DWf" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</p>
 
 ## Vimeo Embed
-
-<iframe width="100%" height="468" src="https://player.vimeo.com/video/148834441?h=9dae3ab297" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-
+<p>
+<iframe width="640" height="360" src="https://player.vimeo.com/video/148834441?h=9dae3ab297" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+</p>
 ---
 
 ## Images

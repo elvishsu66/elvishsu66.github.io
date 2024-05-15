@@ -49,7 +49,7 @@
   
     .site-menu { 
       a {
-        padding: 25px 25px;
+        padding: 25px 1rem;
         color: $background-color;
         display: inline-block;
         width: 100%;
@@ -167,9 +167,14 @@
     }
   }
 
-  .item {
+  .site-footer-column {
     flex: 1;
-    padding: 1em 25px;
+    padding: 1rem 25px;
+
+    p {
+      margin-bottom: .5rem;
+    }
+
     a, span {
       margin: 0 .5em;
     }
@@ -200,7 +205,7 @@
     h2, p {
       margin-bottom: 5px;
     }
-    .item {
+    .site-footer-column {
       padding: 3px 5px;
       text-align: center;
       &:nth-child(odd) {
@@ -218,19 +223,14 @@
   padding: ($spacing-unit * 3) 0 ($spacing-unit * 3);
   margin-bottom: $spacing-unit / 2;
   text-align: center;
-  color: $background-color;
+  color: $header-color;
 
   @include media-query($on-mobile) {
     padding: ($spacing-unit * 1.5) 0 ($spacing-unit * 1.5);
     margin-bottom: $spacing-unit / 4;
   }
 
-  h1 {
-    @include relative-font-size(2.8);
-    font-weight: 400;
-  }
-
-  .image {
+  .page-banner-background {
     position: absolute;
     top: 0;
     right: 0;
@@ -241,7 +241,7 @@
     background-size: cover;
   }
 
-  .overlay {
+  .page-banner-overlay {
     position: absolute;
     top: 0;
     right: 0;
@@ -250,7 +250,7 @@
     background: rgba(19, 41, 48, .75);
   }
 
-  .wrap {
+  .page-banner-text {
     position: relative;
     margin: 0 auto;
     padding: 0 20px;
@@ -268,7 +268,9 @@
   flex: 1;
 }
 
-
+/**
+* The post list cards
+*/
 .post-list {
   margin: 0;
   list-style: none;
@@ -277,9 +279,12 @@
   row-gap: $spacing-unit;
 
   .post-item {
-    flex: 0 0 33.3333%;
+    width: calc(4 / 12* 100%);
     display: flex;
     flex-direction: column;
+    &:last-child {
+      flex-grow: 1;
+    }
 
     .post-inner {
       flex: 1;
@@ -289,7 +294,7 @@
       padding: .5em;
 
       .post-thumbnail {
-        border-radius: 5px;
+        border-radius: 1rem;
         border: 1px solid darken($background-color, 5%);
         overflow: hidden;
         text-align: center;
@@ -312,91 +317,105 @@
       }
 
       .post-meta {
-        margin-top: 1em;
+        margin-top: 2em;
       }
 
       .post-content {
         flex: 1;
         color: lighten($theme-color, 40%);
-        @include relative-font-size(.99);
-      }
-
-      .post-categories, .post-tags {
-        margin-top: $spacing-unit / 2;
-        display: flex;
-        .post-category, .post-tag {
-          flex: 0 0 auto;
-          padding: 0 5px;
-          margin: 0 5px;
-          border-radius: 5px;
-          text-transform: uppercase;
-          color: lighten($theme-color, 40%);
-          background-color: darken($background-color, 10%);
-          @include relative-font-size(.8);
-        }
+        @include relative-font-size(.888888);
       }
     }
   
     @include media-query($on-tablet) {
-      flex: 0 0 50%;
+      width: calc(6 / 12* 100%);
     }
 
     @include media-query($on-mobile) {
-      flex: 0 0 100% !important;
+      width: 100%;
     }
   }
 }
 
 
+.post-categories, .post-tags {
+  display: inline-flex;
+  align-items: center;
+  .post-category, .post-tag {
+    flex: 0 0 auto;
+    padding: .3rem 1rem;
+    margin-right: .3rem;
+    border-radius: 1rem;
+    color: $text-color;
+    background-color: darken($background-color, 10%);
+    font-weight: 500;
+    font-size: 12px;
+  }
+}
+
+
+.post-date {
+  display: inline-flex;
+  align-items: center;
+  time {
+    text-transform: uppercase;
+    margin-left: 6px;
+    font-size: 12px;
+    line-height: 1;
+  }
+}
+
+
+.post-author {
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 500;
+  @include relative-font-size(.8);
+  
+  a.author {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-image: url(/assets/images/elvis-head.jpg);
+    background-color: darken($background-color, 10%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .post-author-name {
+    display: inline-block;
+    margin-left: .8em;
+  }
+}
+
+
 .post-meta {
-  font-size: $small-font-size;
   color: lighten($theme-color, 40%);
   display: flex;
-  margin: 1em 0;
-
-  .avatar {
-    flex: 0 0 auto;
-    i.author {
-      width: 48px;
-      height: 48px;
-      display: inline-block;
-      border-radius: 50%;
-      background-image: url(/assets/images/elvis-head.jpg);
-      background-color: darken($background-color, 10%);
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-  }
-
-  .meta {
-    flex: 1;
-    flex-direction: column;
-    padding-left: 1em;
-    .item {
-      flex: 1;
-    }
-  }
+  margin: 1rem 0;
 }
 
 
 .post-link {
   display: block;
   font-weight: bold;
+  margin-bottom: .7rem;
   @include relative-font-size(1.3);
 }
 
 
-.post-date {
-  font-size: 90%;
-}
-
-
+/**
+* The post body
+*/
 .post-body {
   padding: $spacing-unit / 4 $spacing-unit;
 
   @include media-query($on-mobile) {
-    padding: $spacing-unit / 6;
+    padding: $spacing-unit / 8;
+    @include relative-font-size(1);
   }
 
   /**
@@ -416,9 +435,10 @@
 
   .post-title,
   .post-content h1 {
-    @include relative-font-size(2.625);
     letter-spacing: -1px;
     line-height: 1.15;
+
+    @include relative-font-size(2.625);
 
     @media screen and (min-width: $on-large) {
       @include relative-font-size(2.625);
@@ -437,7 +457,7 @@
     }
 
     h3 {
-      @include relative-font-size(1.375);
+      @include relative-font-size(1.5);
 
       @media screen and (min-width: $on-large) {
         @include relative-font-size(1.625);
@@ -449,7 +469,7 @@
     }
 
     h5 {
-      @include relative-font-size(1.125);
+      @include relative-font-size(1.15);
     }
 
     h6 {
@@ -457,6 +477,7 @@
     }
 
     img {
+      border-radius: 1rem;
       overflow: hidden;
       display: inline-flex;
       transition: transform .5s;
@@ -474,17 +495,28 @@
     }
 
     ul {
-      li {
-        list-style: circle inside;
-      }
+      list-style-type: disc;
     }
 
     ol {
-      li {
-        list-style: decimal inside;
-      }
+      list-style-type: decimal;
     }
 
+    li {
+      list-style-position: inside;
+      margin-bottom: .5rem;
+    }
+
+    .table-wrapper {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .js-reframe {
+      border-radius: 1rem;
+      overflow: hidden;
+    }
   }
 }
 

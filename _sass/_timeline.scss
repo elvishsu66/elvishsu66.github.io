@@ -6,7 +6,7 @@
     width: 100%;
     h1, h2, h3, h4, h5, h6 {
         line-height: inherit;
-        margin-bottom: .3em;
+        margin-bottom: .5rem;
     }
 }
 
@@ -19,7 +19,6 @@
 }
 
 .timeline-info {
-    font-size: 12px;
     font-weight: 700;
     letter-spacing: 3px;
     margin: 0 0 .5em 0;
@@ -38,10 +37,10 @@
         border-radius: 100%;
         content: "";
         display: block;
-        height: 15px;
+        height: 20px;
+        width: 20px;
         position: absolute;
         top: 4px; left: 0;
-        width: 15px;
         transition: background 0.3s ease-in-out, border 0.3s ease-in-out;
     }
     &:after {
@@ -68,8 +67,8 @@
         margin-bottom: 0;
     }
 
-    ul, li {
-        @include relative-font-size(.99);
+    li {
+        margin-bottom: .5rem;
     }
     li:before {
         content: "\f00c";

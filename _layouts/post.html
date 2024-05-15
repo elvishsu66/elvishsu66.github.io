@@ -4,6 +4,26 @@ layout: page
 <div class="post-body">
     <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
         <header class="post-header">
+            <a href="{% link about.html %}" itemprop="author publisher" itemscope itemtype="http://schema.org/Person" hidden>
+                <span itemprop="name">{{ site.author.name }}</span>
+                <span itemprop="url" hidden>{{ site.author.url }}</span>
+            </a>
+            <div class="post-meta">
+                <div class="post-tags">
+                    {%- assign tags = page.tags | sort -%}
+                    {%- for tag in tags -%}
+                    <a class="post-tag" title="{{ tag }}" href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">
+                        {{ tag | capitalize }}
+                    </a>
+                    {%- endfor -%}
+                </div>
+                <span class="post-date">
+                    • 
+                    <time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+                        {{ page.date | date: site.date_format }}
+                    </time>
+                </span>
+            </div>
             {%- if page.image -%}
             <span class="post-title p-name" itemprop="name headline" hidden>
                 {{ page.title | escape }}
@@ -13,31 +33,6 @@ layout: page
                 {{ page.title | escape }}
             </h1>
             {%- endif -%}
-            <div class="post-meta">
-                <div class="avatar">
-                    <a href="{% link about.html %}">
-                        <i class="author"></i>
-                    </a>
-                </div>
-                <div class="meta">
-                    <div class="item">
-                        <a href="{% link about.html %}" itemprop="author publisher" itemscope itemtype="http://schema.org/Person">
-                            <span itemprop="name">{{ site.author.name }}</span>
-                            <span itemprop="url" hidden>{{ site.author.url }}</span>
-                        </a>
-                        {% if page.tags %}
-                        posted in 
-                        {% for tag in page.tags %}
-                        <a href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">{{ tag | capitalize }}</a>
-                        {%- if forloop.last == false %}, {% endif -%}
-                        {% endfor %}
-                        {% endif %}
-                    </div>
-                    <time class="item dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-                        {{ page.date | date: site.date_format }}
-                    </time>
-                </div>
-            </div>
         </header>
 
         <div class="post-content e-content" itemprop="articleBody">
@@ -56,3 +51,8 @@ layout: page
     {%- include disqus.html -%}
     {%- endif -%}
 </div>
+<!-- Use refram.js to wrap iframes -->
+<script src="https://unpkg.com/reframe.js@latest/dist/reframe.min.js"></script>
+<script>
+    reframe('iframe');
+</script>

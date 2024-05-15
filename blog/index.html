@@ -20,42 +20,43 @@ description: Don’t limit yourself. Many people limit themselves to what they t
                     {%- endif -%}
                 </a>
             </div>
-                       
+
             <div class="post-meta">
-                <div class="avatar">
-                    <a href="{% link about.html %}">
-                        <i class="author"></i>
+                <div class="post-tags">
+                    {%- assign tags = post.tags | sort -%}
+                    {%- for tag in tags -%}
+                    <a class="post-tag" title="{{ tag }}" href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">
+                        {{ tag | capitalize }}
                     </a>
+                    {%- endfor -%}
                 </div>
-                <div class="meta">
-                    <div class="item">
-                        <a href="{% link about.html %}" itemprop="author publisher" itemscope itemtype="http://schema.org/Person">
-                            <span itemprop="name">{{ site.author.name }}</span>
-                            <span itemprop="url" hidden>{{ site.author.url }}</span>
-                        </a>
-                    </div>
-                    <time class="item post-date dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+                <span class="post-date">
+                    • 
+                    <time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
                         {{ post.date | date: site.date_format }}
                     </time>
-                </div>
+                </span>
             </div>
 
-            <h3>
+            <div>
                 <a class="post-link" href="{{ post.url | relative_url }}" itemprop="name headline">
                     {{ post.title | escape }}
                 </a>
-            </h3>
+            </div>
             
             <div class="post-content" itemprop="articleBody">
                 {{ post.content | markdownify | strip_html | truncatewords: 25 }}
             </div>
 
-            <div class="post-tags">
-                {%- for tag in post.tags -%}
-                <a class="post-tag" title="{{ tag }}" href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">
-                    {{ tag | capitalize }}
-                </a>
-                {%- endfor -%}
+            <div class="post-author">
+                <a class="author" href="{% link about.html %}"></a>
+                <span class="post-author-name">
+                    By 
+                    <a href="{% link about.html %}" itemprop="author publisher" itemscope itemtype="http://schema.org/Person">
+                        <span itemprop="name">{{ site.author.name }}</span>
+                        <span itemprop="url" hidden>{{ site.author.url }}</span>
+                    </a>
+                </span>
             </div>
         </div>
     </div>
