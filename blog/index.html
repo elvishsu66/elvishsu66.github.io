@@ -1,66 +1,11 @@
 ---
-layout: page
+layout: default
 title: Coding, thoughts, technology and ideas.
 image: /assets/posts/bg-technology-network.png
 description: Don’t limit yourself. Many people limit themselves to what they think they can do. You can go as far as your mind lets you. What you believe, remember, you can achieve.
 ---
+<div class="container">
+    {%- include post-list.html posts=paginator.posts -%}
 
-<div class="post-list">
-    {%- for post in paginator.posts -%}
-    <div class="post-item" itemscope itemtype="http://schema.org/BlogPosting">
-        <div class="post-inner">
-            <div class="post-thumbnail">
-                <a href="{{ post.url | relative_url }}" title="{{ post.title }}">
-                    {%- if post.image -%}
-                    <img class="lazy" data-src="{{ post.image }}" alt="{{ post.title }}" itemprop="image"/>
-                    {%- elsif post.thumbnail -%}
-                    <img class="lazy" data-src="{{ post.thumbnail }}" alt="{{ post.title }}" itemprop="image"/>
-                    {%- else -%}
-                    <img class="lazy" data-src="/assets/images/bg-blogging.png" alt="{{ post.title }}" itemprop="image"/>
-                    {%- endif -%}
-                </a>
-            </div>
-
-            <div class="post-meta">
-                <div class="post-tags">
-                    {%- assign tags = post.tags | sort -%}
-                    {%- for tag in tags -%}
-                    <a class="post-tag" title="{{ tag }}" href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">
-                        {{ tag | capitalize }}
-                    </a>
-                    {%- endfor -%}
-                </div>
-                <span class="post-date">
-                    • 
-                    <time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
-                        {{ post.date | date: site.date_format }}
-                    </time>
-                </span>
-            </div>
-
-            <div>
-                <a class="post-link" href="{{ post.url | relative_url }}" itemprop="name headline">
-                    {{ post.title | escape }}
-                </a>
-            </div>
-            
-            <div class="post-content" itemprop="articleBody">
-                {{ post.content | markdownify | strip_html | truncatewords: 25 }}
-            </div>
-
-            <div class="post-author">
-                <a class="author" href="{% link about.html %}"></a>
-                <span class="post-author-name">
-                    By 
-                    <a href="{% link about.html %}" itemprop="author publisher" itemscope itemtype="http://schema.org/Person">
-                        <span itemprop="name">{{ site.author.name }}</span>
-                        <span itemprop="url" hidden>{{ site.author.url }}</span>
-                    </a>
-                </span>
-            </div>
-        </div>
-    </div>
-    {%- endfor -%}
+    {%- include post-pager.html -%}
 </div>
-
-{%- include pager.html -%}

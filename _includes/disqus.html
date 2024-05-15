@@ -1,4 +1,6 @@
 {%- if page.comments != false and jekyll.environment == "production" -%}
+{%- if site.disqus.shortname -%}
+<hr>
 <section class="section">
     <div id="disqus_thread"></div>
     <script>
@@ -21,4 +23,5 @@
         <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
     </noscript>
 </section>
+{%- endif -%}
 {%- endif -%}

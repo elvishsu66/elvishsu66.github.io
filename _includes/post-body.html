@@ -1,0 +1,38 @@
+{% assign post = include.post %}
+<section class="section">
+    <div class="post-body">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+            <header class="post-header">
+                <a href="{% link about.html %}" itemprop="author publisher" itemscope itemtype="http://schema.org/Person" hidden>
+                    <span itemprop="name">{{ site.author.name }}</span>
+                    <span itemprop="url" hidden>{{ site.author.url }}</span>
+                </a>
+                
+                {% include post-meta.html post=post %}
+    
+                {%- if post.image -%}
+                <span class="post-title p-name" itemprop="name headline" hidden>
+                    {{ post.title | escape }}
+                </span>
+                {%- else -%}
+                <h1 class="post-title p-name" itemprop="name headline">
+                    {{ post.title | escape }}
+                </h1>
+                {%- endif -%}
+            </header>
+    
+            <div class="post-content e-content" itemprop="articleBody">
+                {{ content }}
+            </div>
+    
+            <a class="u-url" href="{{ post.url | relative_url }}" hidden></a>
+            <img src="{{ post.image }}" itemprop="image" alt="{{ post.title | escape }}" hidden/>
+        </article>
+    </div>
+    <!-- Use refram.js to wrap iframes -->
+    <script src="https://unpkg.com/reframe.js@latest/dist/reframe.min.js"></script>
+    <script>
+        reframe('iframe');
+    </script>
+    
+</section>

@@ -1,58 +1,9 @@
 ---
-layout: page
+layout: default
 ---
-<div class="post-body">
-    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-        <header class="post-header">
-            <a href="{% link about.html %}" itemprop="author publisher" itemscope itemtype="http://schema.org/Person" hidden>
-                <span itemprop="name">{{ site.author.name }}</span>
-                <span itemprop="url" hidden>{{ site.author.url }}</span>
-            </a>
-            <div class="post-meta">
-                <div class="post-tags">
-                    {%- assign tags = page.tags | sort -%}
-                    {%- for tag in tags -%}
-                    <a class="post-tag" title="{{ tag }}" href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">
-                        {{ tag | capitalize }}
-                    </a>
-                    {%- endfor -%}
-                </div>
-                <span class="post-date">
-                    • 
-                    <time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
-                        {{ page.date | date: site.date_format }}
-                    </time>
-                </span>
-            </div>
-            {%- if page.image -%}
-            <span class="post-title p-name" itemprop="name headline" hidden>
-                {{ page.title | escape }}
-            </span>
-            {%- else -%}
-            <h1 class="post-title p-name" itemprop="name headline">
-                {{ page.title | escape }}
-            </h1>
-            {%- endif -%}
-        </header>
 
-        <div class="post-content e-content" itemprop="articleBody">
-            {{ content }}
-        </div>
+{%- include post-body.html post=page -%}
 
-        <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
-        <img src="{{ page.image }}" itemprop="image" alt="{{ page.title | escape }}" hidden/>
-    </article>
-    
-    <hr>
+{%- include post-related.html -%}
 
-    {%- include related.html -%}
-
-    {%- if site.disqus.shortname -%}
-    {%- include disqus.html -%}
-    {%- endif -%}
-</div>
-<!-- Use refram.js to wrap iframes -->
-<script src="https://unpkg.com/reframe.js@latest/dist/reframe.min.js"></script>
-<script>
-    reframe('iframe');
-</script>
+{%- include disqus.html -%}

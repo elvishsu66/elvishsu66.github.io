@@ -53,7 +53,6 @@ document.addEventListener("DOMContentLoaded", function() {
               image.src = image.dataset.src;
               image.classList.add("loaded");
               imageObserver.unobserve(image);
-              console.log(image)
             }
           });
         });

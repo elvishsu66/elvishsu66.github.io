@@ -6,20 +6,14 @@ $colors: (
     "green": #a4bf9e
 );
 
-.home-content {
-  p {
-    padding: 0 1em;
-  }
-}
-
-.skill-list {
+.feature-list {
     display: flex;
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
 
-    .skill-item {
+    .feature-item {
       padding: 1em;
       box-sizing: border-box;
       width: 50%;
@@ -30,7 +24,7 @@ $colors: (
         width: 100%;
       }
   
-      .skill-wrapper {
+      .feature-wrapper {
         border-radius: 10px;
         padding: $spacing-unit;
         transition: border-top 300ms ease-in-out, padding-top 300ms ease-in-out;
@@ -39,16 +33,16 @@ $colors: (
           border-top: 0.5rem solid lighten($color: $theme-color, $amount: 50);
         }
   
-        .skill-icon {
+        .feature-icon {
           @include relative-font-size(3);
           text-align: center;
         }
   
-        .skill-title {
+        .feature-title {
           text-align: center;
         }
         
-        .skill-content {
+        .feature-content {
           @include relative-font-size(1);
         }
       }
@@ -59,4 +53,4 @@ $colors: (
             background-color: $code;
         }
     }
-  }
+}

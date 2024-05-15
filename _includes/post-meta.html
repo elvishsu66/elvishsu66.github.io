@@ -1,0 +1,17 @@
+{% assign post = include.post %}
+<div class="post-meta">
+    <div class="post-tags">
+        {%- assign tags = post.tags | sort -%}
+        {%- for tag in tags -%}
+        <a class="post-tag" title="{{ tag }}" href="{% link blog/topics.html %}#{{tag | uri_escape | downcase }}">
+            {{ tag | capitalize }}
+        </a>
+        {%- endfor -%}
+    </div>
+    <span class="post-date">
+        • 
+        <time class="dt-published" datetime="{{ post.date | date_to_xmlschema }}" itemprop="datePublished">
+            {{ post.date | date: site.date_format }}
+        </time>
+    </span>
+</div>

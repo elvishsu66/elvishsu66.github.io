@@ -1,18 +1,16 @@
 ---
-layout: page
+layout: default
 image: /assets/images/banner-home.png
 ---
-<div class="home-content" itemscope
-     itemtype="http://schema.org/ProfilePage">
-
-    <img class="lazy" data-src="{{ '/assets/images/banner-home.png' | relative_url }}" alt="home" itemprop="image"/>
+<img class="lazy" data-src="{{ '/assets/images/banner-home.png' | relative_url }}" alt="home" itemprop="image"/>
+<div class="container" itemscope itemtype="http://schema.org/ProfilePage">
 
     <h1>👋 Hi! I'm Elvis</h1>
 
     <p>
-    Thank you for visiting my personal site! I'm thrilled to share my journey with you. With over 20 years in the technology sector,
-     my career has been a fascinating adventure in mastering how best to bridge the gap between complex cloud technologies 
-     and practical business applications.
+        Thank you for visiting my personal site! I'm thrilled to share my journey with you. With over 20 years in the technology sector,
+        my career has been a fascinating adventure in mastering how best to bridge the gap between complex cloud technologies 
+        and practical business applications.
     </p>
 
     <p>
@@ -36,17 +34,17 @@ image: /assets/images/banner-home.png
 
     <hr>
 
-    <div class="skill-list">
-        {% for skill in site.data.skills %}
-        <section class="skill-item">
-            <div class="skill-wrapper bg-{{ skill.background }}">
-                <div class="skill-icon">{{ skill.icon }}</div>
-                <h2 class="skill-title">{{ skill.title }}</h2>
-                <div class="skill-content">
-                    <span>{{ skill.content }}</span>
+    <div class="feature-list">
+        {% for feature in site.data.features %}
+        <div class="feature-item">
+            <div class="feature-wrapper bg-{{ feature.background }}">
+                <div class="feature-icon">{{ feature.icon }}</div>
+                <h2 class="feature-title">{{ feature.title }}</h2>
+                <div class="feature-content">
+                    <span>{{ feature.content }}</span>
                 </div>
             </div>
-        </section>
+        </div>
         {% endfor %}
     </div>
 </div>

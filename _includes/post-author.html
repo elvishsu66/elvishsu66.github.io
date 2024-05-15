@@ -1,0 +1,10 @@
+<div class="post-author">
+    <a class="author" href="{% link about.html %}"></a>
+    <span class="post-author-name">
+        By 
+        <a href="{% link about.html %}" itemprop="author publisher" itemscope itemtype="http://schema.org/Person">
+            <span itemprop="name">{{ site.author.name }}</span>
+            <span itemprop="url" hidden>{{ site.author.url }}</span>
+        </a>
+    </span>
+</div>

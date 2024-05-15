@@ -1,0 +1,33 @@
+<div class="post-list">
+    {%- for post in include.posts limit: include.limit -%}
+    <div class="post-item animate" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="post-inner">
+            <div class="post-thumbnail">
+                <a href="{{ post.url | relative_url }}" title="{{ post.title }}">
+                    {%- if post.image -%}
+                    <img class="lazy" data-src="{{ post.image }}" alt="{{ post.title }}" itemprop="image"/>
+                    {%- elsif post.thumbnail -%}
+                    <img class="lazy" data-src="{{ post.thumbnail }}" alt="{{ post.title }}" itemprop="image"/>
+                    {%- else -%}
+                    <img class="lazy" data-src="/assets/images/bg-blogging.png" alt="{{ post.title }}" itemprop="image"/>
+                    {%- endif -%}
+                </a>
+            </div>
+
+            {% include post-meta.html post=post %}
+
+            <div>
+                <a class="post-link" href="{{ post.url | relative_url }}" itemprop="name headline">
+                    {{ post.title | escape }}
+                </a>
+            </div>
+            
+            <div class="post-content" itemprop="articleBody">
+                {{ post.content | markdownify | strip_html | truncatewords: 25 }}
+            </div>
+
+            {% include post-author.html post=post %}
+        </div>
+    </div>
+    {%- endfor -%}
+</div>
