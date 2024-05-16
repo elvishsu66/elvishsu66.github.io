@@ -1,14 +1,14 @@
 .animate {
-    animation: animateElement .8s ease;
-    will-change: transform
+  animation: animateElement 0.8s ease;
+  will-change: transform;
 }
 
 @keyframes animateElement {
-    0% {
-        transform: translate(0px, 40px)
-    }
+  0% {
+    transform: translate(0px, 40px);
+  }
 
-    100% {
-        transform: translate(0px, 0px)
-    }
+  100% {
+    transform: translate(0px, 0px);
+  }
 }

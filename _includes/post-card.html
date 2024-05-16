@@ -1,0 +1,26 @@
+{% assign post = include.post %}
+<div class="post-card" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="post-thumbnail">
+        <a href="{{ post.url | relative_url }}" title="{{ post.title }}">
+            {%- if post.image -%}
+            <img class="lazy" data-src="{{ post.image }}" alt="{{ post.title }}" itemprop="image"/>
+            {%- elsif post.thumbnail -%}
+            <img class="lazy" data-src="{{ post.thumbnail }}" alt="{{ post.title }}" itemprop="image"/>
+            {%- else -%}
+            <img class="lazy" data-src="/assets/images/bg-blogging.png" alt="{{ post.title }}" itemprop="image"/>
+            {%- endif -%}
+        </a>
+    </div>
+
+    {% include post-meta.html post=post %}
+
+    <a class="post-link" href="{{ post.url | relative_url }}" itemprop="name headline">
+        {{ post.title | escape }}
+    </a>
+    
+    <div class="post-content" itemprop="articleBody">
+        {{ post.content | markdownify | strip_html | truncatewords: 25 }}
+    </div>
+
+    {% include post-author.html author=site.author %}
+</div>

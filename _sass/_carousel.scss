@@ -1,0 +1,39 @@
+.carousel {
+  border-radius: 1rem;
+  background-color: $background-color;
+  padding: 1rem 0;
+  margin-bottom: $spacing-unit;
+  .post-card {
+    min-height: 580px;
+    padding: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+    .post-thumbnail {
+      margin: -10px;
+      border: none;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      background-color: $background-color;
+    }
+  }
+}
+
+.carousel-cell {
+  width: 35%;
+  margin-right: 5px;
+  padding: 5px;
+  @include media-query($on-mobile) {
+    width: 100%;
+  }
+}
+
+/* smaller, dark, rounded square */
+.flickity-button {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+.flickity-button:hover {
+  background: $link-base-color !important;
+}
+/* icon color */
+.flickity-button-icon {
+  fill: white !important;
+}

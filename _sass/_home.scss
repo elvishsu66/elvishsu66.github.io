@@ -27,10 +27,12 @@ $colors: (
       .feature-wrapper {
         border-radius: 10px;
         padding: $spacing-unit;
-        transition: border-top 300ms ease-in-out, padding-top 300ms ease-in-out;
+        transform: scale(1);
+        transition: transform .3s ease-out;
   
         &:hover {
-          border-top: 0.5rem solid lighten($color: $theme-color, $amount: 50);
+          transform: scale(1.1);
+          filter: brightness(110%);
         }
   
         .feature-icon {

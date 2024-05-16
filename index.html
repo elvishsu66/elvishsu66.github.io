@@ -3,7 +3,8 @@ layout: default
 image: /assets/images/banner-home.png
 ---
 <img class="lazy" data-src="{{ '/assets/images/banner-home.png' | relative_url }}" alt="home" itemprop="image"/>
-<div class="container" itemscope itemtype="http://schema.org/ProfilePage">
+
+<section itemscope itemtype="http://schema.org/ProfilePage">
 
     <h1>👋 Hi! I'm Elvis</h1>
 
@@ -33,7 +34,13 @@ image: /assets/images/banner-home.png
     </p>
 
     <hr>
+</section>
 
+<section class="section no-paddings">
+    <div class="section-head">
+        <spa class="section-intro">About me</spa>
+        <h2 class="section-title">What are my strengths?</h2>
+    </div>
     <div class="feature-list">
         {% for feature in site.data.features %}
         <div class="feature-item">
@@ -47,4 +54,32 @@ image: /assets/images/banner-home.png
         </div>
         {% endfor %}
     </div>
-</div>
+</section>
+<hr>
+<section class="section">
+    <div class="section-head">
+        <spa class="section-intro">Blog posts</spa>
+        <h2 class="section-title"> Check out the recent stories</h2>
+    </div>
+    <div class="carousel">
+        {%- for post in site.posts limit: 9 -%}
+        <div class="carousel-cell">
+            {% include post-card.html post=post %}
+        </div>
+        {%- endfor -%}
+    </div>
+</section>
+
+<!-- CSS -->
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<!-- JavaScript -->
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<script>
+    var elem = document.querySelector('.carousel');
+    var flkty = new Flickity(elem, {
+        groupCells: true,
+        wrapAround: true,
+        cellAlign: 'center',
+        contain: true
+    });
+</script>
