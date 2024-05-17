@@ -6,13 +6,19 @@
   .post-card {
     min-height: 580px;
     padding: 10px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.08);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
     .post-thumbnail {
       margin: -10px;
       border: none;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
       background-color: $background-color;
+    }
+  }
+
+  &:hover {
+    .flickity-button {
+      opacity: 1;
     }
   }
 }
@@ -28,11 +34,14 @@
 
 /* smaller, dark, rounded square */
 .flickity-button {
+  opacity: 0;
   background: rgba(0, 0, 0, 0.5) !important;
+  transition: opacity .5s ease-in-out;
+  &:hover {
+    background: $link-base-color !important;
+  }
 }
-.flickity-button:hover {
-  background: $link-base-color !important;
-}
+
 /* icon color */
 .flickity-button-icon {
   fill: white !important;

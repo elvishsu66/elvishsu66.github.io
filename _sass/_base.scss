@@ -21,7 +21,7 @@ html {
 body {
   font-family: $base-font-family;
   font-weight: $base-font-weight;
-  color: $text-color;
+  color: $foreground-color;
   background-color: $background-color;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
@@ -130,11 +130,11 @@ a {
   text-decoration: none;
 
   &:visited {
-    color: $link-visited-colour;
+    color: $link-visited-color;
   }
 
   &:hover {
-    color: $text-color;
+    color: $foreground-color;
     text-decoration: underline;
   }
 }
@@ -152,13 +152,13 @@ hr {
     left: 50%;
     transform: translateX(-50%);
     line-height: 0;
-    color: $text-color;
+    color: $foreground-color;
   }
 }
 
 blockquote {
-  color: $theme-color;
-  border-left: 4px solid $theme-color;
+  color: $foreground-color;
+  border-left: 4px solid $foreground-color;
   padding: $spacing-unit / 2;
   @include relative-font-size(1.8);
   letter-spacing: -1px;
@@ -178,7 +178,7 @@ table {
   margin-bottom: $spacing-unit;
   width: 100%;
   overflow-x: auto;
-  color: $text-color;
+  color: $foreground-color;
   border-collapse: collapse;
   tr {
     &:nth-child(even) {

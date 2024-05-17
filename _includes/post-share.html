@@ -1,0 +1,38 @@
+<hr />
+<div class="share-container">
+  <a
+    href="https://www.linkedin.com/shareArticle?mini=true&url={{ site.url }}{{ site.baseurl }}{{ page.url }}&title={{ page.title | uri_escape }}&summary={{ page.description | uri_escape }}&source={{ site.title | uri_escape }}"
+    onclick="return false;"
+    title="Share on LinkedIn"
+    data-media="LinkedIn"
+  >
+    <i class="fa-brands fa-linkedin share-button"></i>
+  </a>
+
+  <a
+    href="https://twitter.com/intent/tweet?text={{ page.title }}&url={{ site.url }}{{ site.baseurl }}{{ page.url }}"
+    onclick="return false;"
+    title="Share on Twitter"
+    data-media="Twitter"
+  >
+    <i class="fa-brands fa-x-twitter share-button"></i>
+  </a>
+
+  <a
+    href="http://www.reddit.com/submit?type=LINK&title={{ page.title | uri_escape }}&url={{ site.url }}{{ site.baseurl }}{{ page.url }}"
+    onclick="return false;"
+    title="Share on Reddit"
+    data-media="Reddit"
+  >
+    <i class="fa-brands fa-reddit-alien share-button"></i>
+  </a>
+
+  <a
+    href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ site.baseurl }}{{ page.url }}"
+    onclick="return false;"
+    title="Share on Facebook"
+    data-media="Facebook"
+  >
+    <i class="fa-brands fa-facebook share-button"></i>
+  </a>
+</div>

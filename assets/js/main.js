@@ -8,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function() {
     searchInput = document.getElementById("search-input"),
     sideMenu = document.getElementById("side-menu"),
     lazyImages = document.querySelectorAll(".lazy"),
-    tables = document.querySelectorAll('table');
+    tables = document.querySelectorAll('table'),
+    shareButtons = document.querySelectorAll('.share-container a');;
 
     searchOpenIcon.addEventListener("click", () => {
       searchOpen();
@@ -17,6 +18,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     searchCloseIcon.addEventListener("click", () => {
       searchClose();
+    });
+
+    shareButtons.forEach((e) => {
+      if(e.href) {
+        e.addEventListener("click", () => {
+          var media = e.dataset.media;
+          if (typeof gtag !== 'undefined' && media) {
+            gtag('event', media, {'event_category':'Post Shared','event_label': media});
+          }
+          window.open(e.href, 'pop-up', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0');
+          return false;
+        });
+      }
     });
 
 

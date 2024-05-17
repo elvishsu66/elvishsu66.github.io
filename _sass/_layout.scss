@@ -38,7 +38,7 @@
  * Site header
  */
 .site-header {
-  background-color: $theme-color;
+  background-color: $foreground-color;
   color: $background-color;
   position: sticky;
   top: 0;
@@ -78,7 +78,7 @@
     width: 100%;
     height: 100%;
     position: fixed;
-    background-color: $theme-color;
+    background-color: $foreground-color;
     overflow: hidden;
     max-height: 0;
     transition: max-height .5s ease-out;
@@ -90,11 +90,11 @@
         display: inline-block;
         width: 100%;
         &:hover{
-          background-color: lighten($theme-color, 20);
+          background-color: lighten($foreground-color, 20);
           text-decoration: none;
         }
         &.active {
-          color: $link-active-colour;
+          color: $link-active-color;
           font-weight: bold;
         }
       }
@@ -138,7 +138,7 @@
     &:checked {
       ~ nav {
         max-height: 100vh;
-        background-color: $theme-color;
+        background-color: $foreground-color;
       }
       /* Toggle menu icon */
       ~ .hamburger {
@@ -188,7 +188,7 @@
 */
 .site-footer {
   position: relative;
-  background-color: $theme-color;
+  background-color: $foreground-color;
   color: $background-color;
   display: flex;
   @include relative-font-size(1);
@@ -340,13 +340,14 @@
   }
 }
 
+
 .post-card {
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
 
   a {
-    color: $text-color;
+    color: $foreground-color;
   }
 
   .post-thumbnail {
@@ -378,7 +379,7 @@
 
   .post-content {
     flex: 1;
-    color: lighten($theme-color, 40%);
+    color: lighten($foreground-color, 40%);
     @include relative-font-size(.888888);
   }
 }
@@ -392,11 +393,18 @@
     padding: .3rem 1rem;
     margin-right: .3rem;
     border-radius: 5px;
-    color: $text-color;
+    color: $foreground-color;
     background-color: darken($background-color, 10%);
     font-weight: 500;
     font-size: 12px;
   }
+}
+
+
+.post-meta {
+  color: lighten($foreground-color, 40%);
+  display: flex;
+  margin: 1rem 0;
 }
 
 
@@ -441,17 +449,11 @@
 }
 
 
-.post-meta {
-  color: lighten($theme-color, 40%);
-  display: flex;
-  margin: 1rem 0;
-}
-
-
 .post-link {
-  display: block;
+  display: inline-block;
   font-weight: bold;
   margin-bottom: .7rem;
+  line-height: 1.5rem;
   @include relative-font-size(1.3);
 }
 
@@ -561,6 +563,9 @@
 }
 
 
+/**
+* The post pagination
+*/
 .post-pager {
   margin-top: $spacing-unit;
   justify-content: center !important;
@@ -592,7 +597,7 @@
 
       span {
         display: block;
-        color: $text-color;
+        color: $foreground-color;
         text-decoration: none;
       }
 
@@ -657,7 +662,7 @@
   
   .section-intro {
     text-transform: uppercase;
-    color: lighten($text-color, 20%);
+    color: lighten($foreground-color, 20%);
     margin-bottom: $spacing-unit / 2;
     font-weight: 500;
   }
@@ -699,7 +704,7 @@
       padding: .5em;
       display: flex;
       border: none;
-      border-bottom: 3px solid $theme-color;
+      border-bottom: 3px solid $foreground-color;
 
       input, button {
         border: none;
@@ -745,4 +750,22 @@
 
 .highlight {
   border-radius: 8px;
+}
+
+/**
+* Animation
+*/
+.animate {
+  animation: animateElement 0.8s ease;
+  will-change: transform;
+}
+
+@keyframes animateElement {
+  0% {
+    transform: translate(0px, 40px);
+  }
+
+  100% {
+    transform: translate(0px, 0px);
+  }
 }

@@ -2,18 +2,19 @@
 
 $theme-color: #000000;
 $primary-color: $theme-color;
-$text-color: #111111;
-$gutter-color: #303030;
+
 $background-color: #ffffff;
+$foreground-color: #1e1e1e;
+
 $header-color: $background-color;
-$header-background-color: $theme-color;
+$header-background-color: $foreground-color;
 
 $link-base-color: #219ebc;
-$link-visited-colour: darken($link-base-color, 15%);
-$link-active-colour: lighten($link-base-color, 5%);
+$link-visited-color: darken($link-base-color, 15%);
+$link-active-color: lighten($link-base-color, 5%);
 
-$code-background-colour: #1e1e1e;
-$code-foreground-colour: #d4d4d4;
+$code-background-color: lighten($foreground-color, 5%);
+$code-foreground-color: lighten($background-color, 5%);
 
 $base-font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif,
   "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -34,4 +35,4 @@ $on-laptop: 1900px;
 $on-medium: $on-mobile;
 $on-large: $on-laptop;
 
-@import "mixins", "layout", "base", "timeline", "syntax", "home", "animation", "carousel";
+@import "mixins", "base", "layout", "syntax", "home", "timeline", "carousel", "share";
