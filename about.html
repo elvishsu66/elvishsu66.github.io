@@ -26,7 +26,7 @@ image: /assets/images/elvis.jpg
         <h2 class="timeline-title">{{ experience.role }}</h2>
         <h5 class="timeline-title">
           {% if experience.website %}
-          <a href="{{ experience.website }}" target="_blank" title=" {{ experience.company }}"> {{ experience.company }}</a>
+          <a href="{{ experience.website }}" target="_blank" title=" {{ experience.company }}" rel="noopener noreferrer"> {{ experience.company }}</a>
           {% else %}
           <span>{{ experience.company }}</span>
           {% endif %}

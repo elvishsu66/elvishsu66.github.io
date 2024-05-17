@@ -21,22 +21,22 @@ I have been using ASP .NET MVC for many years. It is a complex framework but
     was: "Why not developing a simple MVC framework with PHP?". It would allow
     me to utilise the backend code and avoid mixing code in classes.<br />
 <br />
-I started to study many PHP MVC Frameworks such as <a href="http://framework.zend.com/" target="_blank">Zend
-      Framework</a>, <a href="http://symfony.com/" target="_blank">Symfony</a>
-    and <a href="http://cakephp.org/" target="_blank">CakePHP</a> but I
+I started to study many PHP MVC Frameworks such as <a href="http://framework.zend.com/" target="_blank" rel="noopener noreferrer">Zend
+      Framework</a>, <a href="http://symfony.com/" target="_blank" rel="noopener noreferrer">Symfony</a>
+    and <a href="http://cakephp.org/" target="_blank" rel="noopener noreferrer">CakePHP</a> but I
     realised those "<span style="font-style: italic; font-weight: bold;">ready-to-use</span>"
     frameworks are overkilled for this simple project and I would like to have
     codes that I could manipulate easily and apply them to next simple projects
     without making my brand hurts. <br />
 <a name='more'></a><br />
-Luckily, I found this article: <a href="http://anantgarg.com/2009/03/13/write-your-own-php-mvc-framework-part-1/" target="_blank">Write
+Luckily, I found this article: <a href="http://anantgarg.com/2009/03/13/write-your-own-php-mvc-framework-part-1/" target="_blank" rel="noopener noreferrer">Write
       your own PHP MVC Framework</a>. It is a very good article and it explained
     the concept of MVC comprehensively. If you just start learning MVC, this is
     a great place start. Well, the truth is the article inspired me to create my
     own little MVC framework with PHP.<br />
 <br />
 Anyway, before you continue reading, I recommend you to read through the
-    article I mentioned <a href="http://anantgarg.com/2009/03/13/write-your-own-php-mvc-framework-part-1/" target="_blank">above</a>.
+    article I mentioned <a href="http://anantgarg.com/2009/03/13/write-your-own-php-mvc-framework-part-1/" target="_blank" rel="noopener noreferrer">above</a>.
     My version of MVC is a little bit different from Anant Garg's but I believe you will find it useful.<br />
 <br />
 In this article, I would like to focus on the routing and template operations. Since Anant Garg has covered most important parts of MVC, I will just point out some features of my own framework in this article.<br />
@@ -291,15 +291,15 @@ Basically, this part does not have big differences between Anant Garg's
 <ul>
 <li>I included a <span style="font-weight: bold;">config.php</span> file
         to serve configuration parameters such as site name and title</li>
-<li>I use <a href="http://www.php.net/manual/en/function.spl-autoload-register.php" target="_blank">spl_autoload_register</a>
-        instead of <a href="http://www.php.net/manual/en/function.autoload.php" target="_blank">__autoload</a>
-        (Please refer this <a href="http://stackoverflow.com/questions/6894538/php-spl-autoload-register-vs-autoload" target="_blank">discussion</a>)</li>
+<li>I use <a href="http://www.php.net/manual/en/function.spl-autoload-register.php" target="_blank" rel="noopener noreferrer">spl_autoload_register</a>
+        instead of <a href="http://www.php.net/manual/en/function.autoload.php" target="_blank" rel="noopener noreferrer">__autoload</a>
+        (Please refer this <a href="http://stackoverflow.com/questions/6894538/php-spl-autoload-register-vs-autoload" target="_blank" rel="noopener noreferrer">discussion</a>)</li>
 <li>I wrapped the "<span style="font-weight: bold;">removeMagicQuotes</span>"
         and "<span style="font-weight: bold;">unregisterGlobals</span>"
         functions to <span style="font-weight: bold;"> MyHelpers</span> class</li>
 <li> I use use the <span style="font-weight: bold;">Router</span> class
         to handle further operations and dispatch the outputs</li>
-<li> I call <a href="http://php.net/manual/en/function.session-write-close.php" target="_blank">session_write_close</a>
+<li> I call <a href="http://php.net/manual/en/function.session-write-close.php" target="_blank" rel="noopener noreferrer">session_write_close</a>
         and the end of the operation to unlock the session data. This is useful
         when you have many concurrent connections such as using Ajax operations.</li>
 </ul>
@@ -381,7 +381,7 @@ The Router class plays an important role in our framework. It translates the
     value first. After we found what controller and action are, then we process
     the request and dispatch the results to the clients.<br />
 <br />
-We uses regular expression match by <a href="http://ch1.php.net/preg_match" target="_blank">preg_match</a>
+We uses regular expression match by <a href="http://ch1.php.net/preg_match" target="_blank" rel="noopener noreferrer">preg_match</a>
     method to parse our routing patterns. If you have other patterns, you can
     simply add more test patterns to the code (<span style="font-style: italic;">Line
       25 - 29</span>).<br />
@@ -392,10 +392,10 @@ After we found out what controller and action are, we start to parse our
 <br />
 After we got our query string, then we need to determine which request
     method has client sent in order to retrieve our parameters. This part
-    supports <a href="http://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank">RESTful</a>
+    supports <a href="http://en.wikipedia.org/wiki/Representational_state_transfer" target="_blank" rel="noopener noreferrer">RESTful</a>
     and standard Http requests (<span style="font-style: italic;">Line 71 - 104</span>).
-    Since I use <a href="http://en.wikipedia.org/wiki/Representational_state_transfer#Concept" target="_blank">RESTful</a>
-    data store from <a href="http://docs.sencha.com/extjs/4.2.2/#%21/api/Ext.data.proxy.Rest" target="_blank">ExtJs</a>
+    Since I use <a href="http://en.wikipedia.org/wiki/Representational_state_transfer#Concept" target="_blank" rel="noopener noreferrer">RESTful</a>
+    data store from <a href="http://docs.sencha.com/extjs/4.2.2/#%21/api/Ext.data.proxy.Rest" target="_blank" rel="noopener noreferrer">ExtJs</a>
     a lot, therefore I included in the Router class.<br />
 <br />
 The parameters may not include the "<span style="font-weight: bold;">id</span>",
@@ -404,7 +404,7 @@ The parameters may not include the "<span style="font-weight: bold;">id</span>",
 <br />
 We start to validate the existence of controller class, model class and
     action method. If all of them exist, then we try to match the action
-    method's arguments with requested parameters. We then use <a href="http://ch1.php.net/call_user_func_array" target="_blank">call_user_func_array</a>
+    method's arguments with requested parameters. We then use <a href="http://ch1.php.net/call_user_func_array" target="_blank" rel="noopener noreferrer">call_user_func_array</a>
     to call the action method with filtered parameters (<span style="font-style: italic;">Line
       120 - 152</span>). <br />
 <br />
@@ -750,20 +750,20 @@ Well, since most of database operations are handled by MySqlDataAdapter.php,
 <br />
 <h3>
 The Template (Template.class.php)</h3>
-The Template class handles our output operations. I use <a href="http://ch2.php.net/ob_start" target="_blank">ob_start</a>,
-    <a href="http://ch2.php.net/manual/en/function.ob-get-contents.php" target="_blank">ob_get_contents</a>,
-    <a href="http://ch2.php.net/manual/en/function.ob-end-clean.php" target="_blank">ob_end_clean</a>
-    and <a href="http://ch2.php.net/manual/en/function.ob-end-flush.php" target="_blank">ob_end_flush</a>
+The Template class handles our output operations. I use <a href="http://ch2.php.net/ob_start" target="_blank" rel="noopener noreferrer">ob_start</a>,
+    <a href="http://ch2.php.net/manual/en/function.ob-get-contents.php" target="_blank" rel="noopener noreferrer">ob_get_contents</a>,
+    <a href="http://ch2.php.net/manual/en/function.ob-end-clean.php" target="_blank" rel="noopener noreferrer">ob_end_clean</a>
+    and <a href="http://ch2.php.net/manual/en/function.ob-end-flush.php" target="_blank" rel="noopener noreferrer">ob_end_flush</a>
     to hold the output data and join them together before dispatching to
     clients.<br />
 <br />
 <span style="text-decoration: underline;"></span>You may also notice that I
-    use <a href="https://code.google.com/p/minify/" target="_blank">PHP minify</a>
+    use <a href="https://code.google.com/p/minify/" target="_blank" rel="noopener noreferrer">PHP minify</a>
     to reduce the size of the outputs. If the operation is html output then I
     minify Html, CSS and JavaScript contents. If the operation is Ajax or just
     JavaScript contents, then I only minify it with JS minify only.<br />
 <br />
-At the end, we override the <a href="http://www.php.net/manual/en/language.oop5.magic.php#object.tostring" target="_blank">__toString()</a>
+At the end, we override the <a href="http://www.php.net/manual/en/language.oop5.magic.php#object.tostring" target="_blank" rel="noopener noreferrer">__toString()</a>
     method in order for <a href="https://www.blogger.com/blogger.g?blogID=1691872865366176972#library-mvc-Router.class.php">Router.class.php</a>
     to dispatch the output.<br />
 <br />
@@ -938,5 +938,5 @@ In conclusion, the concept is not difficult and should be easy to apply on any s
 If you enjoy this article, please leave a like or a plus and let me know your thoughts in the comments. <br />
 
 <p style="font-size:14px;color:red;"> 
- <b>Update</b>: I have updated the MySqlDataAdapter.class.php in the sample code which replaced <b>mysql_*</b> functions to <b>PDO (<a href="http://www.php.net/manual/en/book.pdo.php" target="_blank">PHP Data Objects</a>)</b>.
+ <b>Update</b>: I have updated the MySqlDataAdapter.class.php in the sample code which replaced <b>mysql_*</b> functions to <b>PDO (<a href="http://www.php.net/manual/en/book.pdo.php" target="_blank" rel="noopener noreferrer">PHP Data Objects</a>)</b>.
 </p>

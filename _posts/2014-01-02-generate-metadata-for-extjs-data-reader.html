@@ -14,13 +14,13 @@ blogger_orig_url: https://www.elvishsu.com/2014/01/generate-metadata-for-extjs-d
 
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/assets/posts/blogger/2014-01-02-image-0000.png" imageanchor="1" style="clear: left; float: left; margin-bottom: 1em; margin-right: 1em;"><img alt="Generate MetaData for ExtJs Data Reader" border="0" src="/assets/posts/blogger/2014-01-02-image-0000.png" title="Generate MetaData for ExtJs Data Reader" /></a></div>
-<a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.reader.Reader-property-metaData" target="_blank">Metadata</a> is one of my most used properties in&nbsp;<a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.reader.Reader" target="_blank">Ext.data.reader.Reader</a>. It allows me to pass custom data/configuration to <a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.grid.Panel" target="_blank">Grid Panel</a>, <a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.form.Panel" target="_blank">Form</a>, <a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.form.field.ComboBox" target="_blank">ComboBox</a> and other components without needing extra efforts to change the code. At the following example, I just want to put my column layout configuration to the grid without configuring the data fields in the <a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.JsonStore" target="_blank">data store</a>. If the settings of data fields is bound with data columns' information on the database, then we could save a lot of time to match the data field types when updating/retrieving data to/from server.<br />
+<a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.reader.Reader-property-metaData" target="_blank" rel="noopener noreferrer">Metadata</a> is one of my most used properties in&nbsp;<a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.reader.Reader" target="_blank" rel="noopener noreferrer">Ext.data.reader.Reader</a>. It allows me to pass custom data/configuration to <a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.grid.Panel" target="_blank" rel="noopener noreferrer">Grid Panel</a>, <a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.form.Panel" target="_blank" rel="noopener noreferrer">Form</a>, <a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.form.field.ComboBox" target="_blank" rel="noopener noreferrer">ComboBox</a> and other components without needing extra efforts to change the code. At the following example, I just want to put my column layout configuration to the grid without configuring the data fields in the <a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.JsonStore" target="_blank" rel="noopener noreferrer">data store</a>. If the settings of data fields is bound with data columns' information on the database, then we could save a lot of time to match the data field types when updating/retrieving data to/from server.<br />
 <br />
 In this article, we are going to retrieve field types, defaultValues, and allowBlank settings via the meta data which is generated based on the data columns information of the MySQL database.<br />
 <a name='more'></a><br />
-For example, we want to display a data grid with <a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.toolbar.Paging" target="_blank">paging toolbar</a> which shows a list of values of 'items'.<br />
+For example, we want to display a data grid with <a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.toolbar.Paging" target="_blank" rel="noopener noreferrer">paging toolbar</a> which shows a list of values of 'items'.<br />
 <br />
-We now just need to create a simple <b><a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.JsonStore" target="_blank">JsonStore</a></b> and let the <b><a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.proxy.Ajax" target="_blank">proxy</a></b> retrieves the information by '<b>MetaDataExample.php</b>'.<br />
+We now just need to create a simple <b><a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.JsonStore" target="_blank" rel="noopener noreferrer">JsonStore</a></b> and let the <b><a href="http://docs.sencha.com/extjs/4.2.2/#!/api/Ext.data.proxy.Ajax" target="_blank" rel="noopener noreferrer">proxy</a></b> retrieves the information by '<b>MetaDataExample.php</b>'.<br />
 <br />
 <br />
 
@@ -106,7 +106,7 @@ public function getItems(){
 
 <br />
 <br />
-We want to avoid some unwanted characters to appear on the data, we need to convert some characters to <a href="http://ch1.php.net/utf8_encode" target="_blank">UTF8</a> format characters.<br />
+We want to avoid some unwanted characters to appear on the data, we need to convert some characters to <a href="http://ch1.php.net/utf8_encode" target="_blank" rel="noopener noreferrer">UTF8</a> format characters.<br />
 <br />
 <br />
 
@@ -229,7 +229,7 @@ protected function parseMetaDataFields($stmt, $overrides = false){
 <br />
 The <b>convertType</b> function plays an important role. We want to convert MySQL's data type to ExtJs data type. This function contains my most used types. The rest of less used types, I leave them to be 'auto'. If you have further types need to be converted, feel free to add them in.<br />
 <br />
-Please note that MySQL does <b>not</b> have '<b><a href="http://dev.mysql.com/doc/refman/5.0/en/numeric-type-overview.html" target="_blank">Boolean</a></b>' type, but it uses '<b><a href="http://dev.mysql.com/doc/refman/5.0/en/integer-types.html" target="_blank">tinyint</a></b>' instead.<br />
+Please note that MySQL does <b>not</b> have '<b><a href="http://dev.mysql.com/doc/refman/5.0/en/numeric-type-overview.html" target="_blank" rel="noopener noreferrer">Boolean</a></b>' type, but it uses '<b><a href="http://dev.mysql.com/doc/refman/5.0/en/integer-types.html" target="_blank" rel="noopener noreferrer">tinyint</a></b>' instead.<br />
 <br />
 <br />
 
@@ -272,7 +272,7 @@ public function convertType($type){
 
 <br />
 <br />
-The following simple database class wraps functions we need together. In this example, we use&nbsp;&nbsp;<b><a href="http://www.php.net/manual/en/ref.pdo-mysql.php" target="_blank">PDO</a></b>&nbsp;class to connect to our MySQL database. You might want to use&nbsp;<b><a href="http://www.php.net/manual/en/book.mysqli.php" target="_blank">mysqli</a></b> extension for MySQL functions instead. However I don't recommend using&nbsp;<b><a href="http://www.php.net/manual/en/ref.mysql.php" target="_blank">mysql</a></b>&nbsp;extension since <b>mysql</b> extension is <a href="http://www.php.net/manual/en/mysqlinfo.api.choosing.php" target="_blank">deprecated</a> since PHP version 5.5.0.<br />
+The following simple database class wraps functions we need together. In this example, we use&nbsp;&nbsp;<b><a href="http://www.php.net/manual/en/ref.pdo-mysql.php" target="_blank" rel="noopener noreferrer">PDO</a></b>&nbsp;class to connect to our MySQL database. You might want to use&nbsp;<b><a href="http://www.php.net/manual/en/book.mysqli.php" target="_blank" rel="noopener noreferrer">mysqli</a></b> extension for MySQL functions instead. However I don't recommend using&nbsp;<b><a href="http://www.php.net/manual/en/ref.mysql.php" target="_blank" rel="noopener noreferrer">mysql</a></b>&nbsp;extension since <b>mysql</b> extension is <a href="http://www.php.net/manual/en/mysqlinfo.api.choosing.php" target="_blank" rel="noopener noreferrer">deprecated</a> since PHP version 5.5.0.<br />
 <br />
 <a href="http://www.blogger.com/blogger.g?blogID=1691872865366176972#" name="MySqlDataAdapter"></a>
 
@@ -380,7 +380,7 @@ class MySqlDataAdapter
 
 <br />
 <br />
-You can also use the same concept to configure the Grid Panel column settings via the meta data. Have a look at '<a href="http://www.elvishsu66.com/2011/05/dynamic-gridpanel-for-extjs-4.html" target="_blank">Dynamic GridPanel for ExtJs 4</a>' and it may give you some ideas to apply column settings via meta data to the Grid Panel.<br />
+You can also use the same concept to configure the Grid Panel column settings via the meta data. Have a look at '<a href="http://www.elvishsu66.com/2011/05/dynamic-gridpanel-for-extjs-4.html" target="_blank" rel="noopener noreferrer">Dynamic GridPanel for ExtJs 4</a>' and it may give you some ideas to apply column settings via meta data to the Grid Panel.<br />
 <br />
 You can download the source code via <a href="https://drive.google.com/uc?export=download&amp;confirm=no_antivirus&amp;id=0BxNgktpBGY4YcmxpdlZlRmY1RGM">here</a>.<br />
 <br />
