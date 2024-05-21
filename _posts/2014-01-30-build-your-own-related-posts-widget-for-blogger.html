@@ -218,7 +218,7 @@ blogger_orig_url: https://www.elvishsu.com/2014/01/build-your-own-related-posts-
    }
   };
  })(jQuery);
-{% endhighlight %}
+{%- endhighlight -%}
 
 You may notice that I use the url <span style="font-weight: bold;">/feeds/posts/default</span>
 instead of <span style="font-weight: bold;">/feeds/posts/summary</span>. If
@@ -248,32 +248,32 @@ Let's get started and we only need 3 steps to make it work<br>
 Below is the code you need to put to the place you want to show on your page
 
 
-{% highlight html %} 
+{%- highlight html -%}  
 <b:if cond='data:blog.pageType == &quot;item&quot;'>
  <!-- related posts -->
  <div id='related_posts'></div>
  <script>var labels = &#39;<b:loop values='data:post.labels' var='label'><data:label.name/><b:if cond='data:label.isLast != &quot;true&quot;'>,</b:if></b:loop>&#39;;</script>                  
 </b:if>
-{% endhighlight %}
+{%- endhighlight -%}
 
  First you need to open your HTML template editor and search for<br>
 <br>
-{% highlight html %} 
+{%- highlight html -%}  
   <div class='post-footer'></div>
-{% endhighlight %}
+{%- endhighlight -%}
 
 <br>
 if you cannot find above, then we need to find below text<br>
 <br>
-{% highlight html %} 
+{%- highlight html -%} 
   <b:includable id='post' var='post'>
-{% endhighlight %}
+{%- endhighlight -%}
 <br>
 when you found above part, you need to scroll down until you see<br>
 <br>
-{% highlight html %} 
+{%- highlight html -%} 
   </b:includable>
-{% endhighlight %}
+{%- endhighlight -%}
 <br>
 when you see it, place the sample code above it.<br>
 <br>
@@ -281,14 +281,14 @@ when you see it, place the sample code above it.<br>
 <h3> 2. Place the CSS code to your skin</h3>
 Search the text below in your HTML template editor<br>
 <br>
-{% highlight html %} 
+{%- highlight html -%} 
   ]]></b:skin>
-{% endhighlight %}
+{%- endhighlight -%}
 <br>
-then place the code below above the <span style="font-family: Courier New,Courier,monospace;">]]></b:skin></span><br>
+then place the code below above the <span style="font-family: Courier New,Courier,monospace;">]]&gt;&lt;b:skin&gt;</span><br>
 
 
-{% highlight css %} 
+{%- highlight css -%} 
 #related_posts{
  border-top: 1px solid #d0d0d0;
  border-bottom: 1px solid #d0d0d0;         
@@ -366,21 +366,21 @@ then place the code below above the <span style="font-family: Courier New,Courie
  text-decoration: none;
  color:#fff;
 }
-{% endhighlight %}
+{%- endhighlight -%}
 <hr>
 
 <h3> 3. Execute the plugin</h3>
 
 Search the text below in your HTML template editor<br>
 <br>
-{% highlight html %} 
+{%- highlight html -%}  
   </body>
-{% endhighlight %}
+{%- endhighlight -%}
 <br>
 then place the code below above</span><br>
 <br>
 
-{% highlight js %}       
+{%- highlight js -%}       
 <!-- comment out below if you have jQuery library loaded already -->
 <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js' />
 <script src='https://dl.dropboxusercontent.com/u/99319532/Blogger/host/related_posts.js'/>
@@ -390,7 +390,7 @@ then place the code below above</span><br>
     $('#related_posts').relatedPosts({labels:labels,title:'You may also like -'});
   };
 <script/>
-{% endhighlight %}
+{%- endhighlight -%}
 
 
 Now, you should be able to see your related post on your page. You can tweak
