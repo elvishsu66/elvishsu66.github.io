@@ -38,6 +38,7 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
   - jekyll-tagging-related_posts
+  - jekyll-redirect-from
 
 sass:
   sass_dir: _sass

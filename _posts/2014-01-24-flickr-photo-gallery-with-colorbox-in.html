@@ -14,34 +14,34 @@ blogger_orig_url: https://www.elvishsu.com/2014/01/flickr-photo-gallery-with-col
 
 <div class="separator" style="clear: both; text-align: center;">
 <a href="/assets/posts/blogger/2014-01-24-image-0000.png" imageanchor="1" style="clear: right; float: right; margin-bottom: 1em; margin-left: 1em;"><img alt="Flickr Photo Gallery" border="0" src="/assets/posts/blogger/2014-01-24-image-0000.png" height="148" title="Flickr Photo Gallery" width="200" /></a></div>
-Last week I updated my Blogger site to be responsive and optimised the <a href="https://developers.google.com/speed/pagespeed/insights/?url=www.elvishsu66.com" target="_blank" title="Google PageSpeed Insights">page
-      load time</a>. Whilst doing those optimisation, I was looking for a simple
-    photo gallery to display the photos from my <a href="http://www.flickr.com/photos/elvishsu66" target="_blank" title="Elvis's Photostream">Flickr
-      photo stream</a>. I've tried <a href="http://www.flickrslideshow.com/" target="_blank" title="flickr sideshow">flickr
-      sideshow</a><span style="text-decoration: underline;"></span>, <a href="http://www.db798.com/pictobrowser/" target="_blank" title="pictobrowser">pictobrowser
-      </a>and <a href="http://www.slideflickr.com/" target="_blank" title="slideflickr">slideflickr</a>
-    however I was not satisfied with them. I then started to study the <a href="http://www.flickr.com/services/api/" target="_blank" title="Flickr API">Flickr
-      API</a> and tried to make a Flickr-like justified layout for my <a href="https://www.blogger.com/p/photography.html" target="_blank" title="My Phtos">photography
-      page</a>. While trying to code the jQuery plugin, I found two great
-    articles by Sam from <a href="http://www.wackylabs.net/2012/03/flickr-justified-layout-in-jquery/" target="_blank" title="wackylabs">Wackylabs.net</a>
-    and <a href="http://miromannino.com/projects/justified-gallery/" target="_top">Miro
-      Mannino</a>. Miro explained how the layout could be done with a detailed
-    illustrations but I decided to use Sam's algorithm to build my own jQuery
-    plugin.<br />
+Last week I updated my Blogger site to be responsive and optimised the <a href="https://developers.google.com/speed/pagespeed/insights/?url=www.elvishsu.com" target="_blank" title="Google PageSpeed Insights">page
+load time</a>. Whilst doing those optimisation, I was looking for a simple
+photo gallery to display the photos from my <a href="http://www.flickr.com/photos/elvishsu66" target="_blank" title="Elvis's Photostream">Flickr
+photo stream</a>. I've tried <a href="http://www.flickrslideshow.com/" target="_blank" title="flickr sideshow">flickr
+sideshow</a><span style="text-decoration: underline;"></span>, <a href="http://www.db798.com/pictobrowser/" target="_blank" title="pictobrowser">pictobrowser
+</a>and <a href="http://www.slideflickr.com/" target="_blank" title="slideflickr">slideflickr</a>
+however I was not satisfied with them. I then started to study the <a href="http://www.flickr.com/services/api/" target="_blank" title="Flickr API">Flickr
+API</a> and tried to make a Flickr-like justified layout for my <a href="https://www.blogger.com/p/photography.html" target="_blank" title="My Phtos">photography
+page</a>. While trying to code the jQuery plugin, I found two great
+articles by Sam from <a href="http://www.wackylabs.net/2012/03/flickr-justified-layout-in-jquery/" target="_blank" title="wackylabs">Wackylabs.net</a>
+and <a href="http://miromannino.com/projects/justified-gallery/" target="_top">Miro
+Mannino</a>. Miro explained how the layout could be done with a detailed
+illustrations but I decided to use Sam's algorithm to build my own jQuery
+plugin.<br />
 <a name='more'></a><br />
 The plugin loads 5 rows when scrolling to the end of the page until photos
-    all are loaded. If the configuration specifies more than one page, then it
-    calls and loads next page until it reaches maximum pages. The current
-    solution is not perfect and may affect the performance when it loads more
-    than <span style="font-weight: bold;">800</span> photos. I will be working
-    on optimising the performance to allow loading more photos.<br />
+all are loaded. If the configuration specifies more than one page, then it
+calls and loads next page until it reaches maximum pages. The current
+solution is not perfect and may affect the performance when it loads more
+than <span style="font-weight: bold;">800</span> photos. I will be working
+on optimising the performance to allow loading more photos.<br />
 <br />
 This jQuery plugin also uses <a href="http://www.jacklmoore.com/colorbox/" target="_blank" title="Colorbox">Colorbox</a>
     to show larger version of photos when user clicks on the photo.<br />
 <br />
 Okay, let me explain the configuration and how to use the plugin. However
-    feel free to jump straight to the <a href="https://dl.dropboxusercontent.com/u/99319532/Blogger/host/flickrGallery.html" target="_blank" rel="noopener noreferrer">demo</a>
-    to view-source.<br />
+feel free to jump straight to the <a href="https://dl.dropboxusercontent.com/u/99319532/Blogger/host/flickrGallery.html" target="_blank" rel="noopener noreferrer">demo</a>
+to view-source.<br />
 <br />
 <ul>
 <li><span style="font-weight: bold;">rows</span>: the total/initial rows
@@ -79,7 +79,7 @@ The following example uses "<a href="http://www.flickr.com/services/api/flickr.p
     "<a href="https://www.flickr.com/services/api/flickr.people.getPhotos.html" target="_blank" title="Get your photos">flickr.people.getPhotos</a>".<br />
 
 
-{% highlight js %} 
+{%- highlight html -%} 
 <!DOCTYPE html>
 <html lang='en'>
  <head>
@@ -107,7 +107,7 @@ The following example uses "<a href="http://www.flickr.com/services/api/flickr.p
       api_key: 'ad2e1cc1d51162a8ee4ee4b022a711f4',// your API key
       per_page: 100, // max 500
       page: 1, // page to load
-      tags: 'canon' // search tag,
+      tags: 'canon', // search tag,
       extras: 'url_o' // add to existing params (url_n,url_c,url_m,url_z,owner_name)
      }
     };
@@ -117,20 +117,18 @@ The following example uses "<a href="http://www.flickr.com/services/api/flickr.p
   </script>
  </body>
 </html>
-    {% endhighlight %}
+{%- endhighlight -%}
 
-You can see it in action at below or from <a href="http://elvishsu66.github.io/flickrGallery.html" target="_blank" title="Flickr Photo Gallery with Colorbox in jQuery">here</a>.
-    You can also read and study the plugin from <a href="https://raw.githubusercontent.com/elvishsu66/Blogger/master/host/flickrGallery.js" target="_blank" title="Plugin source">here</a>.<br />
+You can see it in action at below or from <a href="http://elvishsu66.github.io/legacy/flickrGallery.html" target="_blank" title="Flickr Photo Gallery with Colorbox in jQuery">here</a>.
+You can also read and study the plugin from <a href="https://raw.githubusercontent.com/elvishsu66/Blogger/master/host/flickrGallery.js" target="_blank" title="Plugin source">here</a>.<br />
+
 <br />
+<div id="images-container"></div>
+<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+<script type='text/javascript' src='/assets/js/flickrGallery.js'></script>
 <script>
-var flickrConfig = {rows:5,rowHeight: 120, borderWidth:3}
+   var flickrConfig = {rows: 5, rowHeight: 120, borderWidth: 3};
+    $(document).ready(function() {
+        $('#images-container').flickrGallery(flickrConfig);
+    });
 </script>
-
-<br />
-<div id="fGallery">
-</div>
-<br />
-<br />
-Well, if you enjoy this article, please leave a like or a plus and let me know your thoughts in the comments.
-<br />
-<br />
