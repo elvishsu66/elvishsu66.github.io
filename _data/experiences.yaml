@@ -36,6 +36,13 @@
     - Reduced operation cost by <strong> ~ 45% within 3 months</strong> through developing automated engineering systems
     - Reduced security vulnerabilities by <strong> ~ 80% within 1 month</strong> through automated detection systems
 
+- role: Career Break
+  company: elvishsu.com
+  location: Switzerland
+  started: 05/2024
+  ended: 08/2024
+  break: true
+
 - role: Chief Architect & Director of Engineering
   company: Numeus Group
   location: Zug, Switzerland
@@ -156,7 +163,7 @@
 
 - role: Career Break
   company: elvishsu.com
-  location: Southeast Asia, Switzerlnad
+  location: Southeast Asia, Switzerland
   started: 05/2013
   ended: 07/2014
   break: true
