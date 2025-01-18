@@ -1,3 +1,41 @@
+- role: VP of Engineering
+  company: Keyrock SA
+  location: Brussels, Belgium (Remote)
+  started: 01/2025
+  website: https://keyrock.com
+  stacks:
+    - Rust
+    - Vue
+    - Kubernetes
+    - AWS, GCP
+    - GitLab
+  content:
+    - Lead, mentor, support, and coordinate entire Engineering operations
+  achievements:
+    - More to come
+
+- role: Head of Engineering
+  company: Keyrock SA
+  location: Brussels, Belgium (Remote)
+  started: 09/2024
+  website: https://keyrock.com
+  stacks:
+    - Rust
+    - Vue
+    - Java
+    - Kubernetes
+    - AWS, GCP
+    - GitLab
+  content:
+    - Led, mentored, supported, and coordinated a team of 6 engineering members
+    - Defined and supervised the business unit’s technical strategy and platform blueprint
+    - Architected and implemented solutions for high availability and data protection on AWS
+    - Ensured consistency in engineering practices, quality assurance, and software development processes
+  achievements:
+    - Established Internal Risk Passing platform as well as Backoffice system
+    - Reduced operation cost by <strong> ~ 45% within 3 months</strong> through developing automated engineering systems
+    - Reduced security vulnerabilities by <strong> ~ 80% within 1 month</strong> through automated detection systems
+
 - role: Chief Architect & Director of Engineering
   company: Numeus Group
   location: Zug, Switzerland
